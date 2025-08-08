@@ -1,0 +1,11 @@
+part 'login_models.dart';
+part 'user_profile_models.dart';
+part 'account_bill_model.dart';
+part 'invoice_model.dart';
+part 'order_model.dart';
+part 'province_model.dart';
+part 'subdistrict_model.dart';
+part 'city_model.dart';
+part 'bank_model.dart';
+part 'report_model.dart';
+part 'map_model.dart';

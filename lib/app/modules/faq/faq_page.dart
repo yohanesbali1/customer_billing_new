@@ -1,0 +1,28 @@
+import 'package:customer_billing/app/core/theme/theme.dart';
+import 'package:customer_billing/app/core/widgets/not_found.dart';
+import 'package:customer_billing/app/modules/faq/faq_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class FAQPage extends GetView<FAQController> {
+  const FAQPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: bgColor,
+        appBar: AppBar(
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          title: Text(
+            'Kembali',
+            style: GoogleFonts.montserrat(
+                color: textPrimaryColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w600),
+          ),
+        ),
+        body: NotFoundPage());
+  }
+}
