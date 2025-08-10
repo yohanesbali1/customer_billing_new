@@ -21,272 +21,305 @@ class DetailProfilePage extends GetView<DetailProfileController> {
         title: Text(
           'Kembali',
           style: GoogleFonts.montserrat(
-              color: textPrimaryColor,
-              fontSize: 14,
-              fontWeight: FontWeight.w600),
+            color: textPrimaryColor,
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       body: Container(
-          padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-          margin: const EdgeInsets.only(bottom: 20),
-          child: ListView(physics: BouncingScrollPhysics(), children: [
+        padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+        margin: const EdgeInsets.only(bottom: 20),
+        child: ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
             Container(
               margin: const EdgeInsets.only(bottom: 16, top: 20),
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
-                  ),
-                  border: Border.all(
-                    color: borderboxColor,
-                    width: 0.5,
-                  )),
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                border: Border.all(color: borderboxColor, width: 0.9),
+              ),
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: Get.width,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 16),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                        width: 0.5,
-                        color: borderboxColor,
-                      ))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Nama Lengkap',
-                              style: GoogleFonts.montserrat(
-                                color: textSecondaryColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              )),
-                          const SizedBox(height: 4),
-                          Text('${auth_c.profile.value!.name}',
-                              style: GoogleFonts.montserrat(
-                                color: textPrimaryColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              )),
-                        ],
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: Get.width,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 0.9, color: borderboxColor),
                       ),
                     ),
-                    Container(
-                      width: Get.width,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 16),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                        width: 0.5,
-                        color: borderboxColor,
-                      ))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Email',
-                              style: GoogleFonts.montserrat(
-                                color: textSecondaryColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              )),
-                          const SizedBox(height: 4),
-                          Text('${auth_c.profile.value!.email}',
-                              style: GoogleFonts.montserrat(
-                                color: textPrimaryColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              )),
-                        ],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Nama Lengkap',
+                          style: GoogleFonts.montserrat(
+                            color: textSecondaryColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '${auth_c.profile.value!.name}',
+                          style: GoogleFonts.montserrat(
+                            color: textPrimaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: Get.width,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 0.9, color: borderboxColor),
                       ),
                     ),
-                    Container(
-                      width: Get.width,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 16),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                        width: 0.5,
-                        color: borderboxColor,
-                      ))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Hp',
-                              style: GoogleFonts.montserrat(
-                                color: textSecondaryColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              )),
-                          const SizedBox(height: 4),
-                          Text('${auth_c.profile.value!.phone}',
-                              style: GoogleFonts.montserrat(
-                                color: textPrimaryColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              )),
-                        ],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Email',
+                          style: GoogleFonts.montserrat(
+                            color: textSecondaryColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '${auth_c.profile.value!.email}',
+                          style: GoogleFonts.montserrat(
+                            color: textPrimaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: Get.width,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 0.9, color: borderboxColor),
                       ),
                     ),
-                    Container(
-                      width: Get.width,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 16),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                        width: 0.5,
-                        color: borderboxColor,
-                      ))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Alamat',
-                              style: GoogleFonts.montserrat(
-                                color: textSecondaryColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              )),
-                          const SizedBox(height: 4),
-                          Html(
-                            data: "${auth_c.profile.value!.address}",
-                            style: {
-                              "p": Style(
-                                color: textPrimaryColor,
-                                fontSize: FontSize(14),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            },
-                          )
-                        ],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Hp',
+                          style: GoogleFonts.montserrat(
+                            color: textSecondaryColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '${auth_c.profile.value!.phone}',
+                          style: GoogleFonts.montserrat(
+                            color: textPrimaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: Get.width,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 0.9, color: borderboxColor),
                       ),
                     ),
-                    Container(
-                      width: Get.width,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 16),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                        width: 0.5,
-                        color: borderboxColor,
-                      ))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Provinsi',
-                              style: GoogleFonts.montserrat(
-                                color: textSecondaryColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              )),
-                          const SizedBox(height: 4),
-                          Text(
-                            ' ${auth_c.profile.value!.province?.name ?? '-'}',
-                            style: GoogleFonts.montserrat(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Alamat',
+                          style: GoogleFonts.montserrat(
+                            color: textSecondaryColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Html(
+                          data: "${auth_c.profile.value!.address}",
+                          style: {
+                            "p": Style(
                               color: textPrimaryColor,
-                              fontSize: 14,
+                              fontSize: FontSize(14),
                               fontWeight: FontWeight.w500,
                             ),
-                          ),
-                        ],
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: Get.width,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 0.9, color: borderboxColor),
                       ),
                     ),
-                    Container(
-                      width: Get.width,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 16),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                        width: 0.5,
-                        color: borderboxColor,
-                      ))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Kabupaten',
-                              style: GoogleFonts.montserrat(
-                                color: textSecondaryColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              )),
-                          const SizedBox(height: 4),
-                          Text(
-                            ' ${auth_c.profile.value!.city?.name ?? '-'}',
-                            style: GoogleFonts.montserrat(
-                              color: textPrimaryColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Provinsi',
+                          style: GoogleFonts.montserrat(
+                            color: textSecondaryColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
                           ),
-                        ],
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          ' ${auth_c.profile.value!.province?.name ?? '-'}',
+                          style: GoogleFonts.montserrat(
+                            color: textPrimaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: Get.width,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 0.9, color: borderboxColor),
                       ),
                     ),
-                    Container(
-                      width: Get.width,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 16),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                        width: 0.5,
-                        color: borderboxColor,
-                      ))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Kecamatan',
-                              style: GoogleFonts.montserrat(
-                                color: textSecondaryColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              )),
-                          const SizedBox(height: 4),
-                          Text(
-                            ' ${auth_c.profile.value!.subdistrict?.name ?? '-'}',
-                            style: GoogleFonts.montserrat(
-                              color: textPrimaryColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Kabupaten',
+                          style: GoogleFonts.montserrat(
+                            color: textSecondaryColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
                           ),
-                        ],
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          ' ${auth_c.profile.value!.city?.name ?? '-'}',
+                          style: GoogleFonts.montserrat(
+                            color: textPrimaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: Get.width,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 0.9, color: borderboxColor),
                       ),
                     ),
-                    Container(
-                      width: Get.width,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 16),
-                      decoration: BoxDecoration(),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Desa',
-                              style: GoogleFonts.montserrat(
-                                color: textSecondaryColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              )),
-                          const SizedBox(height: 4),
-                          Text(
-                            ' ${auth_c.profile.value!.vilage ?? '-'}',
-                            style: GoogleFonts.montserrat(
-                              color: textPrimaryColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Kecamatan',
+                          style: GoogleFonts.montserrat(
+                            color: textSecondaryColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
                           ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          ' ${auth_c.profile.value!.subdistrict?.name ?? '-'}',
+                          style: GoogleFonts.montserrat(
+                            color: textPrimaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
-                  ]),
-            )
-          ])),
+                  ),
+                  Container(
+                    width: Get.width,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Desa',
+                          style: GoogleFonts.montserrat(
+                            color: textSecondaryColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          ' ${auth_c.profile.value!.vilage ?? '-'}',
+                          style: GoogleFonts.montserrat(
+                            color: textPrimaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

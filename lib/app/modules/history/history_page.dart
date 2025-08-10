@@ -16,20 +16,24 @@ class HistoryPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
-          elevation: 0,
-          scrolledUnderElevation: 0,
-          title: Text(
-            'Riwayat',
-            style: GoogleFonts.montserrat(
-                color: textPrimaryColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w600),
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        backgroundColor: Colors.white,
+        title: Text(
+          'Riwayat',
+          style: GoogleFonts.montserrat(
+            color: textPrimaryColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
           ),
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back), // Custom back icon
-              onPressed: () {
-                home_c.change_page(0); // Go back to the previous screen
-              })),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back), // Custom back icon
+          onPressed: () {
+            home_c.change_page(0); // Go back to the previous screen
+          },
+        ),
+      ),
       body: Container(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -39,63 +43,77 @@ class HistoryPage extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                        child: GestureDetector(
-                            onTap: () {
-                              history_c.change_page(0);
-                            },
-                            child: Obx(() => Container(
-                                padding: EdgeInsets.only(bottom: 12),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border(
-                                      bottom: BorderSide(
-                                          color: history_c.page_index.value == 0
-                                              ? mainColor
-                                              : Colors.grey.shade300,
-                                          width: history_c.page_index.value == 0
-                                              ? 2.0
-                                              : 1.0),
-                                    )),
-                                child: Text(
-                                  'Tagihan',
-                                  style: GoogleFonts.montserrat(
-                                    color: history_c.page_index.value == 0
-                                        ? mainColor
-                                        : textPrimaryColor,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ))))),
+                      child: GestureDetector(
+                        onTap: () {
+                          history_c.change_page(0);
+                        },
+                        child: Obx(
+                          () => Container(
+                            padding: EdgeInsets.only(bottom: 12),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: history_c.page_index.value == 0
+                                      ? mainColor
+                                      : Colors.grey.shade300,
+                                  width: history_c.page_index.value == 0
+                                      ? 2.0
+                                      : 1.0,
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              'Tagihan',
+                              style: GoogleFonts.montserrat(
+                                color: history_c.page_index.value == 0
+                                    ? mainColor
+                                    : textPrimaryColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     Expanded(
-                        child: GestureDetector(
-                            onTap: () {
-                              history_c.change_page(1);
-                            },
-                            child: Obx(() => Container(
-                                padding: EdgeInsets.only(bottom: 12),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border(
-                                      bottom: BorderSide(
-                                          color: history_c.page_index.value == 1
-                                              ? mainColor
-                                              : Colors.grey.shade300,
-                                          width: history_c.page_index.value == 1
-                                              ? 2.0
-                                              : 1.0),
-                                    )),
-                                child: Text(
-                                  'Lunas',
-                                  style: GoogleFonts.montserrat(
-                                    color: history_c.page_index.value == 1
-                                        ? mainColor
-                                        : textPrimaryColor,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ))))),
+                      child: GestureDetector(
+                        onTap: () {
+                          history_c.change_page(1);
+                        },
+                        child: Obx(
+                          () => Container(
+                            padding: EdgeInsets.only(bottom: 12),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: history_c.page_index.value == 1
+                                      ? mainColor
+                                      : Colors.grey.shade300,
+                                  width: history_c.page_index.value == 1
+                                      ? 2.0
+                                      : 1.0,
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              'Lunas',
+                              style: GoogleFonts.montserrat(
+                                color: history_c.page_index.value == 1
+                                    ? mainColor
+                                    : textPrimaryColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -108,12 +126,8 @@ class HistoryPage extends StatelessWidget {
                   history_c.page_index.value = index;
                 },
                 children: <Widget>[
-                  ListBillPage(
-                    controller: history_c,
-                  ),
-                  ListPaidPage(
-                    controller: history_c,
-                  ),
+                  ListBillPage(controller: history_c),
+                  ListPaidPage(controller: history_c),
                 ],
               ),
             ),

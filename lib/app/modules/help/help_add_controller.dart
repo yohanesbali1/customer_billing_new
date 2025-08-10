@@ -86,7 +86,8 @@ class HelpFormController extends GetxController {
         if (parts.length >= 2) {
           maps.value.text = data.value!.maps!;
           await updateLocation(
-              LatLng(double.parse(parts[0]), double.parse(parts[1])));
+            LatLng(double.parse(parts[0]), double.parse(parts[1])),
+          );
         }
       } else {
         await getCurrentLocation();
@@ -94,8 +95,9 @@ class HelpFormController extends GetxController {
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
-      String errorMessage =
-          e is String ? e : 'Maaf ada kesalahan, silahkan coba lagi';
+      String errorMessage = e is String
+          ? e
+          : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(null, errorMessage);
     }
   }
@@ -114,14 +116,14 @@ class HelpFormController extends GetxController {
           'type_topic_id': type_topic_value.value!.id.toString(),
           'description': description.value.text,
           'img': image.value,
-        }
+        },
       };
       await HelperProvider().submitReportData(data);
       if (id.value == '') {
         help_controller.report_data.value = await HelperProvider().getData();
       } else {
-        detail_controller.reportData.value =
-            await HelperProvider().showreportData(id.value);
+        detail_controller.reportData.value = await HelperProvider()
+            .showreportData(id.value);
       }
       Get.back();
       await Helper().AlertGetX('success', "Data berhasil disimpan");
@@ -130,8 +132,9 @@ class HelpFormController extends GetxController {
     } catch (e) {
       Get.back();
       isLoading(false);
-      String errorMessage =
-          e is String ? e : 'Maaf ada kesalahan, silahkan coba lagi';
+      String errorMessage = e is String
+          ? e
+          : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(null, errorMessage);
     }
   }
@@ -141,8 +144,9 @@ class HelpFormController extends GetxController {
       type_topic_value.value = type_topic_data.value[type_topic_select];
       type_topic_id.value.text = type_topic_value.value!.type.toString();
     } catch (e) {
-      String errorMessage =
-          e is String ? e : 'Maaf ada kesalahan, silahkan coba lagi';
+      String errorMessage = e is String
+          ? e
+          : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(null, errorMessage);
     }
   }
@@ -162,14 +166,17 @@ class HelpFormController extends GetxController {
         }
       }
       Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
+        desiredAccuracy: LocationAccuracy.high,
+      );
       await updateLocation(LatLng(position.latitude, position.longitude));
       Get.back();
       isLoading(false);
     } catch (e) {
+      print(e);
       Get.back();
-      String errorMessage =
-          e is String ? e : 'Maaf ada kesalahan, silahkan coba lagi';
+      String errorMessage = e is String
+          ? e
+          : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(null, errorMessage);
     }
   }
@@ -186,8 +193,9 @@ class HelpFormController extends GetxController {
       isoptionLoading.value = false;
     } catch (e) {
       isoptionLoading.value = false;
-      String errorMessage =
-          e is String ? e : 'Maaf ada kesalahan, silahkan coba lagi';
+      String errorMessage = e is String
+          ? e
+          : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(null, errorMessage);
       return [];
     }
@@ -195,7 +203,9 @@ class HelpFormController extends GetxController {
 
   pickImage(ImageSource source) async {
     final pickedFile = await picker.pickImage(
-        source: source, preferredCameraDevice: CameraDevice.rear);
+      source: source,
+      preferredCameraDevice: CameraDevice.rear,
+    );
 
     if (pickedFile != null) {
       image.value = File(pickedFile.path);

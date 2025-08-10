@@ -11,7 +11,6 @@ import 'package:get/get.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 
 part 'auth_provider.dart';
 part 'account_bill_provider.dart';
