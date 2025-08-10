@@ -16,37 +16,43 @@ class PackagePage extends GetView<PackageController> {
   Widget build(BuildContext context) {
     controller.onInit();
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: bgColor,
-        appBar: AppBar(
-          elevation: 0,
-          scrolledUnderElevation: 0,
-          title: Text(
-            'Kembali',
-            style: GoogleFonts.montserrat(
-                color: textPrimaryColor,
-                fontSize: 14,
-                fontWeight: FontWeight.w600),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: bgColor,
+      appBar: AppBar(
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        title: Text(
+          'Kembali',
+          style: GoogleFonts.montserrat(
+            color: textPrimaryColor,
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
           ),
         ),
-        body: Obx(() {
-          if (controller.isLoading.value) {
-            return SkeletonAccountBill();
-          }
-          if (controller.accountbillData.value == null) {
-            return NotFoundPage();
-          }
-          return Container(
-            child: buildInvoiceItem(
-                controller.accountbillData.value as AccountBillModel, context),
-          );
-        }));
+      ),
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return SkeletonAccountBill();
+        }
+        if (controller.accountbillData.value == null) {
+          return NotFoundPage();
+        }
+        return Container(
+          child: buildInvoiceItem(
+            controller.accountbillData.value as AccountBillModel,
+            context,
+          ),
+        );
+      }),
+    );
   }
 
   Widget buildInvoiceItem(AccountBillModel data, context) {
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-        child: ListView(padding: EdgeInsets.zero, children: [
+      margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
           Container(
             margin: const EdgeInsets.only(bottom: 10, top: 20),
             child: Column(
@@ -73,24 +79,27 @@ class PackagePage extends GetView<PackageController> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
                   decoration: BoxDecoration(
-                      color: data.status == 'active' ? greenColor : redColor,
-                      borderRadius: BorderRadius.circular(5)),
+                    color: data.status == 'active' ? greenColor : redColor,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   child: Text(
-                      data.status == 'active'
-                          ? 'Langganan Aktif'
-                          : 'Langganan Tidak Aktif',
-                      style: GoogleFonts.montserrat(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.italic,
-                      )),
+                    data.status == 'active'
+                        ? 'Langganan Aktif'
+                        : 'Langganan Tidak Aktif',
+                    style: GoogleFonts.montserrat(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
                 ),
 
                 const SizedBox(height: 20),
-                Row(children: [
-                  Expanded(
-                    child: Column(
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -109,12 +118,13 @@ class PackagePage extends GetView<PackageController> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                        ]),
-                  ),
-                  const SizedBox(width: 30),
-                  Expanded(
-                    flex: 1,
-                    child: Column(
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 30),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -133,65 +143,75 @@ class PackagePage extends GetView<PackageController> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                        ]),
-                  ),
-                ]),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
 
                 const SizedBox(height: 10),
 
                 // const SizedBox(height: 20),
-
-                Text('Rincian Langganan',
-                    style: GoogleFonts.montserrat(
-                        color: textPrimaryColor,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.italic)),
+                Text(
+                  'Rincian Langganan',
+                  style: GoogleFonts.montserrat(
+                    color: textPrimaryColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
                 const SizedBox(height: 10),
                 Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: borderboxColor, // Set the border color
-                        width: 0.5, // Set the border width
-                      ),
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ListView.separated(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: data.orders.length,
-                            itemBuilder: (context, index) {
-                              final item = data.orders[index];
-                              return Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('${item.productName}',
-                                      style: GoogleFonts.montserrat(
-                                        color: textPrimaryColor,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                      )),
-                                  const SizedBox(height: 5),
-                                ],
-                              );
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) => SizedBox(
-                              height: 10,
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListView.separated(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: data.orders.length,
+                        itemBuilder: (context, index) {
+                          final item = data.orders[index];
+                          return Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                color: borderboxColor, // Set the border color
+                                width: 0.5, // Set the border width
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
-                          ),
-                        ])),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '${item.productName}',
+                                  style: GoogleFonts.montserrat(
+                                    color: textPrimaryColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) =>
+                            SizedBox(height: 10),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-          )
-        ]));
+          ),
+        ],
+      ),
+    );
   }
 }
