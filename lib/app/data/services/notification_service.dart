@@ -1,5 +1,12 @@
+import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
+
+@pragma('vm:entry-point')
+void notificationTapBackground(NotificationResponse details) {
+  NotificationService.instance.pendingPayload = details.payload;
+}
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -10,14 +17,22 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 class NotificationService {
   NotificationService._();
   static final NotificationService instance = NotificationService._();
-  final _messaging = FirebaseMessaging.instance;
-  final _localNotification = FlutterLocalNotificationsPlugin();
+
+  final FirebaseMessaging _messaging = FirebaseMessaging.instance;
+  final FlutterLocalNotificationsPlugin _localNotification =
+      FlutterLocalNotificationsPlugin();
+
   bool _isInitialized = false;
+  String? pendingPayload;
+
+  static const String _channelId = 'channel_my_wng';
 
   Future<void> initialize() async {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+    await setupFlutterNotification();
     await _requestPermission();
-    await _setupeMessagingHandler();
+    await _setupMessagingHandler();
   }
 
   Future<void> _requestPermission() async {
@@ -31,19 +46,23 @@ class NotificationService {
 
   Future<void> setupFlutterNotification() async {
     if (_isInitialized) return;
+
     const channel = AndroidNotificationChannel(
-      'high_importance_channel', // ← this
+      _channelId,
       'High Importance Notifications',
       description: 'This channel is used for important notifications.',
       importance: Importance.high,
     );
+
     await _localNotification
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.createNotificationChannel(channel);
 
-    const initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/launcher_icon');
+    const initializationSettingsAndroid = AndroidInitializationSettings(
+      '@mipmap/ic_launcher',
+    );
 
     final initializationSettingsIOS = DarwinInitializationSettings(
       requestAlertPermission: true,
@@ -58,8 +77,13 @@ class NotificationService {
 
     await _localNotification.initialize(
       initializationSettings,
-      onDidReceiveBackgroundNotificationResponse: (details) {},
+      onDidReceiveNotificationResponse: (details) {
+        pendingPayload = details.payload;
+        handleClickNotification();
+      },
+      onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
     );
+
     _isInitialized = true;
   }
 
@@ -67,21 +91,20 @@ class NotificationService {
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = notification?.android;
 
-    if (notification != null && android != null) {
-      final title = notification?.title;
-      final body = notification?.body;
+    if (notification != null) {
       await _localNotification.show(
         0,
-        title,
-        body,
+        notification.title ?? '',
+        notification.body ?? '',
         NotificationDetails(
           android: AndroidNotificationDetails(
-            'chanel_my_wng',
-            'channel my wng',
-            channelDescription: 'Notification App WNG',
+            _channelId,
+            'High Importance Notifications',
+            channelDescription:
+                'This channel is used for important notifications.',
             importance: Importance.max,
             priority: Priority.high,
-            icon: 'ic_stat_notify',
+            icon: android?.smallIcon ?? '@mipmap/ic_launcher',
           ),
           iOS: const DarwinNotificationDetails(
             presentAlert: true,
@@ -89,20 +112,42 @@ class NotificationService {
             presentSound: true,
           ),
         ),
-        payload: message.data.toString(),
+        payload: jsonEncode(message.data),
       );
     }
   }
 
-  Future<String?> _setupeMessagingHandler() async {
-    FirebaseMessaging.onMessageOpenedApp.listen(_handleBackgroundMessage);
+  Future<void> _setupMessagingHandler() async {
+    FirebaseMessaging.onMessage.listen(showNotification);
+
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      pendingPayload = jsonEncode(message.data);
+      handleClickNotification();
+    });
+
     final initialMessage = await _messaging.getInitialMessage();
     if (initialMessage != null) {
-      _handleBackgroundMessage(initialMessage);
+      pendingPayload = jsonEncode(initialMessage.data);
     }
   }
 
-  void _handleBackgroundMessage(RemoteMessage message) {
-    if (message.data['type'] == "chat") {}
+  void handleClickNotification() {
+    if (pendingPayload == null) return;
+
+    try {
+      final data = jsonDecode(pendingPayload!) as Map<String, dynamic>;
+      final type = data['type'];
+      final id = data['id'];
+
+      if (type == 'invoice') {
+        Get.toNamed('/invoice/detail/$id');
+      } else if (type == 'chat') {
+        Get.toNamed('/chat');
+      }
+    } catch (e) {
+      print("Gagal parse payload: $e");
+    }
+
+    pendingPayload = null;
   }
 }
