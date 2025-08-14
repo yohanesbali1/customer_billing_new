@@ -12,126 +12,140 @@ class ListDataInovicePage extends StatelessWidget {
   const ListDataInovicePage({required this.data, required this.controller});
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(
-            left: defaultMargin, right: defaultMargin, bottom: 10, top: 10),
-        child: ListView.separated(
-          padding: EdgeInsets.zero,
-          itemCount: data != null ? data.length : 0,
-          itemBuilder: (BuildContext context, int index) => GestureDetector(
-            onTap: () {
-              Get.toNamed("/invoice/detail/${data[index].id}");
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade300,
-                    spreadRadius: 0,
-                    blurRadius: 10,
-                    offset: Offset(0, 1),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Text(data[index].numTransaction,
+      margin: EdgeInsets.only(
+        left: defaultMargin,
+        right: defaultMargin,
+        bottom: 10,
+        top: 10,
+      ),
+      child: Column(
+        children: List.generate(
+          data != null ? data.length : 0,
+          (index) => Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: GestureDetector(
+              onTap: () {
+                Get.toNamed("/invoice/detail/${data[index].id}");
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade300,
+                      spreadRadius: 0,
+                      blurRadius: 10,
+                      offset: Offset(0, 1),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          data[index].numTransaction,
                           style: GoogleFonts.montserrat(
                             color: textPrimaryColor,
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
-                          ))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                              data[index].status == 'paid'
-                                  ? "Sudah dibayar pada ${DateFormat("d MMMM yyyy").format(data[index].paidAt)}"
-                                  : "Jatuh tempo ${DateFormat("d MMMM yyyy").format(data[index].startDate)}",
-                              style: GoogleFonts.montserrat(
-                                color: data[index].status == 'paid'
-                                    ? textSecondaryColor
-                                    : redColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              )),
-                          const SizedBox(
-                            height: 5,
                           ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 5),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: data[index].status == 'paid'
-                                  ? greenColor
-                                  : redColor,
-                            ),
-                            child: Text(
-                                controller.change_status(data[index].status),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                data[index].status == 'paid'
+                                    ? "Sudah dibayar pada ${DateFormat("d MMMM yyyy").format(data[index].paidAt)}"
+                                    : "Jatuh tempo ${DateFormat("d MMMM yyyy").format(data[index].startDate)}",
                                 style: GoogleFonts.montserrat(
-                                  color: Colors.white,
+                                  color: data[index].status == 'paid'
+                                      ? textSecondaryColor
+                                      : redColor,
                                   fontSize: 13,
                                   fontWeight: FontWeight.w400,
-                                )),
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: data[index].status == 'paid'
+                                      ? greenColor
+                                      : redColor,
+                                ),
+                                child: Text(
+                                  controller.change_status(data[index].status),
+                                  style: GoogleFonts.montserrat(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      )),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Column(
+                        ),
+                        const SizedBox(width: 12),
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text('${Helper.formatRupiah(data[index].price)}',
-                                style: GoogleFonts.montserrat(
-                                  color: textPrimaryColor,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                )),
+                            Text(
+                              '${Helper.formatRupiah(data[index].price)}',
+                              style: GoogleFonts.montserrat(
+                                color: textPrimaryColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                             Row(
                               children: [
-                                Text('Lihat Detail ',
-                                    style: GoogleFonts.montserrat(
-                                        color: mainColor,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w400,
-                                        fontStyle: FontStyle.italic)),
+                                Text(
+                                  'Lihat Detail ',
+                                  style: GoogleFonts.montserrat(
+                                    color: mainColor,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
                                 Text(
                                   '>',
                                   style: GoogleFonts.montserrat(
-                                      color: mainColor,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w400,
-                                      fontStyle: FontStyle.italic),
-                                )
+                                    color: mainColor,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
                               ],
-                            )
-                          ]),
-                    ],
-                  ),
-                ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-          separatorBuilder: (BuildContext context, int index) => SizedBox(
-            height: 10,
-          ),
-        ));
+        ),
+      ),
+    );
   }
 }

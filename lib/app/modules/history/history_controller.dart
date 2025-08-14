@@ -1,51 +1,55 @@
 import 'package:customer_billing/app/core/helpers/helpers.dart';
-import 'package:customer_billing/app/core/theme/theme.dart';
 import 'package:customer_billing/app/data/models/models.dart';
 import 'package:customer_billing/app/data/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HistoryController extends GetxController {
-  //TODO: Implement HomeController.
   var invoice_data = <InvoiceModel>[].obs;
   var pagecontroller = PageController();
   var page_index = 0.obs;
   var isLoading = true.obs;
 
+  bool _billLoaded = false;
+  bool _paidLoaded = false;
+
   @override
   void onInit() {
     super.onInit();
-    change_page(0);
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
+    loadPageData(0); // pertama kali masuk tab Tagihan
   }
 
   @override
   void onClose() {
-    super.onClose();
     page_index.value = 0;
-    this.pagecontroller.dispose();
+    pagecontroller.dispose();
+    super.onClose();
   }
 
-  void change_page(dynamic payload) {
-    this.page_index.value = payload;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      this.pagecontroller.jumpToPage(payload);
-    });
+  void change_page(int index) {
+    page_index.value = index;
+    pagecontroller.jumpToPage(index);
+    loadPageData(index);
   }
 
-  void getData(String status) async {
+  void loadPageData(int index) {
+    if (index == 0 && !_billLoaded) {
+      getData('not_paid');
+      _billLoaded = true;
+    } else if (index == 1 && !_paidLoaded) {
+      getData('paid');
+      _paidLoaded = true;
+    }
+  }
+
+  getData(String status) async {
     try {
       isLoading(true);
       invoice_data.value = await InvoiceProvider().getData(status);
-      isLoading(false);
     } catch (e) {
-      isLoading(false);
       Helper().AlertSnackBar(null);
+    } finally {
+      isLoading(false);
     }
   }
 
@@ -65,7 +69,7 @@ class HistoryController extends GetxController {
       case 'not_paid':
         return 'Belum Dibayar';
       case 'paid':
-        return 'Sudah dibayar pada ${paid_at}';
+        return 'Sudah dibayar pada $paid_at';
       default:
         return '-';
     }

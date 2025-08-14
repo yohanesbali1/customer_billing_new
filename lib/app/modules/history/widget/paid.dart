@@ -11,28 +11,38 @@ class ListPaidPage extends StatelessWidget {
   const ListPaidPage({required this.controller});
   @override
   Widget build(BuildContext context) {
-    //function
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.getData('paid');
-    });
-
     return Obx(() {
       if (controller.isLoading.value) {
         return SkeletonListInvoice();
       }
-      if (controller.invoice_data.isEmpty) {
-        return NotFoundPage();
-      }
+
       return RefreshIndicator(
-          color: mainColor,
-          onRefresh: () {
-            Future.microtask(() => controller.getData('paid'));
-            return Future.value(true);
-          },
-          child: Container(
-            child: ListDataInovicePage(
-                data: controller.invoice_data, controller: controller),
-          ));
+        color: mainColor,
+        onRefresh: () async {
+          await controller.getData('paid');
+        },
+        child: controller.invoice_data.isEmpty
+            ? ListView(
+                shrinkWrap: true,
+                physics: const AlwaysScrollableScrollPhysics(),
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child: NotFoundPage(),
+                  ),
+                ],
+              )
+            : ListView(
+                shrinkWrap: true,
+                physics: const AlwaysScrollableScrollPhysics(),
+                children: [
+                  ListDataInovicePage(
+                    data: controller.invoice_data,
+                    controller: controller,
+                  ),
+                ],
+              ),
+      );
     });
   }
 }
