@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HistoryController extends GetxController {
-  var invoice_data = <InvoiceModel>[].obs;
+  var invoice_not_paid_data = <InvoiceModel>[].obs;
+  var invoice_paid_data = <InvoiceModel>[].obs;
   var pagecontroller = PageController();
   var page_index = 0.obs;
   var isLoading = true.obs;
@@ -16,12 +17,14 @@ class HistoryController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    page_index.value = 0;
     loadPageData(0); // pertama kali masuk tab Tagihan
   }
 
   @override
   void onClose() {
     page_index.value = 0;
+    loadPageData(0);
     pagecontroller.dispose();
     super.onClose();
   }
@@ -45,7 +48,12 @@ class HistoryController extends GetxController {
   getData(String status) async {
     try {
       isLoading(true);
-      invoice_data.value = await InvoiceProvider().getData(status);
+      final data = await InvoiceProvider().getData(status);
+      if (status == 'not_paid') {
+        invoice_not_paid_data.value = data;
+      } else {
+        invoice_paid_data.value = data;
+      }
     } catch (e) {
       Helper().AlertSnackBar(null);
     } finally {

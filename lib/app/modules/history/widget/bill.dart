@@ -22,7 +22,7 @@ class ListBillPage extends StatelessWidget {
         onRefresh: () async {
           await controller.getData('not_paid');
         },
-        child: controller.invoice_data.isEmpty
+        child: controller.invoice_not_paid_data.isEmpty
             ? ListView(
                 shrinkWrap: true,
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -38,7 +38,7 @@ class ListBillPage extends StatelessWidget {
                 physics: const AlwaysScrollableScrollPhysics(),
                 children: [
                   ListDataInovicePage(
-                    data: controller.invoice_data,
+                    data: controller.invoice_not_paid_data,
                     controller: controller,
                   ),
                 ],

@@ -21,7 +21,7 @@ class ListPaidPage extends StatelessWidget {
         onRefresh: () async {
           await controller.getData('paid');
         },
-        child: controller.invoice_data.isEmpty
+        child: controller.invoice_paid_data.isEmpty
             ? ListView(
                 shrinkWrap: true,
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -33,12 +33,14 @@ class ListPaidPage extends StatelessWidget {
                 ],
               )
             : ListView(
-                shrinkWrap: true,
                 physics: const AlwaysScrollableScrollPhysics(),
                 children: [
-                  ListDataInovicePage(
-                    data: controller.invoice_data,
-                    controller: controller,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: ListDataInovicePage(
+                      data: controller.invoice_paid_data,
+                      controller: controller,
+                    ),
                   ),
                 ],
               ),

@@ -44,6 +44,7 @@ void main() async {
         initialRoute: token != null ? '/home' : 'login',
         getPages: AppPages.routes,
         theme: ThemeData(
+          appBarTheme: AppBarTheme(backgroundColor: Colors.white),
           primaryColor: Colors.white,
           primarySwatch: Colors.amber,
           fontFamily: GoogleFonts.montserrat().fontFamily,
