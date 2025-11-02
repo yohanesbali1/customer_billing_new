@@ -33,15 +33,27 @@ class ListBillPage extends StatelessWidget {
                   ),
                 ],
               )
-            : ListView(
-                shrinkWrap: true,
-                physics: const AlwaysScrollableScrollPhysics(),
-                children: [
-                  ListDataInovicePage(
-                    data: controller.invoice_not_paid_data,
-                    controller: controller,
-                  ),
-                ],
+            : LayoutBuilder(
+                builder: (context, constraints) {
+                  return SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                      ),
+                      child: IntrinsicHeight(
+                        child: Column(
+                          children: [
+                            ListDataInovicePage(
+                              data: controller.invoice_not_paid_data,
+                              controller: controller,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
       );
     });

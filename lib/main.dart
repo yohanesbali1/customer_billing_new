@@ -45,12 +45,11 @@ void main() async {
         getPages: AppPages.routes,
         theme: ThemeData(
           appBarTheme: AppBarTheme(backgroundColor: Colors.white),
-          primaryColor: Colors.white,
-          primarySwatch: Colors.amber,
+          primaryColor: Color(0xFFBD0000),
           fontFamily: GoogleFonts.montserrat().fontFamily,
           textSelectionTheme: TextSelectionThemeData(
-            cursorColor: Color(0xFFEF8200),
-            selectionColor: Colors.amber,
+            cursorColor: Color(0xFFBD0000),
+            selectionColor: Color.fromARGB(255, 215, 39, 39),
             selectionHandleColor: Colors.transparent,
           ),
           textTheme: GoogleFonts.montserratTextTheme(

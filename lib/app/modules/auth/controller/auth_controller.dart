@@ -30,7 +30,7 @@ class AuthController extends GetxController {
       isLoading(false);
     } catch (e) {
       isLoading(false);
-      Helper().AlertSnackBar(null);
+      Helper().AlertSnackBar();
     }
   }
 
@@ -42,8 +42,9 @@ class AuthController extends GetxController {
       Get.offAllNamed('/login');
     } catch (e) {
       Get.back();
-      String errorMessage =
-          e is String ? e : 'Maaf ada kesalahan, silahkan coba lagi';
+      String errorMessage = e is String
+          ? e
+          : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(null, errorMessage);
     }
   }

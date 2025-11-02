@@ -1,4 +1,5 @@
 import 'package:customer_billing/app/core/theme/theme.dart';
+import 'package:customer_billing/app/core/widgets/not_found.dart';
 import 'package:customer_billing/app/modules/history/datail/invoice_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,9 +14,7 @@ class ModalBank extends GetView<InvoiceController> {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: BoxDecoration(
-        color: bgColor,
-      ),
+      decoration: BoxDecoration(color: bgColor),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,18 +27,14 @@ class ModalBank extends GetView<InvoiceController> {
               top: 40.0,
               bottom: 14.0,
             ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
+            decoration: BoxDecoration(color: Colors.white),
             child: Row(
               children: [
                 GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Icon(
-                    Icons.arrow_back,
-                  ),
+                  child: Icon(Icons.arrow_back),
                 ),
                 SizedBox(width: 10),
                 Text(
@@ -63,15 +58,18 @@ class ModalBank extends GetView<InvoiceController> {
   }
 
   Widget ListBank(controller, data) {
-    String _selectedOption = 'Option 1';
     return ListView.separated(
       shrinkWrap: true,
-      itemCount: data != null ? data.length : 0,
-      itemBuilder: (BuildContext context, int index_g) => Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
+      itemCount: data.isEmpty ? 1 : data.length,
+      itemBuilder: (BuildContext context, int index_g) {
+        if (data.isEmpty) {
+          return const NotFoundPage();
+        }
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
               padding: const EdgeInsets.only(
                 left: 20.0,
                 right: 20.0,
@@ -80,34 +78,34 @@ class ModalBank extends GetView<InvoiceController> {
               child: Text(
                 controller.bank_group(data[index_g].group),
                 style: GoogleFonts.montserrat(
-                    color: textPrimaryColor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500),
-              )),
-          SizedBox(height: 12),
-          ListView.separated(
-            shrinkWrap: true,
-            physics:
-                NeverScrollableScrollPhysics(), // Disable inner ListView scrolling
-            itemCount: data != null && data[index_g].data != null
-                ? data[index_g].data.length
-                : 0,
-            itemBuilder: (BuildContext context, int index) => GestureDetector(
-              onTap: () {
-                controller.choses_bank(data[index_g].data[index]);
-                Navigator.pop(context);
-              },
-              child: Container(
+                  color: textPrimaryColor,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            SizedBox(height: 12),
+            ListView.separated(
+              shrinkWrap: true,
+              physics:
+                  NeverScrollableScrollPhysics(), // Disable inner ListView scrolling
+              itemCount: data != null && data[index_g].data != null
+                  ? data[index_g].data.length
+                  : 0,
+              itemBuilder: (BuildContext context, int index) => GestureDetector(
+                onTap: () {
+                  controller.choses_bank(data[index_g].data[index]);
+                  Navigator.pop(context);
+                },
                 child: Container(
+                  child: Container(
                     padding: const EdgeInsets.only(
                       left: 20.0,
                       right: 20.0,
                       top: 10,
                       bottom: 10.0,
                     ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                    ),
+                    decoration: BoxDecoration(color: Colors.white),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,27 +121,28 @@ class ModalBank extends GetView<InvoiceController> {
                               height: 40,
                               loadingBuilder:
                                   (context, child, loadingProgress) {
-                                if (loadingProgress == null) return child;
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    color: mainColor,
-                                  ),
-                                );
-                              },
+                                    if (loadingProgress == null) return child;
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        color: mainColor,
+                                      ),
+                                    );
+                                  },
                               errorBuilder: (context, error, stackTrace) {
                                 return Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(Icons.error,
-                                        size: 30, color: Colors.red),
+                                    Icon(
+                                      Icons.error,
+                                      size: 30,
+                                      color: Colors.red,
+                                    ),
                                   ],
                                 );
                               },
                               // ),
                             ),
-                            SizedBox(
-                              width: 10,
-                            ),
+                            SizedBox(width: 10),
                             Text(
                               data[index_g].data[index].name,
                               style: GoogleFonts.montserrat(
@@ -155,18 +154,18 @@ class ModalBank extends GetView<InvoiceController> {
                           ],
                         ),
                       ],
-                    )),
+                    ),
+                  ),
+                ),
               ),
+              separatorBuilder: (BuildContext context, int index) =>
+                  SizedBox(height: 10),
             ),
-            separatorBuilder: (BuildContext context, int index) => SizedBox(
-              height: 10,
-            ),
-          ),
-        ],
-      ),
-      separatorBuilder: (BuildContext context, int index) => SizedBox(
-        height: 20,
-      ),
+          ],
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) =>
+          SizedBox(height: 20),
     );
   }
 }

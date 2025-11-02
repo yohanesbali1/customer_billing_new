@@ -7,11 +7,13 @@ class BankProvider {
   Future<List<BankGroupModel>> getData() async {
     final String? token = await storage.read(key: 'token');
     try {
-      final response =
-          await http.get(Uri.parse('$baseUrl/customer/bank'), headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-      });
+      final response = await http.get(
+        Uri.parse('$baseUrl/customer/bank?type=vigo'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
       final data = json.decode(response.body);
       if (response.statusCode == 200) {
         return (data as List).map((e) => BankGroupModel.fromJson(e)).toList();
@@ -30,11 +32,13 @@ class BankProvider {
   Future<BankModel?> showData(id) async {
     final String? token = await storage.read(key: 'token');
     try {
-      final response =
-          await http.get(Uri.parse('$baseUrl/customer/bank/${id}'), headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-      });
+      final response = await http.get(
+        Uri.parse('$baseUrl/customer/bank/${id}'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
       final data = json.decode(response.body);
       final Map<String, dynamic> responseData = json.decode(response.body);
       if (response.statusCode == 200) {

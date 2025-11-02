@@ -64,7 +64,7 @@ class HelpPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Center(child: Icon(Icons.add)),
+                  child: Center(child: Icon(Icons.add, color: Colors.white)),
                 ),
               ),
             ),

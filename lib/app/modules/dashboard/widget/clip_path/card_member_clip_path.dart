@@ -53,7 +53,7 @@ class CardMember extends StatelessWidget {
         margin: EdgeInsets.only(left: defaultMargin, right: defaultMargin),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFFEF8200), Color(0xFF212360)],
+            colors: [Color(0xFFAC0205), Color(0xFF4F0203)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),

@@ -29,7 +29,7 @@ class PackageController extends GetxController {
       isLoading(false);
     } catch (e) {
       isLoading(false);
-      Helper().AlertSnackBar(null);
+      Helper().AlertSnackBar();
     }
   }
 }

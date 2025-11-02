@@ -101,7 +101,7 @@ class HomePage extends GetView<HomeController> {
                               ? mainColor
                               : textSecondaryColor,
                           fontSize: 10,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
@@ -142,7 +142,7 @@ class HomePage extends GetView<HomeController> {
                               ? mainColor
                               : textSecondaryColor,
                           fontSize: 10,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
@@ -183,7 +183,7 @@ class HomePage extends GetView<HomeController> {
                               ? mainColor
                               : textSecondaryColor,
                           fontSize: 10,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
@@ -224,7 +224,7 @@ class HomePage extends GetView<HomeController> {
                               ? mainColor
                               : textSecondaryColor,
                           fontSize: 10,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),

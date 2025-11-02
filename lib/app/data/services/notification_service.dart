@@ -25,7 +25,7 @@ class NotificationService {
   bool _isInitialized = false;
   String? pendingPayload;
 
-  static const String _channelId = 'channel_my_wng';
+  static const String _channelId = 'channel_my_vigo';
 
   Future<void> initialize() async {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);

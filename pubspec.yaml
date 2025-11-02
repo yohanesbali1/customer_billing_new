@@ -61,21 +61,20 @@ dev_dependencies:
 flutter_native_splash:
   color: "#ffffff"
   color_dark: "#ffffff"
-  image: assets/images/logo-flash-fix-3.png
-  image_dark: assets/images/logo-flash-fix-3.png
+  image: assets/images/logo-flash.png
+  image_dark: assets/images/logo-flash.png
   android: true
   ios: true
-  android_gravity: center
   web: false
-  ios_content_mode: scaleAspectFill
   fullscreen: true
+  android_gravity: center
+  ios_content_mode: scaleAspectFill
+
   android_12:
+    image: assets/images/logo-flash.png
+    image_dark: assets/images/logo-flash.png
     color: "#ffffff"
     color_dark: "#ffffff"
-    image: assets/images/logo-flash-fix-3.png
-    image_dark: assets/images/logo-flash-fix-3.png
-    android_gravity: center
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.

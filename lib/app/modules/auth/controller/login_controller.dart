@@ -41,7 +41,7 @@ class LoginController extends GetxController {
       var data = {
         'username': username.value.text,
         'password': password.value.text,
-        'group_app': 'WNG'
+        'group_app': 'VIGO',
       };
       await FirebaseMessaging.instance.deleteToken();
       final LoginModel response = await AuthProvider().loginData(data);
@@ -53,8 +53,9 @@ class LoginController extends GetxController {
     } catch (e) {
       Get.back();
       isLoading(false);
-      String errorMessage =
-          e is String ? e : 'Maaf ada kesalahan, silahkan coba lagi';
+      String errorMessage = e is String
+          ? e
+          : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(null, errorMessage);
     }
   }

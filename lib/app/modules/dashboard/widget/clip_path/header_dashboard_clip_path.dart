@@ -13,27 +13,24 @@ class HeaderDashboard extends StatelessWidget {
     return ClipPath(
       clipper: HeaderDashboardClipPath(),
       child: Container(
-          height: 269,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFFFF842B), // "#FF842B"
-                Color(0xFF1D2087), // "#1D2087"
-              ],
-            ),
+        height: 269,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFF690305), Color(0xFFAC0205)],
           ),
-          child: Container(
-            margin: EdgeInsets.only(top: 50),
-            alignment: Alignment.topCenter,
-            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                    child: Column(
+        ),
+        child: Container(
+          margin: EdgeInsets.only(top: 50),
+          alignment: Alignment.topCenter,
+          padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -43,7 +40,8 @@ class HeaderDashboard extends StatelessWidget {
                         fontSize: 13,
                       ),
                     ),
-                    Obx(() => Skeletonizer(
+                    Obx(
+                      () => Skeletonizer(
                         enabled: auth_c.isLoading.value,
                         child: Text(
                           '${auth_c.profile.value?.name ?? '-'}',
@@ -52,12 +50,16 @@ class HeaderDashboard extends StatelessWidget {
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
-                        )))
+                        ),
+                      ),
+                    ),
                   ],
-                ))
-              ],
-            ),
-          )),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -71,7 +73,11 @@ class HeaderDashboardClipPath extends CustomClipper<Path> {
 
     // Draw an oval bottom
     path.quadraticBezierTo(
-        size.width / 2, size.height, size.width, size.height - 50);
+      size.width / 2,
+      size.height,
+      size.width,
+      size.height - 50,
+    );
 
     // Complete the path
     path.lineTo(size.width, 0.0);

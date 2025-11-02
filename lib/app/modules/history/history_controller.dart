@@ -55,7 +55,7 @@ class HistoryController extends GetxController {
         invoice_paid_data.value = data;
       }
     } catch (e) {
-      Helper().AlertSnackBar(null);
+      Helper().AlertSnackBar();
     } finally {
       isLoading(false);
     }

@@ -17,7 +17,8 @@ class InvoiceController extends GetxController {
   void onInit() {
     super.onInit();
     // Safely get the parameter 'id' from the Get.parameters map
-    id.value = Get.parameters['id'] ??
+    id.value =
+        Get.parameters['id'] ??
         ''; // Defaulting to empty string if 'id' is not found
     getData(id.value);
     getBank();
@@ -34,7 +35,7 @@ class InvoiceController extends GetxController {
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
-      Helper().AlertSnackBar(null);
+      Helper().AlertSnackBar();
     }
   }
 
@@ -46,7 +47,7 @@ class InvoiceController extends GetxController {
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
-      Helper().AlertSnackBar(null);
+      Helper().AlertSnackBar();
     }
   }
 
@@ -58,7 +59,7 @@ class InvoiceController extends GetxController {
       isLoadingBank.value = false;
     } catch (e) {
       isLoadingBank.value = false;
-      Helper().AlertSnackBar(null);
+      Helper().AlertSnackBar();
     }
   }
 

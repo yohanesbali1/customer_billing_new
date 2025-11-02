@@ -312,41 +312,38 @@ class Helper {
     }
   }
 
-  void AlertSnackBar(dynamic status) {
-    switch (status) {
-      default:
-        Get.snackbar(
-          "",
-          "",
-          backgroundColor: redColor,
-          colorText: Colors.white,
-          icon: Icon(Icons.error, color: Colors.white),
-          titleText: Text(
-            'Maaf, terjadi kesalahan',
-            style: GoogleFonts.montserrat(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          messageText: Text(
-            'Silahkan hubungi cs',
-            style: GoogleFonts.montserrat(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          margin: EdgeInsets.only(
-            top: 10,
-            left: defaultMargin,
-            right: defaultMargin,
-          ),
-          duration: 2.seconds,
-          snackPosition: SnackPosition.TOP,
-          isDismissible: true,
-        );
-    }
+  void AlertSnackBar() {
+    Get.snackbar(
+      "",
+      "",
+      backgroundColor: redColor,
+      colorText: Colors.white,
+      icon: Icon(Icons.error, color: Colors.white),
+      titleText: Text(
+        'Maaf, terjadi kesalahan',
+        style: GoogleFonts.montserrat(
+          color: Colors.white,
+          fontSize: 15,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      messageText: Text(
+        'Silahkan hubungi cs',
+        style: GoogleFonts.montserrat(
+          color: Colors.white,
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+      margin: EdgeInsets.only(
+        top: 10,
+        left: defaultMargin,
+        right: defaultMargin,
+      ),
+      duration: 2.seconds,
+      snackPosition: SnackPosition.TOP,
+      isDismissible: true,
+    );
   }
 
   // OverlayEntry? show_loading(context) {
