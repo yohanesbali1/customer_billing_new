@@ -15,7 +15,7 @@ class ListDataInovicePage extends StatelessWidget {
       margin: EdgeInsets.only(
         left: defaultMargin,
         right: defaultMargin,
-        bottom: 10,
+        bottom: 0,
         top: 10,
       ),
       child: Column(

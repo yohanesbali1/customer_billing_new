@@ -9,3 +9,4 @@ part 'city_model.dart';
 part 'bank_model.dart';
 part 'report_model.dart';
 part 'map_model.dart';
+part 'meta_model.dart';

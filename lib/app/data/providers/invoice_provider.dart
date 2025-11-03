@@ -4,29 +4,35 @@ class InvoiceProvider {
   final storage = new FlutterSecureStorage();
   final String baseUrl = dotenv.env['BASE_URL'] ?? '';
 
-  Future<List<InvoiceModel>> getData(String status) async {
+  Future<InvoiceResponseModel> getData({
+    required String status,
+    int page = 1,
+    int perPage = 10,
+  }) async {
     try {
       final String? token = await storage.read(key: 'token');
       final response = await http.get(
-        Uri.parse('$baseUrl/customer/invoice?status=$status'),
+        Uri.parse(
+          '$baseUrl/customer/invoice?status=$status&page=$page&per_page=$perPage',
+        ),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
         },
       );
 
-      final Map<String, dynamic> responseData = json.decode(response.body);
       if (response.statusCode == 200) {
-        return (responseData['data'] as List)
-            .map((e) => InvoiceModel.fromJson(e))
-            .toList();
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        return InvoiceResponseModel.fromJson(responseData);
       }
+
       if (response.statusCode == 401) {
         storage.delete(key: 'token');
-        Get.toNamed('/login');
-        return [];
+        Get.offAllNamed('/login');
+        throw 'Sesi login berakhir, silakan login ulang.';
       }
-      throw responseData['message'];
+
+      throw json.decode(response.body)['message'] ?? 'Gagal memuat data';
     } catch (e) {
       rethrow;
     }

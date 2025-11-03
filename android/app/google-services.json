@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "26093709880",
-    "project_id": "billing-92cbf",
-    "storage_bucket": "billing-92cbf.firebasestorage.app"
+    "project_number": "85373941587",
+    "project_id": "vigo-billing",
+    "storage_bucket": "vigo-billing.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:26093709880:android:89b9d412648969615314cd",
+        "mobilesdk_app_id": "1:85373941587:android:f0bb6df23ffb4ff5c293a6",
         "android_client_info": {
-          "package_name": "com.wng.customer_billing"
+          "package_name": "com.billing.vigo_customer"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBrxFAlEv_BNy08kwB4FBkxjqvTVT3Jtj0"
+          "current_key": "AIzaSyCQdiSF_zPiFHRQ0JfRPeQqPzrxoRUJfVY"
         }
       ],
       "services": {

@@ -1,4 +1,4 @@
-package com.vigo.customer
+package com.billing.vigo_customer
 
 import io.flutter.embedding.android.FlutterActivity
 

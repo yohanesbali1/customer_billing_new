@@ -7,9 +7,18 @@ import 'package:get/get.dart';
 class HistoryController extends GetxController {
   var invoice_not_paid_data = <InvoiceModel>[].obs;
   var invoice_paid_data = <InvoiceModel>[].obs;
+
   var pagecontroller = PageController();
   var page_index = 0.obs;
+
   var isLoading = true.obs;
+  var isLoadMore = false.obs;
+
+  // Pagination tracking
+  var currentPagePaid = 1.obs;
+  var lastPagePaid = 1.obs;
+  var currentPageNotPaid = 1.obs;
+  var lastPageNotPaid = 1.obs;
 
   bool _billLoaded = false;
   bool _paidLoaded = false;
@@ -18,13 +27,11 @@ class HistoryController extends GetxController {
   void onInit() {
     super.onInit();
     page_index.value = 0;
-    loadPageData(0); // pertama kali masuk tab Tagihan
+    loadPageData(0);
   }
 
   @override
   void onClose() {
-    page_index.value = 0;
-    loadPageData(0);
     pagecontroller.dispose();
     super.onClose();
   }
@@ -45,19 +52,58 @@ class HistoryController extends GetxController {
     }
   }
 
-  getData(String status) async {
+  Future<void> getData(String status, {bool loadMore = false}) async {
     try {
-      isLoading(true);
-      final data = await InvoiceProvider().getData(status);
-      if (status == 'not_paid') {
-        invoice_not_paid_data.value = data;
+      if (loadMore) {
+        if (status == 'paid' && currentPagePaid.value >= lastPagePaid.value)
+          return;
+        if (status == 'not_paid' &&
+            currentPageNotPaid.value >= lastPageNotPaid.value)
+          return;
+
+        isLoadMore(true);
       } else {
-        invoice_paid_data.value = data;
+        isLoading(true);
+      }
+
+      // Tentukan halaman
+      int currentPage = 1;
+      if (status == 'paid') {
+        currentPage = loadMore ? currentPagePaid.value + 1 : 1;
+      } else {
+        currentPage = loadMore ? currentPageNotPaid.value + 1 : 1;
+      }
+
+      final response = await InvoiceProvider().getData(
+        status: status,
+        page: currentPage,
+        perPage: 10,
+      );
+
+      if (status == 'paid') {
+        if (loadMore) {
+          invoice_paid_data.addAll(response.data);
+          currentPagePaid.value = currentPage;
+        } else {
+          invoice_paid_data.assignAll(response.data);
+          currentPagePaid.value = 1;
+        }
+        lastPagePaid.value = response.meta?.lastPage ?? 1;
+      } else {
+        if (loadMore) {
+          invoice_not_paid_data.addAll(response.data);
+          currentPageNotPaid.value = currentPage;
+        } else {
+          invoice_not_paid_data.assignAll(response.data);
+          currentPageNotPaid.value = 1;
+        }
+        lastPageNotPaid.value = response.meta?.lastPage ?? 1;
       }
     } catch (e) {
       Helper().AlertSnackBar();
     } finally {
       isLoading(false);
+      isLoadMore(false);
     }
   }
 

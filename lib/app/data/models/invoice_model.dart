@@ -87,3 +87,28 @@ class InvoiceModel {
     };
   }
 }
+
+class InvoiceResponseModel {
+  final List<InvoiceModel> data;
+  final InvoiceMeta? meta;
+
+  InvoiceResponseModel({required this.data, this.meta});
+
+  factory InvoiceResponseModel.fromJson(Map<String, dynamic> json) {
+    return InvoiceResponseModel(
+      data:
+          (json['data'] as List<dynamic>?)
+              ?.map((e) => InvoiceModel.fromJson(e))
+              .toList() ??
+          [],
+      meta: json['meta'] != null ? InvoiceMeta.fromJson(json['meta']) : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data.map((e) => e.toJson()).toList(),
+      'meta': meta?.toJson(),
+    };
+  }
+}

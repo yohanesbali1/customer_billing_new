@@ -16,7 +16,7 @@ plugins {
 }
 
 android {
-    namespace = "com.vigo.customer"
+    namespace = "com.billing.vigo_customer"
     compileSdk = 35
     ndkVersion = "27.0.12077973"
 
@@ -31,7 +31,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.vigo.customer"
+        applicationId = "com.billing.vigo_customer"
         minSdk = 23
         targetSdk = 35
         versionCode = 6
