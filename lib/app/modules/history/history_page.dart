@@ -1,6 +1,5 @@
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/history/widget/bill.dart';
-import 'package:vigo_customer_billing/app/modules/history/widget/paid.dart';
+import 'package:vigo_customer_billing/app/modules/history/widget/list_invoice.dart';
 import 'package:vigo_customer_billing/app/modules/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -126,8 +125,8 @@ class HistoryPage extends StatelessWidget {
                   history_c.page_index.value = index;
                 },
                 children: <Widget>[
-                  ListBillPage(controller: history_c),
-                  ListPaidPage(controller: history_c),
+                  ListInvoicePage(controller: history_c, type: 'not_paid'),
+                  ListInvoicePage(controller: history_c, type: 'paid'),
                 ],
               ),
             ),

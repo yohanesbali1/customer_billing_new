@@ -13,7 +13,7 @@ class InvoiceProvider {
       final String? token = await storage.read(key: 'token');
       final response = await http.get(
         Uri.parse(
-          '$baseUrl/customer/invoice?status=$status&page=$page&per_page=$perPage',
+          '$baseUrl/customer/invoice?status=$status&per_page=$perPage&page=$page',
         ),
         headers: {
           'Accept': 'application/json',

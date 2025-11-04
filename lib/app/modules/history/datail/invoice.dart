@@ -181,32 +181,21 @@ class InvoicePage extends GetView<InvoiceController> {
                             onTap: controller.isButtonDisabledCopy.value
                                 ? null
                                 : () async {
-                                    // Disable the button
                                     controller.isButtonDisabledCopy.value =
                                         true;
-
-                                    // Copy to clipboard
                                     Clipboard.setData(
                                       ClipboardData(
                                         text:
                                             "${controller.bank_data.value!.code}${das_c.accountbillData.value!.paymentCode}",
                                       ),
                                     );
-
-                                    // Show snackbar
-                                    Get.snackbar(
-                                      "Berhasil",
-                                      "Kode pembayaran berhasil dicopy",
-                                      backgroundColor: mainColor,
-                                      duration: 2.seconds,
-                                      isDismissible: true,
+                                    Helper().AlertSnackBar(
+                                      status: "success",
+                                      message:
+                                          "Kode pembayaran berhasil dicopy",
                                     );
-
-                                    // Wait for 2 seconds before re-enabling the button
                                     await Future.delayed(2.seconds);
-
-                                    controller.isButtonDisabledCopy.value =
-                                        false;
+                                    controller.isButtonDisabledCopy(false);
                                   },
                             child: Container(
                               decoration: BoxDecoration(
@@ -448,7 +437,7 @@ class InvoicePage extends GetView<InvoiceController> {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              const SizedBox(height: 5),
+                              const SizedBox(width: 5),
                               Text(
                                 '${Helper.formatRupiah(item.productPrice)}',
                                 style: GoogleFonts.montserrat(
@@ -463,7 +452,6 @@ class InvoicePage extends GetView<InvoiceController> {
                         separatorBuilder: (BuildContext context, int index) =>
                             SizedBox(height: 10),
                       ),
-                      const SizedBox(height: 10),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -476,7 +464,7 @@ class InvoicePage extends GetView<InvoiceController> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          const SizedBox(height: 5),
+                          const SizedBox(width: 5),
                           Text(
                             '${Helper.formatRupiah(controller.bank_data.value?.adminFee ?? 0)}',
                             style: GoogleFonts.montserrat(
@@ -531,6 +519,7 @@ class InvoicePage extends GetView<InvoiceController> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 10),
               ],
             ),
           ),

@@ -312,15 +312,35 @@ class Helper {
     }
   }
 
-  void AlertSnackBar() {
+  void AlertSnackBar({String message = '', String status = 'error'}) {
+    Color color;
+    String sub_message;
+    Icon icon;
+    switch (status) {
+      case 'success':
+        icon = Icon(Icons.check, color: Colors.white);
+        color = Colors.green;
+        sub_message = 'Berhasil';
+        break;
+      case 'warning':
+        icon = Icon(Icons.warning, color: Colors.white);
+        color = Colors.yellow;
+        sub_message = 'Peringatan';
+        break;
+      default:
+        icon = Icon(Icons.error, color: Colors.white);
+        sub_message = 'Silahkan hubungi cs';
+        color = Colors.red;
+    }
+
     Get.snackbar(
       "",
       "",
-      backgroundColor: redColor,
+      backgroundColor: color,
       colorText: Colors.white,
-      icon: Icon(Icons.error, color: Colors.white),
+      icon: icon,
       titleText: Text(
-        'Maaf, terjadi kesalahan',
+        message ?? 'Maaf, terjadi kesalahan',
         style: GoogleFonts.montserrat(
           color: Colors.white,
           fontSize: 15,
@@ -328,7 +348,7 @@ class Helper {
         ),
       ),
       messageText: Text(
-        'Silahkan hubungi cs',
+        sub_message,
         style: GoogleFonts.montserrat(
           color: Colors.white,
           fontSize: 12,
@@ -345,201 +365,4 @@ class Helper {
       isDismissible: true,
     );
   }
-
-  // OverlayEntry? show_loading(context) {
-  //   final overlay = Overlay.of(context);
-  //   if (overlay == null) {
-  //     throw FlutterError('No overlay found in the current context');
-  //   }
-  //   final overlayEntry = OverlayEntry(
-  //     builder: (context) => Material(
-  //       color: Colors.transparent.withOpacity(
-  //           0.5), // Ensures no material shadows or effects interfere.
-  //       child: Container(
-  //         width: double.infinity,
-  //         height: double.infinity,
-  //         // color: Colors.white.withOpacity(0.7), // Semi-transparent overlay.
-  //         child: Center(
-  //           child: Container(
-  //             height: 270, // Increased height for better spacing.
-  //             width: 280, // Adjusted width for a better layout.
-  //             decoration: BoxDecoration(
-  //               color: Colors.white,
-  //               borderRadius: BorderRadius.circular(20),
-  //             ),
-  //             child: Column(
-  //               mainAxisAlignment:
-  //                   MainAxisAlignment.start, // Center column items vertically.
-  //               children: [
-  //                 Container(
-  //                     width: double.infinity,
-  //                     height: 150,
-  //                     decoration: BoxDecoration(
-  //                         color: mainColor,
-  //                         borderRadius: const BorderRadius.only(
-  //                             topLeft: Radius.circular(20),
-  //                             topRight: Radius.circular(20))),
-  //                     child: Row(
-  //                         mainAxisAlignment: MainAxisAlignment.center,
-  //                         children: [
-  //                           Container(
-  //                             height: 40,
-  //                             width: 40,
-  //                             child: CircularProgressIndicator(
-  //                               color: Colors.white,
-  //                               strokeWidth: 3.0,
-  //                             ),
-  //                           )
-  //                         ])),
-
-  //                 SizedBox(
-  //                     height:
-  //                         21), // Adds spacing between the progress indicator and text.
-  //                 Text(
-  //                   'Loading',
-  //                   style: GoogleFonts.montserrat(
-  //                     color: textPrimaryColor,
-  //                     fontSize: 22,
-  //                     fontWeight: FontWeight.w400,
-  //                     decoration: TextDecoration.none,
-  //                   ),
-  //                 ),
-  //                 SizedBox(
-  //                     height:
-  //                         5), // Adds spacing between the progress indicator and text.
-  //                 Text(
-  //                   'Mohon tunggu',
-  //                   style: GoogleFonts.montserrat(
-  //                     color: textPrimaryColor,
-  //                     fontSize: 12,
-  //                     fontWeight: FontWeight.w400,
-  //                     decoration: TextDecoration.none,
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  //   overlay.insert(overlayEntry);
-  //   return overlayEntry;
-  // }
-
-  // void custom_alert(context) {
-  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //       content: Stack(
-  //         clipBehavior: Clip.none,
-  //         children: [
-  //           Container(
-  //             padding: EdgeInsets.all(16),
-  //             height: 90,
-  //             decoration: BoxDecoration(
-  //                 color: Color(0xFFC72C41),
-  //                 borderRadius: BorderRadius.all(Radius.circular(20))),
-  //             child: Row(
-  //               mainAxisAlignment: MainAxisAlignment.start,
-  //               children: [
-  //                 const SizedBox(
-  //                   width: 48,
-  //                 ),
-  //                 const Text("test"),
-  //               ],
-  //             ),
-  //           ),
-  //           Positioned(
-  //               bottom: 0,
-  //               child: ClipRRect(
-  //                 borderRadius:
-  //                     BorderRadius.only(bottomLeft: Radius.circular(20)),
-  //                 child: SvgPicture.asset(
-  //                   'assets/icons/bubbles.svg',
-  //                   height: 48,
-  //                   width: 40,
-  //                   color: Color(0xFF801336),
-  //                 ),
-  //               )),
-  //           Positioned(
-  //               top: -20,
-  //               left: 0,
-  //               child: Stack(
-  //                 alignment: Alignment.center,
-  //                 children: [
-  //                   SvgPicture.asset(
-  //                     'assets/icons/fail.svg',
-  //                     height: 40,
-  //                   ),
-  //                   Positioned(
-  //                     top: 10,
-  //                     child: SvgPicture.asset(
-  //                       'assets/icons/close.svg',
-  //                       height: 16,
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ))
-  //         ],
-  //       ),
-  //       behavior: SnackBarBehavior.floating,
-  //       backgroundColor: Colors.transparent,
-  //       elevation: 0,
-  //       duration: Duration(seconds: 3),
-  //       dismissDirection: DismissDirection.none,
-  //       padding: EdgeInsets.symmetric(vertical: 20)));
-  // }
-
-  // Alert(dynamic status, String? message, BuildContext context) async {
-  //   switch (status) {
-  //     case 'success':
-  //       await QuickAlert.show(
-  //         context: context,
-  //         type: QuickAlertType.success,
-  //         showConfirmBtn: false,
-  //         title: "Berhasil",
-  //         barrierDismissible: false,
-  //         autoCloseDuration: Duration(seconds: 4),
-  //         text: 'Data berhasil di simpan',
-  //       );
-  //       break;
-  //     case 'loading':
-  //       await QuickAlert.show(
-  //         context: context,
-  //         type: QuickAlertType.loading,
-  //         title: 'Loading',
-  //         text: 'Mohon menuggu',
-  //       );
-  //       break;
-  //     case 'question':
-  //       bool confirmed = false;
-  //       await QuickAlert.show(
-  //         context: context,
-  //         type: QuickAlertType.warning,
-  //         title: 'Yakin?',
-  //         text: 'Apakah kamu ingin melanjutkan?',
-  //         confirmBtnText: 'Ya',
-  //         cancelBtnText: 'Tidak',
-  //         showCancelBtn: true,
-  //         onConfirmBtnTap: () {
-  //           confirmed = true;
-  //           Navigator.of(context, rootNavigator: true).pop();
-  //         },
-  //         onCancelBtnTap: () {
-  //           confirmed = false;
-  //           Navigator.of(context, rootNavigator: true).pop();
-  //         },
-  //       );
-  //       return confirmed;
-  //     default:
-  //       await QuickAlert.show(
-  //         context: context,
-  //         barrierDismissible: false,
-  //         type: QuickAlertType.error,
-  //         showConfirmBtn: false,
-  //         title: "Gagal",
-  //         text: message,
-  //         autoCloseDuration: Duration(seconds: 4),
-  //       );
-  //   }
-  // }
 }
