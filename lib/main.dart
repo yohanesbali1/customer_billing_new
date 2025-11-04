@@ -1,5 +1,5 @@
-import 'package:customer_billing/app/data/services/notification_service.dart';
-import 'package:customer_billing/firebase_options.dart';
+import 'package:vigo_customer_billing/app/data/services/notification_service.dart';
+import 'package:vigo_customer_billing/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,7 +45,7 @@ void main() async {
         getPages: AppPages.routes,
         theme: ThemeData(
           appBarTheme: AppBarTheme(backgroundColor: Colors.white),
-          primaryColor: Color(0xFFBD0000),
+          primaryColor: Colors.white,
           fontFamily: GoogleFonts.montserrat().fontFamily,
           textSelectionTheme: TextSelectionThemeData(
             cursorColor: Color(0xFFBD0000),

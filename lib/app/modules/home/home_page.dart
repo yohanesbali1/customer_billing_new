@@ -1,9 +1,9 @@
-import 'package:customer_billing/app/core/theme/theme.dart';
-import 'package:customer_billing/app/modules/auth/controller/auth_controller.dart';
-import 'package:customer_billing/app/modules/dashboard/dashboard_page.dart';
-import 'package:customer_billing/app/modules/help/page/list_help_page.dart';
-import 'package:customer_billing/app/modules/history/history_page.dart';
-import 'package:customer_billing/app/modules/profile/profile_page.dart';
+import 'package:vigo_customer_billing/app/core/theme/theme.dart';
+import 'package:vigo_customer_billing/app/modules/auth/controller/auth_controller.dart';
+import 'package:vigo_customer_billing/app/modules/dashboard/dashboard_page.dart';
+import 'package:vigo_customer_billing/app/modules/help/page/list_help_page.dart';
+import 'package:vigo_customer_billing/app/modules/history/history_page.dart';
+import 'package:vigo_customer_billing/app/modules/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

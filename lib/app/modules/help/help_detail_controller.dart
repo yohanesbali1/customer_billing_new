@@ -1,7 +1,7 @@
-import 'package:customer_billing/app/data/models/models.dart';
-import 'package:customer_billing/app/data/providers/providers.dart';
-import 'package:customer_billing/app/core/helpers/helpers.dart';
-import 'package:customer_billing/app/modules/help/help_controller.dart';
+import 'package:vigo_customer_billing/app/data/models/models.dart';
+import 'package:vigo_customer_billing/app/data/providers/providers.dart';
+import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_customer_billing/app/modules/help/help_controller.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -30,8 +30,9 @@ class HelpDetailController extends GetxController {
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
-      String errorMessage =
-          e is String ? e : 'Maaf ada kesalahan, silahkan coba lagi';
+      String errorMessage = e is String
+          ? e
+          : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(null, errorMessage);
     }
   }
@@ -50,8 +51,9 @@ class HelpDetailController extends GetxController {
     } catch (e) {
       Get.back();
       isLoading.value = false;
-      String errorMessage =
-          e is String ? e : 'Maaf ada kesalahan, silahkan coba lagi';
+      String errorMessage = e is String
+          ? e
+          : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(null, errorMessage);
     }
   }

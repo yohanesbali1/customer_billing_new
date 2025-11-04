@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:customer_billing/app/core/theme/theme.dart';
-import 'package:customer_billing/app/data/models/models.dart';
-import 'package:customer_billing/app/modules/dashboard/dashboard_controller.dart';
-import 'package:customer_billing/app/modules/dashboard/widget/not_found/card_member_not_found.dart';
-import 'package:customer_billing/app/modules/dashboard/widget/skeleton/card_member_skeleton.dart';
+import 'package:vigo_customer_billing/app/core/theme/theme.dart';
+import 'package:vigo_customer_billing/app/data/models/models.dart';
+import 'package:vigo_customer_billing/app/modules/dashboard/dashboard_controller.dart';
+import 'package:vigo_customer_billing/app/modules/dashboard/widget/not_found/card_member_not_found.dart';
+import 'package:vigo_customer_billing/app/modules/dashboard/widget/skeleton/card_member_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';

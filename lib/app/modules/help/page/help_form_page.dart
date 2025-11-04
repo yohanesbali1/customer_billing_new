@@ -1,7 +1,7 @@
-import 'package:customer_billing/app/core/helpers/helpers.dart';
-import 'package:customer_billing/app/core/theme/theme.dart';
-import 'package:customer_billing/app/core/widgets/form.dart';
-import 'package:customer_billing/app/modules/help/help_add_controller.dart';
+import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_customer_billing/app/core/theme/theme.dart';
+import 'package:vigo_customer_billing/app/core/widgets/form.dart';
+import 'package:vigo_customer_billing/app/modules/help/help_add_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';

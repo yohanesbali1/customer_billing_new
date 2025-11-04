@@ -1,6 +1,6 @@
-import 'package:customer_billing/app/modules/auth/middleware/auth_middleware.dart';
-import 'package:customer_billing/app/modules/history/datail/invoice.dart';
-import 'package:customer_billing/app/modules/history/datail/invoice_binding.dart';
+import 'package:vigo_customer_billing/app/modules/auth/middleware/auth_middleware.dart';
+import 'package:vigo_customer_billing/app/modules/history/datail/invoice.dart';
+import 'package:vigo_customer_billing/app/modules/history/datail/invoice_binding.dart';
 import 'package:get/get.dart';
 
 class InvoiceRoutes {

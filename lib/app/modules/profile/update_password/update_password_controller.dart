@@ -1,5 +1,5 @@
-import 'package:customer_billing/app/core/helpers/helpers.dart';
-import 'package:customer_billing/app/data/providers/providers.dart';
+import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_customer_billing/app/data/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -66,7 +66,7 @@ class UpdatePasswordController extends GetxController {
       var data = {
         'password': password.value.text,
         'c_password': c_password.value.text,
-        'new_password': new_password.value.text
+        'new_password': new_password.value.text,
       };
       await AuthProvider().updateData(data);
       clear_form();
@@ -77,8 +77,9 @@ class UpdatePasswordController extends GetxController {
     } catch (e) {
       Get.back();
       isLoading(false);
-      String errorMessage =
-          e is String ? e : 'Maaf ada kesalahan, silahkan coba lagi';
+      String errorMessage = e is String
+          ? e
+          : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(null, errorMessage);
     }
   }

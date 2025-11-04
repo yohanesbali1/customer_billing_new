@@ -1,7 +1,7 @@
-import 'package:customer_billing/app/core/helpers/helpers.dart';
-import 'package:customer_billing/app/data/providers/providers.dart';
-import 'package:customer_billing/app/data/services/notification_service.dart';
-import 'package:customer_billing/app/modules/auth/controller/auth_controller.dart';
+import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_customer_billing/app/data/providers/providers.dart';
+import 'package:vigo_customer_billing/app/data/services/notification_service.dart';
+import 'package:vigo_customer_billing/app/modules/auth/controller/auth_controller.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -44,8 +44,9 @@ class HomeController extends GetxController {
     try {
       await AuthProvider().updateDataTokenFCM();
     } catch (e) {
-      String errorMessage =
-          e is String ? e : 'Maaf ada kesalahan, silahkan coba lagi';
+      String errorMessage = e is String
+          ? e
+          : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(null, errorMessage);
     }
   }

@@ -1,7 +1,7 @@
-import 'package:customer_billing/app/data/models/models.dart';
-import 'package:customer_billing/app/data/providers/providers.dart';
-import 'package:customer_billing/app/core/helpers/helpers.dart';
-import 'package:customer_billing/app/modules/auth/controller/auth_controller.dart';
+import 'package:vigo_customer_billing/app/data/models/models.dart';
+import 'package:vigo_customer_billing/app/data/providers/providers.dart';
+import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_customer_billing/app/modules/auth/controller/auth_controller.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {

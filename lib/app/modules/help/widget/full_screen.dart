@@ -1,8 +1,8 @@
-import 'package:customer_billing/app/modules/help/help_chat_controller.dart';
+import 'package:vigo_customer_billing/app/modules/help/help_chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
-import 'package:customer_billing/app/modules/help/help_chat_controller.dart';
+import 'package:vigo_customer_billing/app/modules/help/help_chat_controller.dart';
 
 enum MediaType { image, video }
 
@@ -63,67 +63,86 @@ class FullscreenMediaWidget extends StatelessWidget {
                         child: Center(
                           child: Container(
                             color: Colors.black38,
-                            child: const Icon(Icons.play_arrow,
-                                color: Colors.white, size: 60),
+                            child: const Icon(
+                              Icons.play_arrow,
+                              color: Colors.white,
+                              size: 60,
+                            ),
                           ),
                         ),
                       ),
 
                     // Kontrol slider & tombol muncul sesuai showControls
-                    Obx(() => controller.showControls.value
-                        ? Container(
-                            color: Colors.black38,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 8),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Slider(
-                                  min: 0,
-                                  max: videoController.value.duration.inSeconds
-                                      .toDouble(),
-                                  value: controller
-                                      .currentPosition.value.inSeconds
-                                      .clamp(
+                    Obx(
+                      () => controller.showControls.value
+                          ? Container(
+                              color: Colors.black38,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Slider(
+                                    min: 0,
+                                    max: videoController
+                                        .value
+                                        .duration
+                                        .inSeconds
+                                        .toDouble(),
+                                    value: controller
+                                        .currentPosition
+                                        .value
+                                        .inSeconds
+                                        .clamp(
                                           0,
                                           videoController
-                                              .value.duration.inSeconds)
-                                      .toDouble(),
-                                  activeColor: Colors.red,
-                                  inactiveColor: Colors.white30,
-                                  onChanged: (value) {
-                                    videoController.seekTo(
-                                        Duration(seconds: value.toInt()));
-                                  },
-                                ),
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(
-                                        controller.isPlaying.value
-                                            ? Icons.pause
-                                            : Icons.play_arrow,
-                                        color: Colors.white,
+                                              .value
+                                              .duration
+                                              .inSeconds,
+                                        )
+                                        .toDouble(),
+                                    activeColor: Colors.red,
+                                    inactiveColor: Colors.white30,
+                                    onChanged: (value) {
+                                      videoController.seekTo(
+                                        Duration(seconds: value.toInt()),
+                                      );
+                                    },
+                                  ),
+                                  Row(
+                                    children: [
+                                      IconButton(
+                                        icon: Icon(
+                                          controller.isPlaying.value
+                                              ? Icons.pause
+                                              : Icons.play_arrow,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: controller.togglePlayPause,
                                       ),
-                                      onPressed: controller.togglePlayPause,
-                                    ),
-                                    Text(
-                                      '${_formatDuration(controller.currentPosition.value)} / ${_formatDuration(videoController.value.duration)}',
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                    ),
-                                    const Spacer(),
-                                    IconButton(
-                                      icon: const Icon(Icons.close,
-                                          color: Colors.white),
-                                      onPressed: () => Navigator.pop(context),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
-                        : const SizedBox.shrink()),
+                                      Text(
+                                        '${_formatDuration(controller.currentPosition.value)} / ${_formatDuration(videoController.value.duration)}',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.close,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            )
+                          : const SizedBox.shrink(),
+                    ),
                   ],
                 ),
               );
@@ -146,10 +165,7 @@ class FullscreenMediaWidget extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     alignment: Alignment.center,
-                    child: Image.network(
-                      url,
-                      fit: BoxFit.contain,
-                    ),
+                    child: Image.network(url, fit: BoxFit.contain),
                   ),
                 ),
               ),

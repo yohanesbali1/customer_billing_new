@@ -1,6 +1,6 @@
-import 'package:customer_billing/app/core/helpers/helpers.dart';
-import 'package:customer_billing/app/data/models/models.dart';
-import 'package:customer_billing/app/data/providers/providers.dart';
+import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_customer_billing/app/data/models/models.dart';
+import 'package:vigo_customer_billing/app/data/providers/providers.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

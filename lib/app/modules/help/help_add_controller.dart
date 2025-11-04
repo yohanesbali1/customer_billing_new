@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:customer_billing/app/core/helpers/helpers.dart';
-import 'package:customer_billing/app/data/models/models.dart';
-import 'package:customer_billing/app/data/providers/providers.dart';
-import 'package:customer_billing/app/modules/help/help_controller.dart';
-import 'package:customer_billing/app/modules/help/help_detail_controller.dart';
+import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_customer_billing/app/data/models/models.dart';
+import 'package:vigo_customer_billing/app/data/providers/providers.dart';
+import 'package:vigo_customer_billing/app/modules/help/help_controller.dart';
+import 'package:vigo_customer_billing/app/modules/help/help_detail_controller.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';

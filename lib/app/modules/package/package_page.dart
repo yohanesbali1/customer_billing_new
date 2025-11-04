@@ -1,9 +1,9 @@
-import 'package:customer_billing/app/core/helpers/helpers.dart';
-import 'package:customer_billing/app/core/theme/theme.dart';
-import 'package:customer_billing/app/core/widgets/not_found.dart';
-import 'package:customer_billing/app/data/models/models.dart';
-import 'package:customer_billing/app/modules/package/package_controller.dart';
-import 'package:customer_billing/app/modules/package/widget/skeleton.dart';
+import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_customer_billing/app/core/theme/theme.dart';
+import 'package:vigo_customer_billing/app/core/widgets/not_found.dart';
+import 'package:vigo_customer_billing/app/data/models/models.dart';
+import 'package:vigo_customer_billing/app/modules/package/package_controller.dart';
+import 'package:vigo_customer_billing/app/modules/package/widget/skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

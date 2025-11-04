@@ -1,4 +1,4 @@
-import 'package:customer_billing/app/core/theme/theme.dart';
+import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -13,16 +13,17 @@ class CustomFormInput extends StatelessWidget {
   final String type_keyboard;
   final validator_input_text;
 
-  CustomFormInput(
-      {required this.placeholder,
-      this.status = false,
-      this.controller,
-      this.isLoading = false,
-      this.disabled = true,
-      this.type = null,
-      this.type_keyboard = 'string',
-      this.change_type,
-      required this.validator_input_text});
+  CustomFormInput({
+    required this.placeholder,
+    this.status = false,
+    this.controller,
+    this.isLoading = false,
+    this.disabled = true,
+    this.type = null,
+    this.type_keyboard = 'string',
+    this.change_type,
+    required this.validator_input_text,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,42 +46,28 @@ class CustomFormInput extends StatelessWidget {
         ),
         decoration: InputDecoration(
           disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                color: borderboxColor,
-                width: 0.5,
-              )),
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: borderboxColor, width: 0.5),
+          ),
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                color: borderboxColor,
-                width: 0.5,
-              )),
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: borderboxColor, width: 0.5),
+          ),
           errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                color: Colors.red,
-                width: 0.5,
-              )),
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: Colors.red, width: 0.5),
+          ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(
-              color: Colors.red,
-              width: 0.5,
-            ),
+            borderSide: BorderSide(color: Colors.red, width: 0.5),
           ),
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                color: borderboxColor,
-                width: 0.5,
-              )),
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: borderboxColor, width: 0.5),
+          ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(
-              color: borderinputColor,
-              width: 0.5,
-            ),
+            borderSide: BorderSide(color: borderinputColor, width: 0.5),
           ),
           errorStyle: GoogleFonts.montserrat(
             color: Colors.red,
@@ -123,15 +110,16 @@ class CustomFormAreaInput extends StatelessWidget {
   final change_type;
   final validator_input_text;
 
-  CustomFormAreaInput(
-      {required this.placeholder,
-      this.status = false,
-      this.controller,
-      this.isLoading = false,
-      this.type = null,
-      this.disabled = false,
-      this.change_type,
-      required this.validator_input_text});
+  CustomFormAreaInput({
+    required this.placeholder,
+    this.status = false,
+    this.controller,
+    this.isLoading = false,
+    this.type = null,
+    this.disabled = false,
+    this.change_type,
+    required this.validator_input_text,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -153,42 +141,28 @@ class CustomFormAreaInput extends StatelessWidget {
         ),
         decoration: InputDecoration(
           disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                color: borderboxColor,
-                width: 0.5,
-              )),
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: borderboxColor, width: 0.5),
+          ),
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                color: borderboxColor,
-                width: 0.5,
-              )),
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: borderboxColor, width: 0.5),
+          ),
           errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                color: Colors.red,
-                width: 0.5,
-              )),
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: Colors.red, width: 0.5),
+          ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(
-              color: Colors.red,
-              width: 0.5,
-            ),
+            borderSide: BorderSide(color: Colors.red, width: 0.5),
           ),
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                color: borderboxColor,
-                width: 0.5,
-              )),
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: borderboxColor, width: 0.5),
+          ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(
-              color: borderinputColor,
-              width: 0.5,
-            ),
+            borderSide: BorderSide(color: borderinputColor, width: 0.5),
           ),
           errorStyle: GoogleFonts.montserrat(
             color: Colors.red,

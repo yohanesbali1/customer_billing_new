@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:customer_billing/app/core/helpers/helpers.dart';
-import 'package:customer_billing/app/core/theme/theme.dart';
-import 'package:customer_billing/app/data/models/models.dart';
-import 'package:customer_billing/app/data/providers/providers.dart';
+import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_customer_billing/app/core/theme/theme.dart';
+import 'package:vigo_customer_billing/app/data/models/models.dart';
+import 'package:vigo_customer_billing/app/data/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,8 +41,9 @@ class HelpController extends GetxController {
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
-      String errorMessage =
-          e is String ? e : 'Maaf ada kesalahan, silahkan coba lagi';
+      String errorMessage = e is String
+          ? e
+          : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(null, errorMessage);
     }
   }

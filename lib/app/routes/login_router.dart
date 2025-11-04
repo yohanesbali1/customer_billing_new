@@ -1,5 +1,5 @@
-import 'package:customer_billing/app/modules/auth/login/login_binding.dart';
-import 'package:customer_billing/app/modules/auth/login/login_page.dart';
+import 'package:vigo_customer_billing/app/modules/auth/login/login_binding.dart';
+import 'package:vigo_customer_billing/app/modules/auth/login/login_page.dart';
 import 'package:get/get.dart';
 
 class LoginRoutes {
@@ -8,10 +8,6 @@ class LoginRoutes {
   static const home = '/login';
 
   static final routes = [
-    GetPage(
-      name: home,
-      page: () => LoginPage(),
-      binding: LoginBinding(),
-    ),
+    GetPage(name: home, page: () => LoginPage(), binding: LoginBinding()),
   ];
 }

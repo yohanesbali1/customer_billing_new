@@ -1,8 +1,8 @@
-import 'package:customer_billing/app/modules/auth/controller/auth_controller.dart';
-import 'package:customer_billing/app/modules/dashboard/dashboard_controller.dart';
-import 'package:customer_billing/app/modules/help/help_controller.dart';
-import 'package:customer_billing/app/modules/history/history_controller.dart';
-import 'package:customer_billing/app/modules/profile/profile_controller.dart';
+import 'package:vigo_customer_billing/app/modules/auth/controller/auth_controller.dart';
+import 'package:vigo_customer_billing/app/modules/dashboard/dashboard_controller.dart';
+import 'package:vigo_customer_billing/app/modules/help/help_controller.dart';
+import 'package:vigo_customer_billing/app/modules/history/history_controller.dart';
+import 'package:vigo_customer_billing/app/modules/profile/profile_controller.dart';
 import 'package:get/get.dart';
 
 import 'home_controller.dart';
@@ -15,8 +15,6 @@ class HomeBinding extends Bindings {
     Get.lazyPut<DashboardController>(() => DashboardController());
     Get.lazyPut<ProfileController>(() => ProfileController());
     Get.lazyPut<HelpController>(() => HelpController());
-    Get.lazyPut<HomeController>(
-      () => HomeController(),
-    );
+    Get.lazyPut<HomeController>(() => HomeController());
   }
 }

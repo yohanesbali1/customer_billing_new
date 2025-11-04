@@ -1,4 +1,4 @@
-import 'package:customer_billing/app/modules/package/package_controller.dart';
+import 'package:vigo_customer_billing/app/modules/package/package_controller.dart';
 import 'package:get/get.dart';
 
 class PackageBinding extends Bindings {
