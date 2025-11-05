@@ -8,7 +8,7 @@ class HelperProvider {
     final String? token = await storage.read(key: 'token');
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/customer/complaint?page=$page&perPage=$perPage'),
+        Uri.parse('$baseUrl/customer/complaint?page=$page&per_page=$perPage'),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',

@@ -111,6 +111,7 @@ class DetailHelpPage extends StatelessWidget {
         ],
       ),
       body: Obx(() {
+        final data = controller.reportData.value;
         if (controller.isLoading.value) {
           return SkeletonReportDetail();
         }
@@ -123,10 +124,18 @@ class DetailHelpPage extends StatelessWidget {
             Future.microtask(() => controller.getData());
             return Future.value(true);
           },
-          child: buildReportItem(
-            controller.reportData.value as ReportModelDetail,
-            context,
-          ),
+          child: data == null
+              ? SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height - 300,
+                    child: NotFoundPage(),
+                  ),
+                )
+              : buildReportItem(
+                  controller.reportData.value as ReportModelDetail,
+                  context,
+                ),
         );
       }),
     );
@@ -136,7 +145,7 @@ class DetailHelpPage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: defaultMargin, vertical: 20),
       child: ListView(
-        physics: BouncingScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         children: [
           Container(
             color: Colors.white,

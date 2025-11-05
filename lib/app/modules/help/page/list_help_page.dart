@@ -1,4 +1,3 @@
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/modules/help/help_controller.dart';
 import 'package:vigo_customer_billing/app/modules/help/widget/list_data.dart';
@@ -26,51 +25,21 @@ class HelpPage extends StatelessWidget {
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back), // Custom back icon
+          icon: Icon(Icons.arrow_back),
           onPressed: () {
-            // Define the action for the back button (e.g., navigate to the previous screen)
-            home_c.change_page(0); // Go back to the previous screen
+            home_c.change_page(0);
           },
         ),
       ),
-      body: Container(
-        child: Stack(
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Expanded(child: ListDataReportPage(controller: controller)),
-              ],
-            ),
-            Positioned(
-              bottom: 20,
-              right: 10,
-              child: GestureDetector(
-                onTap: () {
-                  Get.toNamed('/help/add');
-                },
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: mainColor,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.shade300,
-                        spreadRadius: 0,
-                        blurRadius: 10,
-                        offset: Offset(0, 1),
-                      ),
-                    ],
-                  ),
-                  child: Center(child: Icon(Icons.add, color: Colors.white)),
-                ),
-              ),
-            ),
-          ],
-        ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: mainColor,
+        shape: CircleBorder(),
+        child: Icon(Icons.add, color: Colors.white),
+        onPressed: () {
+          Get.toNamed('/help/add');
+        },
       ),
+      body: ListDataReportPage(controller: controller),
     );
   }
 }

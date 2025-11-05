@@ -14,13 +14,14 @@ class HelpController extends GetxController {
   var isLoadMore = false.obs;
   var currentPage = 1.obs;
   var lastPage = 1.obs;
+  var perPage = 10.obs;
   final scrollController = ScrollController();
-
-  bool _isLoaded = false;
 
   @override
   void onReady() {
     super.onReady();
+    final context = Get.context!;
+    perPage.value = Helper().calculatePerPage(context);
     getData();
     scrollController.addListener(() => onScroll());
   }
@@ -44,28 +45,37 @@ class HelpController extends GetxController {
   }
 
   void onScroll() {
-    print('scroll position ${scrollController.position.maxScrollExtent}');
-    if (scrollController.position.maxScrollExtent == 0 && !isLoadMore.value) {
-      getData(loadMore: true);
+    if (scrollController.position.pixels ==
+            scrollController.position.maxScrollExtent &&
+        !isLoadMore.value) {
+      if (currentPage.value < lastPage.value) {
+        getData(loadMore: true);
+      }
     }
   }
 
   Future<void> getData({bool loadMore = false}) async {
     try {
-      if (loadMore && currentPage.value >= currentPage.value) return;
-      isLoadMore(true);
+      if (loadMore && currentPage.value >= lastPage.value) return;
+      // isLoadMore(true);
+      if (loadMore) {
+        isLoadMore.value = true;
+      } else {
+        isLoading.value = true;
+      }
+
       int _currentPage;
       _currentPage = loadMore ? currentPage.value + 1 : 1;
       final response = await HelperProvider().getData(
         page: _currentPage,
-        perPage: 10,
+        perPage: perPage.value,
       );
       if (loadMore) {
         report_data.addAll(response.data);
       } else {
         report_data.assignAll(response.data);
       }
-      currentPage.value = response.meta?.currentPage ?? 1;
+      currentPage.value = loadMore ? _currentPage : 1;
       lastPage.value = response.meta?.lastPage ?? 1;
     } catch (e) {
       Helper().AlertSnackBar();

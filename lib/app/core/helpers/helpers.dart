@@ -365,4 +365,10 @@ class Helper {
       isDismissible: true,
     );
   }
+
+  int calculatePerPage(BuildContext context, {double itemHeight = 80}) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final estimatedCount = (screenHeight / itemHeight).ceil();
+    return estimatedCount + 2; // tambahkan buffer agar bisa scroll sedikit
+  }
 }
