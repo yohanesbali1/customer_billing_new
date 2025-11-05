@@ -15,18 +15,19 @@ class ReportModel {
 
   factory ReportModel.fromJson(Map<String, dynamic> json) {
     return ReportModel(
-        id: json['id'],
-        typeTopic: TypeTopic.fromJson(json['type_topic']),
-        createdAt: DateTime.parse(json['created_at']),
-        status: Status.fromJson(json['status']));
+      id: json['id'],
+      typeTopic: TypeTopic.fromJson(json['type_topic']),
+      createdAt: DateTime.parse(json['created_at']),
+      status: Status.fromJson(json['status']),
+    );
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'type_topic': typeTopic.toJson(),
-        'created_at': createdAt,
-        'status': status.toJson(),
-      };
+    'id': id,
+    'type_topic': typeTopic.toJson(),
+    'created_at': createdAt,
+    'status': status.toJson(),
+  };
 }
 
 class ReportModelDetail {
@@ -70,17 +71,17 @@ class ReportModelDetail {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'type_topic': typeTopic.toJson(),
-        'num_topic': num_topic,
-        'description': description,
-        'address': address,
-        'phone': phone,
-        'maps': maps,
-        'img': img,
-        'created_at': createdAt,
-        'status': status.map((x) => x.toJson()).toList(),
-      };
+    'id': id,
+    'type_topic': typeTopic.toJson(),
+    'num_topic': num_topic,
+    'description': description,
+    'address': address,
+    'phone': phone,
+    'maps': maps,
+    'img': img,
+    'created_at': createdAt,
+    'status': status.map((x) => x.toJson()).toList(),
+  };
 }
 
 class TypeTopic {
@@ -121,27 +122,21 @@ class Status {
   }
 
   Map<String, dynamic> toJson() => {
-        'status': status,
-        'description': description,
-        'time': time.toIso8601String(),
-        'userApprove': userApprove,
-      };
+    'status': status,
+    'description': description,
+    'time': time.toIso8601String(),
+    'userApprove': userApprove,
+  };
 }
 
 class UserApprove {
   final String username;
   final String name;
 
-  UserApprove({
-    required this.username,
-    required this.name,
-  });
+  UserApprove({required this.username, required this.name});
 
   factory UserApprove.fromJson(Map<String, dynamic> json) {
-    return UserApprove(
-      username: json['username'],
-      name: json['name'],
-    );
+    return UserApprove(username: json['username'], name: json['name']);
   }
 }
 
@@ -159,10 +154,7 @@ class ChatResponse {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'date': date,
-      'chat': chat.map((x) => x.toJson()).toList(),
-    };
+    return {'date': date, 'chat': chat.map((x) => x.toJson()).toList()};
   }
 }
 
@@ -209,6 +201,31 @@ class Chat {
       'file': file,
       'is_image': is_image,
       'created_at': createdAt.toIso8601String(),
+    };
+  }
+}
+
+class ReportResponseModel {
+  final List<ReportModel> data;
+  final MetaData? meta;
+
+  ReportResponseModel({required this.data, this.meta});
+
+  factory ReportResponseModel.fromJson(Map<String, dynamic> json) {
+    return ReportResponseModel(
+      data:
+          (json['data'] as List<dynamic>?)
+              ?.map((e) => ReportModel.fromJson(e))
+              .toList() ??
+          [],
+      meta: json['meta'] != null ? MetaData.fromJson(json['meta']) : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data.map((e) => e.toJson()).toList(),
+      'meta': meta?.toJson(),
     };
   }
 }

@@ -4,24 +4,25 @@ class HelperProvider {
   final storage = new FlutterSecureStorage();
   final String baseUrl = dotenv.env['BASE_URL'] ?? '';
 
-  Future<List<ReportModel>> getData() async {
+  Future<ReportResponseModel> getData({page = 1, perPage = 10}) async {
     final String? token = await storage.read(key: 'token');
     try {
-      final response =
-          await http.get(Uri.parse('$baseUrl/customer/complaint'), headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-      });
+      final response = await http.get(
+        Uri.parse('$baseUrl/customer/complaint?page=$page&perPage=$perPage'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
       final data = json.decode(response.body);
       if (response.statusCode == 200) {
-        return (data['data'] as List)
-            .map((e) => ReportModel.fromJson(e))
-            .toList();
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        return ReportResponseModel.fromJson(responseData);
       }
       if (response.statusCode == 401) {
         storage.delete(key: 'token');
         Get.toNamed('/login');
-        return [];
+        throw 'Sesi login berakhir, silakan login ulang.';
       }
       throw data['message'];
     } catch (e) {
@@ -89,9 +90,11 @@ class HelperProvider {
   dynamic submitReportData(dynamic data) async {
     try {
       final String? token = await storage.read(key: 'token');
-      var uri = Uri.parse(data['id'] == ''
-          ? '$baseUrl/customer/complaint'
-          : '$baseUrl/customer/complaint/${data['id']}');
+      var uri = Uri.parse(
+        data['id'] == ''
+            ? '$baseUrl/customer/complaint'
+            : '$baseUrl/customer/complaint/${data['id']}',
+      );
 
       var request = http.MultipartRequest('POST', uri);
       request.headers['Authorization'] = 'Bearer $token';
@@ -100,11 +103,13 @@ class HelperProvider {
       // Add text fields
       data['form'].forEach((key, value) async {
         if (value is File) {
-          request.files.add(await http.MultipartFile.fromPath(
-            key,
-            value.path,
-            contentType: MediaType('image', 'jpeg'), // adjust as needed
-          ));
+          request.files.add(
+            await http.MultipartFile.fromPath(
+              key,
+              value.path,
+              contentType: MediaType('image', 'jpeg'), // adjust as needed
+            ),
+          );
         } else {
           request.fields[key] = value.toString();
         }
@@ -132,11 +137,13 @@ class HelperProvider {
   Future<List<TypeTopic>> get_type() async {
     final String? token = await storage.read(key: 'token');
     try {
-      final response = await http
-          .get(Uri.parse('$baseUrl/customer/type-complaint'), headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-      });
+      final response = await http.get(
+        Uri.parse('$baseUrl/customer/type-complaint'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
       final data = json.decode(response.body);
       if (response.statusCode == 200) {
         return (data as List).map((e) => TypeTopic.fromJson(e)).toList();
@@ -156,11 +163,12 @@ class HelperProvider {
     final String? token = await storage.read(key: 'token');
     try {
       final response = await http.get(
-          Uri.parse('$baseUrl/customer/complaint/$payload/chat?page=${page}'),
-          headers: {
-            'Accept': 'application/json',
-            'Authorization': 'Bearer $token',
-          });
+        Uri.parse('$baseUrl/customer/complaint/$payload/chat?page=${page}'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
       final data = json.decode(response.body);
       if (response.statusCode == 200) {
         return (data['data'] as List)
@@ -191,11 +199,13 @@ class HelperProvider {
       // Add text fields
       data.forEach((key, value) async {
         if (value is File) {
-          request.files.add(await http.MultipartFile.fromPath(
-            key,
-            value.path,
-            contentType: MediaType('image', 'jpeg'), // adjust as needed
-          ));
+          request.files.add(
+            await http.MultipartFile.fromPath(
+              key,
+              value.path,
+              contentType: MediaType('image', 'jpeg'), // adjust as needed
+            ),
+          );
         } else {
           request.fields[key] = value.toString();
         }

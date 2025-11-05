@@ -43,7 +43,7 @@ class HelpDetailController extends GetxController {
       isLoading.value = true;
       Helper().AlertGetX('loading', null);
       await HelperProvider().deletereportData(id.value);
-      help_controller.report_data.value = await HelperProvider().getData();
+      // help_controller.report_data.value = await HelperProvider().getData();
       Get.back();
       await Helper().AlertGetX('success', "Data berhasil dihapus");
       Get.back();

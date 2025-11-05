@@ -90,7 +90,7 @@ class InvoiceModel {
 
 class InvoiceResponseModel {
   final List<InvoiceModel> data;
-  final InvoiceMeta? meta;
+  final MetaData? meta;
 
   InvoiceResponseModel({required this.data, this.meta});
 
@@ -101,7 +101,7 @@ class InvoiceResponseModel {
               ?.map((e) => InvoiceModel.fromJson(e))
               .toList() ??
           [],
-      meta: json['meta'] != null ? InvoiceMeta.fromJson(json['meta']) : null,
+      meta: json['meta'] != null ? MetaData.fromJson(json['meta']) : null,
     );
   }
 

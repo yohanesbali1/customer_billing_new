@@ -74,7 +74,7 @@ class _ListInvoicePageState extends State<ListInvoicePage> {
                 physics: const AlwaysScrollableScrollPhysics(),
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.8,
+                    height: MediaQuery.of(context).size.height - 300,
                     child: NotFoundPage(),
                   ),
                 ],

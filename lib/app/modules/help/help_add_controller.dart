@@ -120,7 +120,7 @@ class HelpFormController extends GetxController {
       };
       await HelperProvider().submitReportData(data);
       if (id.value == '') {
-        help_controller.report_data.value = await HelperProvider().getData();
+        // help_controller.report_data.value = await HelperProvider().getData();
       } else {
         detail_controller.reportData.value = await HelperProvider()
             .showreportData(id.value);

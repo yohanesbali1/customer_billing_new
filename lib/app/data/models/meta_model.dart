@@ -1,6 +1,6 @@
 part of "models.dart";
 
-class InvoiceMeta {
+class MetaData {
   final int? currentPage;
   final int? from;
   final int? lastPage;
@@ -8,7 +8,7 @@ class InvoiceMeta {
   final int? to;
   final int? total;
 
-  InvoiceMeta({
+  MetaData({
     this.currentPage,
     this.from,
     this.lastPage,
@@ -17,8 +17,8 @@ class InvoiceMeta {
     this.total,
   });
 
-  factory InvoiceMeta.fromJson(Map<String, dynamic> json) {
-    return InvoiceMeta(
+  factory MetaData.fromJson(Map<String, dynamic> json) {
+    return MetaData(
       currentPage: json['current_page'],
       from: json['from'],
       lastPage: json['last_page'],

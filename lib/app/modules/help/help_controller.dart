@@ -10,10 +10,19 @@ import 'package:get/get.dart';
 class HelpController extends GetxController {
   var isLoading = false.obs;
   var report_data = <ReportModel>[].obs;
+  var page_index = 0.obs;
+  var isLoadMore = false.obs;
+  var currentPage = 1.obs;
+  var lastPage = 1.obs;
+  final scrollController = ScrollController();
+
+  bool _isLoaded = false;
 
   @override
   void onReady() {
     super.onReady();
+    getData();
+    scrollController.addListener(() => onScroll());
   }
 
   @override
@@ -31,20 +40,38 @@ class HelpController extends GetxController {
   void dispose() {
     // Cancel the subscription
     super.dispose();
+    scrollController.dispose();
   }
 
-  @override
-  Future<void> getData() async {
+  void onScroll() {
+    print('scroll position ${scrollController.position.maxScrollExtent}');
+    if (scrollController.position.maxScrollExtent == 0 && !isLoadMore.value) {
+      getData(loadMore: true);
+    }
+  }
+
+  Future<void> getData({bool loadMore = false}) async {
     try {
-      isLoading.value = true;
-      report_data.value = await HelperProvider().getData();
-      isLoading.value = false;
+      if (loadMore && currentPage.value >= currentPage.value) return;
+      isLoadMore(true);
+      int _currentPage;
+      _currentPage = loadMore ? currentPage.value + 1 : 1;
+      final response = await HelperProvider().getData(
+        page: _currentPage,
+        perPage: 10,
+      );
+      if (loadMore) {
+        report_data.addAll(response.data);
+      } else {
+        report_data.assignAll(response.data);
+      }
+      currentPage.value = response.meta?.currentPage ?? 1;
+      lastPage.value = response.meta?.lastPage ?? 1;
     } catch (e) {
-      isLoading.value = false;
-      String errorMessage = e is String
-          ? e
-          : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertSnackBar();
+    } finally {
+      isLoading(false);
+      isLoadMore(false);
     }
   }
 
