@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HistoryController extends GetxController {
+  final ScrollController scrollController = ScrollController();
   var invoice_not_paid_data = <InvoiceModel>[].obs;
   var invoice_paid_data = <InvoiceModel>[].obs;
+  var type = 'not_paid'.obs;
+  var perPage = 10.obs;
 
   var pagecontroller = PageController();
   var page_index = 0.obs;
@@ -14,7 +17,6 @@ class HistoryController extends GetxController {
   var isLoading = true.obs;
   var isLoadMore = false.obs;
 
-  // Pagination tracking
   var currentPagePaid = 1.obs;
   var lastPagePaid = 1.obs;
   var currentPageNotPaid = 1.obs;
@@ -27,13 +29,29 @@ class HistoryController extends GetxController {
   void onInit() {
     super.onInit();
     page_index.value = 0;
+    final context = Get.context!;
+    perPage.value = Helper().calculatePerPage(context);
     loadPageData(0);
+    scrollController.addListener(onScroll);
   }
 
   @override
   void onClose() {
-    pagecontroller.dispose();
     super.onClose();
+    pagecontroller.dispose();
+    scrollController.dispose();
+  }
+
+  void onScroll() {
+    if (scrollController.position.pixels ==
+            scrollController.position.maxScrollExtent &&
+        !isLoadMore.value) {
+      final isPaid = type.value == 'paid';
+      if ((isPaid && currentPagePaid.value < lastPagePaid.value) ||
+          (!isPaid && currentPageNotPaid.value < lastPageNotPaid.value)) {
+        getData(type.value, loadMore: true);
+      }
+    }
   }
 
   void change_page(int index) {
@@ -54,51 +72,33 @@ class HistoryController extends GetxController {
 
   Future<void> getData(String status, {bool loadMore = false}) async {
     try {
-      if (loadMore) {
-        if (status == 'paid' && currentPagePaid.value >= lastPagePaid.value)
-          return;
-        if (status == 'not_paid' &&
-            currentPageNotPaid.value >= lastPageNotPaid.value)
-          return;
+      final isPaid = status == 'paid';
 
-        isLoadMore(true);
-      } else {
-        isLoading(true);
-      }
+      final currentPage = isPaid ? currentPagePaid : currentPageNotPaid;
+      final lastPage = isPaid ? lastPagePaid : lastPageNotPaid;
+      final invoiceData = isPaid ? invoice_paid_data : invoice_not_paid_data;
 
-      // Tentukan halaman
-      int currentPage = 1;
-      if (status == 'paid') {
-        currentPage = loadMore ? currentPagePaid.value + 1 : 1;
-      } else {
-        currentPage = loadMore ? currentPageNotPaid.value + 1 : 1;
-      }
+      if (loadMore && currentPage.value >= lastPage.value) return;
+
+      loadMore ? isLoadMore(true) : isLoading(true);
+
+      final nextPage = loadMore ? currentPage.value + 1 : 1;
 
       final response = await InvoiceProvider().getData(
         status: status,
-        page: currentPage,
-        perPage: 10,
+        page: nextPage,
+        perPage: perPage.value,
       );
 
-      if (status == 'paid') {
-        if (loadMore) {
-          invoice_paid_data.addAll(response.data);
-          currentPagePaid.value = currentPage;
-        } else {
-          invoice_paid_data.assignAll(response.data);
-          currentPagePaid.value = 1;
-        }
-        lastPagePaid.value = response.meta?.lastPage ?? 1;
+      if (loadMore) {
+        invoiceData.addAll(response.data);
       } else {
-        if (loadMore) {
-          invoice_not_paid_data.addAll(response.data);
-          currentPageNotPaid.value = currentPage;
-        } else {
-          invoice_not_paid_data.assignAll(response.data);
-          currentPageNotPaid.value = 1;
-        }
-        lastPageNotPaid.value = response.meta?.lastPage ?? 1;
+        invoiceData.assignAll(response.data);
       }
+
+      currentPage.value = nextPage;
+      (isPaid ? lastPagePaid : lastPageNotPaid).value =
+          response.meta?.lastPage ?? 1;
     } catch (e) {
       Helper().AlertSnackBar();
     } finally {

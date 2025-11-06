@@ -6,54 +6,17 @@ import 'package:vigo_customer_billing/app/modules/history/widget/skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ListInvoicePage extends StatefulWidget {
+class ListInvoicePage extends StatelessWidget {
   final HistoryController controller;
   final String type; // 'paid' atau 'not_paid'
-  const ListInvoicePage({
-    required this.controller,
-    required this.type,
-    super.key,
-  });
 
-  @override
-  State<ListInvoicePage> createState() => _ListInvoicePageState();
-}
-
-class _ListInvoicePageState extends State<ListInvoicePage> {
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(_onScroll);
-  }
-
-  void _onScroll() {
-    final controller = widget.controller;
-    final type = widget.type;
-
-    if (_scrollController.position.pixels ==
-            _scrollController.position.maxScrollExtent &&
-        !controller.isLoadMore.value) {
-      final isPaid = type == 'paid';
-
-      if ((isPaid &&
-              controller.currentPagePaid.value <
-                  controller.lastPagePaid.value) ||
-          (!isPaid &&
-              controller.currentPageNotPaid.value <
-                  controller.lastPageNotPaid.value)) {
-        controller.getData(type, loadMore: true);
-      }
-    }
+  ListInvoicePage({required this.controller, required this.type, super.key}) {
+    controller.type.value = type;
   }
 
   @override
   Widget build(BuildContext context) {
-    final controller = widget.controller;
-    final type = widget.type;
     final isPaid = type == 'paid';
-
     return Obx(() {
       final invoices = isPaid
           ? controller.invoice_paid_data
@@ -89,14 +52,14 @@ class _ListInvoicePageState extends State<ListInvoicePage> {
                   return false;
                 },
                 child: ListView.builder(
-                  controller: _scrollController,
+                  controller: controller.scrollController,
                   physics: const AlwaysScrollableScrollPhysics(),
                   itemCount:
                       invoices.length + (controller.isLoadMore.value ? 1 : 0),
                   itemBuilder: (context, index) {
                     if (index < invoices.length) {
                       return ListDataInovicePage(
-                        data: [invoices[index]],
+                        data: invoices[index],
                         controller: controller,
                       );
                     } else {

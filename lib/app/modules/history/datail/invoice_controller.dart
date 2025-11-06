@@ -16,12 +16,10 @@ class InvoiceController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Safely get the parameter 'id' from the Get.parameters map
     id.value =
         Get.parameters['id'] ??
         ''; // Defaulting to empty string if 'id' is not found
     getData(id.value);
-    getBank();
   }
 
   @override
@@ -30,8 +28,8 @@ class InvoiceController extends GetxController {
       isLoading.value = true;
       invoiceData.value = await InvoiceProvider().showinvoiceData(payload);
       invoiceData.value!.paymentMethod != null
-          ? showBank(invoiceData.value!.paymentMethod)
-          : null;
+          ? await showBank(invoiceData.value!.paymentMethod)
+          : await getBank();
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
@@ -42,9 +40,7 @@ class InvoiceController extends GetxController {
   @override
   Future<void> showBank(id) async {
     try {
-      isLoading.value = true;
       bank_data.value = await BankProvider().showData(id);
-      isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
       Helper().AlertSnackBar();

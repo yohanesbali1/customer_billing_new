@@ -18,131 +18,123 @@ class ListDataInovicePage extends StatelessWidget {
         bottom: 0,
         top: 10,
       ),
-      child: Column(
-        children: List.generate(
-          data != null ? data.length : 0,
-          (index) => Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: GestureDetector(
-              onTap: () {
-                Get.toNamed("/invoice/detail/${data[index].id}");
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade300,
-                      spreadRadius: 0,
-                      blurRadius: 10,
-                      offset: Offset(0, 1),
+      child: GestureDetector(
+        onTap: () {
+          Get.toNamed("/invoice/detail/${data.id}");
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade300,
+                spreadRadius: 0,
+                blurRadius: 10,
+                offset: Offset(0, 1),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    data.numTransaction,
+                    style: GoogleFonts.montserrat(
+                      color: textPrimaryColor,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
                     ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Row(
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          data[index].numTransaction,
+                          data.status == 'paid'
+                              ? "Sudah dibayar pada ${DateFormat("d MMMM yyyy").format(data.paidAt)}"
+                              : "Jatuh tempo ${DateFormat("d MMMM yyyy").format(data.startDate)}",
                           style: GoogleFonts.montserrat(
-                            color: textPrimaryColor,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
+                            color: data.status == 'paid'
+                                ? textSecondaryColor
+                                : redColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: data.status == 'paid'
+                                ? greenColor
+                                : redColor,
+                          ),
+                          child: Text(
+                            controller.change_status(data.status),
+                            style: GoogleFonts.montserrat(
+                              color: Colors.white,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                data[index].status == 'paid'
-                                    ? "Sudah dibayar pada ${DateFormat("d MMMM yyyy").format(data[index].paidAt)}"
-                                    : "Jatuh tempo ${DateFormat("d MMMM yyyy").format(data[index].startDate)}",
-                                style: GoogleFonts.montserrat(
-                                  color: data[index].status == 'paid'
-                                      ? textSecondaryColor
-                                      : redColor,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: data[index].status == 'paid'
-                                      ? greenColor
-                                      : redColor,
-                                ),
-                                child: Text(
-                                  controller.change_status(data[index].status),
-                                  style: GoogleFonts.montserrat(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ],
+                  ),
+                  const SizedBox(width: 12),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '${Helper.formatRupiah(data.price)}',
+                        style: GoogleFonts.montserrat(
+                          color: textPrimaryColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Lihat Detail ',
+                            style: GoogleFonts.montserrat(
+                              color: mainColor,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.italic,
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              '${Helper.formatRupiah(data[index].price)}',
-                              style: GoogleFonts.montserrat(
-                                color: textPrimaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
+                          Text(
+                            '>',
+                            style: GoogleFonts.montserrat(
+                              color: mainColor,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.italic,
                             ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Lihat Detail ',
-                                  style: GoogleFonts.montserrat(
-                                    color: mainColor,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                                Text(
-                                  '>',
-                                  style: GoogleFonts.montserrat(
-                                    color: mainColor,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ),
+            ],
           ),
         ),
       ),

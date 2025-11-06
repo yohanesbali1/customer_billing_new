@@ -11,48 +11,38 @@ class ModalBank extends GetView<InvoiceController> {
   @override
   Widget build(BuildContext context) {
     final data = controller.list_bank.value;
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(color: bgColor),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.only(
-              left: 20.0,
-              right: 20.0,
-              top: 40.0,
-              bottom: 14.0,
-            ),
-            decoration: BoxDecoration(color: Colors.white),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(Icons.arrow_back),
-                ),
-                SizedBox(width: 10),
-                Text(
-                  'Pilih bank',
-                  style: GoogleFonts.montserrat(
-                    color: textPrimaryColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
+    return Scaffold(
+      backgroundColor: bgColor,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: Text(
+          'Pilih Bank',
+          style: GoogleFonts.montserrat(
+            color: textPrimaryColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
           ),
-          Expanded(
-            // Add Expanded here to make ListBank scrollable
-            child: ListBank(controller, data),
-          ),
-        ],
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      body: RefreshIndicator(
+        color: mainColor,
+        onRefresh: () async {
+          await controller.getBank();
+        },
+        child: data.isEmpty
+            ? SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height - 300,
+                  child: const Center(child: NotFoundPage()),
+                ),
+              )
+            : ListBank(controller, data),
       ),
     );
   }
@@ -60,11 +50,8 @@ class ModalBank extends GetView<InvoiceController> {
   Widget ListBank(controller, data) {
     return ListView.separated(
       shrinkWrap: true,
-      itemCount: data.isEmpty ? 1 : data.length,
+      itemCount: data.isEmpty ? 0 : data.length,
       itemBuilder: (BuildContext context, int index_g) {
-        if (data.isEmpty) {
-          return const NotFoundPage();
-        }
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -121,9 +121,6 @@ class HistoryPage extends StatelessWidget {
               child: PageView(
                 physics: NeverScrollableScrollPhysics(),
                 controller: history_c.pagecontroller,
-                onPageChanged: (index) {
-                  history_c.page_index.value = index;
-                },
                 children: <Widget>[
                   ListInvoicePage(controller: history_c, type: 'not_paid'),
                   ListInvoicePage(controller: history_c, type: 'paid'),
