@@ -1,4 +1,4 @@
-import 'package:vigo_customer_billing/app/modules/auth/middleware/auth_middleware.dart';
+import 'package:vigo_customer_billing/app/core/middleware/auth_middleware.dart';
 import 'package:vigo_customer_billing/app/modules/help/help_bindding.dart';
 import 'package:vigo_customer_billing/app/modules/help/page/help_chat_page.dart';
 import 'package:vigo_customer_billing/app/modules/help/page/help_detail_page.dart';

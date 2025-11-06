@@ -1,5 +1,5 @@
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/history/widget/list_invoice.dart';
+import 'package:vigo_customer_billing/app/modules/history/list_invoice.dart';
 import 'package:vigo_customer_billing/app/modules/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -329,6 +329,7 @@ class Helper {
         break;
       default:
         icon = Icon(Icons.error, color: Colors.white);
+        message = 'Maaf, terjadi kesalahan';
         sub_message = 'Silahkan hubungi cs';
         color = Colors.red;
     }
@@ -340,7 +341,7 @@ class Helper {
       colorText: Colors.white,
       icon: icon,
       titleText: Text(
-        message ?? 'Maaf, terjadi kesalahan',
+        message,
         style: GoogleFonts.montserrat(
           color: Colors.white,
           fontSize: 15,
