@@ -37,7 +37,7 @@ void main() async {
     runApp(
       GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'App',
+        title: 'App Vigo Customer Billing',
         // navigatorKey: navigatorKey,
         initialBinding: ApplicationBindings(),
         initialRoute: token != null ? '/home' : 'login',
