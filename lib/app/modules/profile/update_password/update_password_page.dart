@@ -1,7 +1,7 @@
 import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/core/widgets/form.dart';
-import 'package:vigo_customer_billing/app/modules/home/home_controller.dart';
+import 'package:vigo_customer_billing/app/modules/home/controllers/home_controller.dart';
 import 'package:vigo_customer_billing/app/modules/profile/update_password/update_password_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

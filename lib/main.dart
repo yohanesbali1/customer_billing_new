@@ -1,5 +1,3 @@
-import 'package:vigo_customer_billing/app/data/services/notification_service.dart';
-import 'package:vigo_customer_billing/app/modules/error/controllers/error_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app/core/bindings/application_bindings.dart';
 import 'app/routes/app_pages.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:vigo_customer_billing/app/data/services/notification_service.dart';
+
+// final navigatorKey = GlobalKey<NavigatorState>();
 
 class NoStretchScrollBehavior extends ScrollBehavior {
   @override
@@ -33,13 +34,6 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) {
-    final errorController = Get.put(ErrorController());
-
-    FlutterError.onError = (FlutterErrorDetails details) {
-      FlutterError.dumpErrorToConsole(details);
-      errorController.setError(details.exceptionAsString());
-      Get.offAllNamed('/error');
-    };
     runApp(
       GetMaterialApp(
         debugShowCheckedModeBanner: false,
@@ -49,12 +43,12 @@ void main() async {
         initialRoute: token != null ? '/home' : 'login',
         getPages: AppPages.routes,
         theme: ThemeData(
-          appBarTheme: AppBarTheme(backgroundColor: Colors.white),
           primaryColor: Colors.white,
+          primarySwatch: Colors.amber,
           fontFamily: GoogleFonts.montserrat().fontFamily,
           textSelectionTheme: TextSelectionThemeData(
-            cursorColor: Color(0xFFBD0000),
-            selectionColor: Color.fromARGB(255, 215, 39, 39),
+            cursorColor: Color(0xFFEF8200),
+            selectionColor: Colors.amber,
             selectionHandleColor: Colors.transparent,
           ),
           textTheme: GoogleFonts.montserratTextTheme(

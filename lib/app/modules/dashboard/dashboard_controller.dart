@@ -35,6 +35,7 @@ class DashboardController extends GetxController {
     } catch (e) {
       isLoading(false);
       Helper().AlertSnackBar();
+      return;
     }
   }
 }

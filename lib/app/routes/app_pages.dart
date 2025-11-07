@@ -24,6 +24,6 @@ class AppPages {
     ...PackageRoutes.routes,
     ...ServiceRoutes.routes,
     ...AboutRoutes.routes,
-    ...FAQRoutes.routes
+    ...FAQRoutes.routes,
   ];
 }
