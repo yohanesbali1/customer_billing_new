@@ -1,7 +1,6 @@
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/core/widgets/form.dart';
-import 'package:vigo_customer_billing/app/modules/auth/controller/login_controller.dart';
+import 'package:vigo_customer_billing/app/modules/login/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +17,7 @@ class LoginPage extends GetView<LoginController> {
             shrinkWrap: true,
             children: [
               Form(
-                key: controller.formkey,
+                key: controller.formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,14 +60,22 @@ class LoginPage extends GetView<LoginController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomFormLabel('Username'),
-                          Obx(
-                            () => CustomFormInput(
-                              isLoading: controller.isLoading.value,
-                              placeholder: 'Masukkan username anda',
-                              validator_input_text: controller.validator_input,
-                              controller: controller.username.value,
-                            ),
+                          // CustomFormLabel('Username'),
+                          // Obx(
+                          //   () => CustomFormInput(
+                          //     isLoading: controller.isLoading.value,
+                          //     placeholder: 'Masukkan username anda',
+                          //     validator_input_text: controller.validator_input,
+                          //     controller: controller.usernameController,
+                          //   ),
+                          // ),
+                          CustomFormField(
+                            label: 'Username',
+                            placeholder: 'Masukkan username anda',
+                            controller: controller.usernameController,
+                            validator: controller.validator_input,
+                            type: FormFieldType.text,
+                            isLoading: controller.isLoading.value,
                           ),
                         ],
                       ),
@@ -78,16 +85,23 @@ class LoginPage extends GetView<LoginController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomFormLabel('Password'),
-                          Obx(
-                            () => CustomFormInput(
-                              status: controller.password_status.value,
-                              isLoading: controller.isLoading.value,
-                              placeholder: 'Masukkan password anda',
-                              validator_input_text: controller.validator_input,
-                              controller: controller.password.value,
-                              change_type: controller.password_status,
-                            ),
+                          // CustomFormLabel('Password'),
+                          // Obx(
+                          //   () => CustomFormInput(
+                          //     status: controller.password_status.value,
+                          //     isLoading: controller.isLoading.value,
+                          //     placeholder: 'Masukkan password anda',
+                          //     validator_input_text: controller.validator_input,
+                          //     controller: controller.passwordController,
+                          //     change_type: controller.password_status,
+                          //   ),
+                          // ),
+                          CustomFormField(
+                            label: 'Password',
+                            placeholder: 'Masukkan password anda',
+                            controller: controller.passwordController,
+                            validator: controller.validator_input,
+                            type: FormFieldType.password,
                           ),
                         ],
                       ),
@@ -97,28 +111,10 @@ class LoginPage extends GetView<LoginController> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () async {
-                          // try {
-                          if (controller.formkey.currentState!.validate()) {
+                          if (controller.formKey.currentState!.validate()) {
                             FocusScope.of(context).unfocus();
                             await controller.submit_login();
-                            // Navigator.of(context, rootNavigator: true)
-                            //     .pop();
-                            // Helper().Alert('loading', null, context);
                           }
-                          // Get.offAllNamed('/home');
-                          // }
-                          // } catch (e) {
-                          //   // Navigator.of(context, rootNavigator: true)
-                          //   //     .pop();
-                          //   String errorMessage = e is String
-                          //       ? e
-                          //       : 'Maaf ada kesalahan, silahkan coba lagi';
-                          //   // WidgetsBinding.instance
-                          //   //     .addPostFrameCallback((_) async {
-                          //   //   await Helper()
-                          //   //       .Alert(null, errorMessage, context);
-                          //   // });
-                          // }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: mainColor,
@@ -178,9 +174,5 @@ class LoginPage extends GetView<LoginController> {
         ),
       ),
     );
-  }
-
-  void _hideLoadingOverlay() {
-    controller.overlayEntry?.remove();
   }
 }

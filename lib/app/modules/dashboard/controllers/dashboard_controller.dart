@@ -2,7 +2,6 @@ import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'package:vigo_customer_billing/app/data/providers/providers.dart';
 import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/data/repositories/account_bill_repositories.dart';
-import 'package:vigo_customer_billing/app/modules/auth/controller/auth_controller.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
@@ -11,12 +10,10 @@ class DashboardController extends GetxController {
 
   Rxn<AccountBillModel> accountbillData = Rxn<AccountBillModel>();
   var isLoading = true.obs;
-  final auth_c = Get.find<AuthController>();
 
   @override
   void onInit() {
     super.onInit();
-    auth_c.getData();
     getData();
   }
 

@@ -7,8 +7,12 @@ class AccountBillRepository {
   AccountBillRepository({required this.api});
 
   Future<AccountBillModel?> getAccountBill() async {
-    final response = await api.get('/customer/account-bill');
-    if (response['data'] == null) return null;
-    return AccountBillModel.fromJson(response['data']);
+    try {
+      final response = await api.get('/customer/account-bill');
+      if (response['data'] == null) return null;
+      return AccountBillModel.fromJson(response['data']);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

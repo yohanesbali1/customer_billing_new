@@ -1,17 +1,17 @@
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
-import 'package:vigo_customer_billing/app/data/models/models.dart';
-import 'package:vigo_customer_billing/app/data/providers/providers.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_customer_billing/app/data/repositories/auth_repositories.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement HomeController.
-  final formkey = GlobalKey<FormState>();
+  final AuthRepository repository;
+  LoginController({required this.repository});
+  final formKey = GlobalKey<FormState>();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+
   var isLoading = false.obs;
-  var username = TextEditingController().obs;
-  var password = TextEditingController().obs;
   OverlayEntry? overlayEntry = null;
   var password_status = true.obs;
 
@@ -34,19 +34,17 @@ class LoginController extends GetxController {
     return value!.isEmpty ? 'Field ini harus diisi' : null;
   }
 
-  submit_login() async {
+  Future<void> submit_login() async {
     try {
       isLoading(true);
       Helper().AlertGetX('loading', null);
       var data = {
-        'username': username.value.text,
-        'password': password.value.text,
+        'username': usernameController.text,
+        'password': passwordController.text,
         'group_app': 'VIGO',
       };
       await FirebaseMessaging.instance.deleteToken();
-      final LoginModel response = await AuthProvider().loginData(data);
-      final storage = new FlutterSecureStorage();
-      await storage.write(key: 'token', value: response.token);
+      await repository.loginData(data);
       isLoading(false);
       Get.back();
       Get.offAllNamed('/home');

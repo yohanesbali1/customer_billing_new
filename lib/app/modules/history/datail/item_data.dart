@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/dashboard/dashboard_controller.dart';
+import 'package:vigo_customer_billing/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:vigo_customer_billing/app/modules/history/datail/guide.dart';
 import 'package:vigo_customer_billing/app/modules/history/datail/bank_modal.dart';
 

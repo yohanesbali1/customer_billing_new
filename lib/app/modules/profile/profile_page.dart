@@ -1,5 +1,5 @@
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/auth/controller/auth_controller.dart';
+import 'package:vigo_customer_billing/app/modules/login/controllers/login_controller.dart';
 import 'package:vigo_customer_billing/app/modules/home/controllers/home_controller.dart';
 import 'package:vigo_customer_billing/app/modules/profile/profile_controller.dart';
 import 'package:vigo_customer_billing/app/modules/profile/widget/list_menu_profile.dart';

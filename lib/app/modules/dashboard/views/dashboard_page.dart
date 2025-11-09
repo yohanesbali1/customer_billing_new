@@ -1,11 +1,11 @@
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/dashboard/dashboard_controller.dart';
+import 'package:vigo_customer_billing/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:vigo_customer_billing/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'widget/clip_path/card_member_clip_path.dart';
-import 'widget/clip_path/header_dashboard_clip_path.dart';
+import '../widget/clip_path/card_member_clip_path.dart';
+import '../widget/clip_path/header_dashboard_clip_path.dart';
 
 class DashboardPage extends GetView<DashboardController> {
   @override
@@ -19,7 +19,6 @@ class DashboardPage extends GetView<DashboardController> {
           onRefresh: () {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               controller.getData();
-              controller.auth_c.getData();
             });
             return Future.value(true);
           },

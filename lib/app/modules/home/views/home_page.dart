@@ -1,6 +1,6 @@
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/auth/controller/auth_controller.dart';
-import 'package:vigo_customer_billing/app/modules/dashboard/dashboard_page.dart';
+import 'package:vigo_customer_billing/app/modules/login/controllers/login_controller.dart';
+import 'package:vigo_customer_billing/app/modules/dashboard/views/dashboard_page.dart';
 import 'package:vigo_customer_billing/app/modules/help/page/list_help_page.dart';
 import 'package:vigo_customer_billing/app/modules/history/history_page.dart';
 import 'package:vigo_customer_billing/app/modules/profile/profile_page.dart';

@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app/core/bindings/application_bindings.dart';
 import 'app/routes/app_pages.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:vigo_customer_billing/app/data/services/notification_service.dart';
+import 'package:vigo_customer_billing/app/core/services/notification_service.dart';
 
 // final navigatorKey = GlobalKey<NavigatorState>();
 
