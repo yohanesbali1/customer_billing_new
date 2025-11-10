@@ -48,7 +48,7 @@ class HelpChatController extends GetxController {
   getData() async {
     try {
       isLoading.value = true;
-      data.value = await repository.get_chat(id.value, page.value);
+      // data.value = await repository.get_chat(id.value, page.value);
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (scrollController.hasClients) {
           scrollController.jumpTo(scrollController.position.maxScrollExtent);
@@ -78,7 +78,7 @@ class HelpChatController extends GetxController {
       } else {
         payload = {'message': message.value.text};
       }
-      await HelperProvider().submitChat(payload, id);
+      // await HelperProvider().submitChat(payload, id);
       // await HelperProvider().submitFireStoreChat(result, id.value);
       await getData();
       Get.back();
@@ -100,7 +100,7 @@ class HelpChatController extends GetxController {
       isLoading(true);
       Helper().AlertGetX('loading', null);
       var items = {"chat_id": payload};
-      await HelperProvider().deleteChat(items);
+      // await HelperProvider().deleteChat(items);
       await getData();
       Get.back();
       // await Helper().AlertGetX('success', null);

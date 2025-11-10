@@ -12,9 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:video_player/video_player.dart';
 
-class ChatHelpPage extends StatelessWidget {
-  final controller = Get.put(HelpChatController());
-
+class ChatHelpPage extends GetView<HelpChatController> {
   void _showDropdownMenu(BuildContext context, Offset position, id) async {
     final selected = await showMenu(
       context: context,

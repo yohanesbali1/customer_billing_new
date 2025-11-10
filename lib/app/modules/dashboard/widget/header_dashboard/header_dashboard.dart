@@ -45,7 +45,7 @@ class HeaderDashboard extends StatelessWidget {
                       () => Skeletonizer(
                         enabled: applicationControllers.isLoading.value,
                         child: Text(
-                          '${applicationControllers.accountbillData.value!.customer.name ?? 'Tidak Diketahui'}',
+                          '${applicationControllers.accountbillData.value?.customer.name ?? 'Tidak Diketahui'}',
                           style: monseratTextFont.copyWith(
                             color: Colors.white,
                             fontSize: 16,
