@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
 
-class DetailProfileController extends GetxController {
-  final ApplicationControllers application_c =
-      Get.find<ApplicationControllers>();
+class PackageController extends GetxController {
+  final ApplicationControllers applicationControllers = Get.find();
+  var isLoading = false.obs;
   @override
   void onInit() {
     super.onInit();

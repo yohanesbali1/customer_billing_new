@@ -35,7 +35,7 @@ class RegisterPage extends GetView<RegisterController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomFormLabel('Nama Lengkap'),
+                  // CustomFormLabel('Nama Lengkap'),
                   // //CustomFormInput('Masukan nama lengkap anda'),
                 ],
               ),
@@ -45,7 +45,7 @@ class RegisterPage extends GetView<RegisterController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomFormLabel('Email'),
+                  // CustomFormLabel('Email'),
                   // //CustomFormInput('Masukan email anda'),
                 ],
               ),
@@ -55,7 +55,7 @@ class RegisterPage extends GetView<RegisterController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomFormLabel('Username'),
+                  // CustomFormLabel('Username'),
                   //  //CustomFormInput('Masukan username anda'),
                 ],
               ),
@@ -65,7 +65,7 @@ class RegisterPage extends GetView<RegisterController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomFormLabel('Nama Lengkap'),
+                  // CustomFormLabel('Nama Lengkap'),
                   //CustomFormInput('Masukan nama lengkap anda'),
                 ],
               ),
@@ -75,7 +75,7 @@ class RegisterPage extends GetView<RegisterController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomFormLabel('Nomor Handphone'),
+                  // CustomFormLabel('Nomor Handphone'),
                   //CustomFormInput('Masukan nomor handphone anda'),
                 ],
               ),
@@ -85,7 +85,7 @@ class RegisterPage extends GetView<RegisterController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomFormLabel('Password '),
+                  // CustomFormLabel('Password '),
                   //CustomFormInput('Masukan password anda'),
                   SizedBox(height: 8),
                   Text(
@@ -103,7 +103,7 @@ class RegisterPage extends GetView<RegisterController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomFormLabel('Konfirmasi Password'),
+                  // CustomFormLabel('Konfirmasi Password'),
                   //CustomFormInput('Masukan password kembali'),
                 ],
               ),

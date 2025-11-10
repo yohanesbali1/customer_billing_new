@@ -1,4 +1,4 @@
-import 'package:vigo_customer_billing/app/core/controllers/profile_controller.dart';
+import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/modules/dashboard/widget/card_member/card_member.dart';
 import 'package:vigo_customer_billing/app/modules/dashboard/widget/header_dashboard/header_dashboard.dart';
@@ -11,14 +11,14 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final home_c = Get.find<HomeController>();
-    final profile_c = Get.find<ProfileController>();
+    final application_c = Get.find<ApplicationControllers>();
     return Scaffold(
       backgroundColor: bgColor,
       body: Container(
         child: RefreshIndicator(
           color: mainColor,
           onRefresh: () {
-            return profile_c.getData();
+            return application_c.getData();
             // WidgetsBinding.instance.addPostFrameCallback((_) {
             //   controller.getData();
             // });
@@ -36,7 +36,7 @@ class DashboardPage extends StatelessWidget {
                     top: 260, // sesuaikan supaya tidak tenggelam
                     left: 0,
                     right: 0,
-                    child: CardMember(controller: profile_c),
+                    child: CardMember(controller: application_c),
                   ),
                 ],
               ),

@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:vigo_customer_billing/app/core/controllers/profile_controller.dart';
+import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
 import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/modules/invoice/datail/widget/guide.dart';
@@ -12,7 +12,7 @@ import 'package:vigo_customer_billing/app/modules/invoice/datail/widget/bank_mod
 class ItemDataInvoice extends StatelessWidget {
   final data;
   final controller;
-  var profile_c = Get.find<ProfileController>();
+  var applicationControllers = Get.find<ApplicationControllers>();
   ItemDataInvoice({required this.data, required this.controller, super.key});
   @override
   Widget build(BuildContext context) {
@@ -142,7 +142,7 @@ class ItemDataInvoice extends StatelessWidget {
                                     Clipboard.setData(
                                       ClipboardData(
                                         text:
-                                            "${controller.bank_data.value!.code}${profile_c.accountbillData.value!.paymentCode}",
+                                            "${controller.bank_data.value!.code}${applicationControllers.accountbillData.value!.paymentCode}",
                                       ),
                                     );
                                     Helper().AlertSnackBar(
@@ -297,7 +297,7 @@ class ItemDataInvoice extends StatelessWidget {
                                                                 .value
                                                                 ?.code !=
                                                             null
-                                                        ? "${controller.bank_data.value!.code}${profile_c.accountbillData.value!.paymentCode}"
+                                                        ? "${controller.bank_data.value!.code}${applicationControllers.accountbillData.value!.paymentCode}"
                                                         : "",
                                                     style:
                                                         GoogleFonts.montserrat(

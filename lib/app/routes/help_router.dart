@@ -3,7 +3,6 @@ import 'package:vigo_customer_billing/app/modules/help/help_bindding.dart';
 import 'package:vigo_customer_billing/app/modules/help/page/help_chat_page.dart';
 import 'package:vigo_customer_billing/app/modules/help/page/help_detail_page.dart';
 import 'package:vigo_customer_billing/app/modules/help/page/help_form_page.dart';
-import 'package:vigo_customer_billing/app/modules/help/page/list_help_page.dart';
 import 'package:get/get.dart';
 
 class HelpRoutes {

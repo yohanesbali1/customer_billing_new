@@ -12,6 +12,8 @@ class HomeBinding extends Bindings {
       () => InvoiceController(repository: Get.find()),
     );
     Get.lazyPut<HelpController>(() => HelpController(repository: Get.find()));
-    Get.lazyPut<ProfileController>(() => ProfileController());
+    Get.lazyPut<ProfileController>(
+      () => ProfileController(repository: Get.find()),
+    );
   }
 }

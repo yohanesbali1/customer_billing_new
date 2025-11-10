@@ -235,7 +235,7 @@ class ListMenuProfile extends StatelessWidget {
         // const SizedBox(height: 20),
         GestureDetector(
           onTap: () async {
-            await auth_c.logoutData();
+            await controller.logoutData();
           },
           child: Container(
             // color: Colors.white,

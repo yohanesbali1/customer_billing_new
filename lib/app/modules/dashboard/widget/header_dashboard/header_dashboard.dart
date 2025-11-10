@@ -1,4 +1,4 @@
-import 'package:vigo_customer_billing/app/core/controllers/profile_controller.dart';
+import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +9,8 @@ class HeaderDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final profile_c = Get.find<ProfileController>();
+    final ApplicationControllers applicationControllers =
+        Get.find<ApplicationControllers>();
     return ClipPath(
       clipper: HeaderDashboardClipPath(),
       child: Container(
@@ -42,9 +43,9 @@ class HeaderDashboard extends StatelessWidget {
                     ),
                     Obx(
                       () => Skeletonizer(
-                        enabled: profile_c.isLoading.value,
+                        enabled: applicationControllers.isLoading.value,
                         child: Text(
-                          '${profile_c.accountbillData.value!.customer.name ?? 'Tidak Diketahui'}',
+                          '${applicationControllers.accountbillData.value!.customer.name ?? 'Tidak Diketahui'}',
                           style: monseratTextFont.copyWith(
                             color: Colors.white,
                             fontSize: 16,

@@ -1,4 +1,5 @@
-import 'package:vigo_customer_billing/app/core/controllers/profile_controller.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
 import 'package:vigo_customer_billing/app/core/services/local_storage_service.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'package:vigo_customer_billing/app/data/providers/api_provider.dart';
@@ -6,7 +7,8 @@ import 'package:get/get.dart';
 
 class AuthRepository {
   final ApiProvider api;
-  final ProfileController profileController = Get.find<ProfileController>();
+  final ApplicationControllers applicationControllers =
+      Get.find<ApplicationControllers>();
   final LocalStorageService storage = LocalStorageService();
 
   AuthRepository({required this.api});
@@ -32,9 +34,10 @@ class AuthRepository {
 
   Future<dynamic?> logoutData() async {
     try {
-      final response = await api.get('/auth/logout');
+      await api.get('/auth/logout');
       await storage.clear();
-      profileController.clearProfile();
+      await FirebaseMessaging.instance.deleteToken();
+      applicationControllers.clearProfile();
       return null;
     } catch (e) {
       rethrow;

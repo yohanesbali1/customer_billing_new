@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:vigo_customer_billing/app/core/controllers/profile_controller.dart';
+import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'card_member_clipper.dart';
@@ -10,7 +10,7 @@ import 'card_member_not_found.dart';
 import 'card_member_skeleton.dart';
 
 class CardMember extends StatelessWidget {
-  final ProfileController controller;
+  final ApplicationControllers controller;
   const CardMember({required this.controller});
 
   @override

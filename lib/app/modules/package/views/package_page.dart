@@ -1,8 +1,7 @@
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/core/widgets/not_found.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
-import 'package:vigo_customer_billing/app/modules/package/package_controller.dart';
+import 'package:vigo_customer_billing/app/modules/package/controlllers/package_controller.dart';
 import 'package:vigo_customer_billing/app/modules/package/widget/skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +13,6 @@ class PackagePage extends GetView<PackageController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.onInit();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: bgColor,
@@ -34,12 +32,13 @@ class PackagePage extends GetView<PackageController> {
         if (controller.isLoading.value) {
           return SkeletonAccountBill();
         }
-        if (controller.accountbillData.value == null) {
+        if (controller.applicationControllers.accountbillData.value == null) {
           return NotFoundPage();
         }
         return Container(
           child: buildInvoiceItem(
-            controller.accountbillData.value as AccountBillModel,
+            controller.applicationControllers.accountbillData.value
+                as AccountBillModel,
             context,
           ),
         );

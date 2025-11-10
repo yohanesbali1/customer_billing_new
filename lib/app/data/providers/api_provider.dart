@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class ApiProvider {
   final storage = const FlutterSecureStorage();
@@ -102,22 +103,38 @@ class ApiProvider {
     return _handleResponse(response);
   }
 
-  Map<String, dynamic> _handleResponse(http.Response response) {
+  Future<Map<String, dynamic>> _handleResponse(http.Response response) async {
     final Map<String, dynamic> data = jsonDecode(response.body);
 
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      if (data.containsKey('meta')) {
-        return {'meta': data['meta'], 'data': data['data']};
+    switch (response.statusCode) {
+      case 200:
+      case 201:
+        if (data.containsKey('meta')) {
+          return {'meta': data['meta'], 'data': data['data']};
+        }
+        return data;
+
+      case 401:
+        await _handleUnauthorized();
+        throw Exception('Sesi login berakhir, silakan login ulang.');
+
+      default:
+        final message =
+            data['message'] ?? 'Terjadi kesalahan, silakan coba lagi.';
+        throw Exception(message);
+    }
+  }
+
+  Future<void> _handleUnauthorized() async {
+    try {
+      await storage.delete(key: 'token');
+      await FirebaseMessaging.instance.deleteToken();
+    } catch (e) {
+      rethrow;
+    } finally {
+      if (Get.currentRoute != '/login') {
+        Get.offAllNamed('/login');
       }
-      return data;
     }
-
-    if (response.statusCode == 401) {
-      storage.delete(key: 'token');
-      Get.offAllNamed('/login');
-      throw Exception('Sesi login berakhir, silakan login ulang.');
-    }
-
-    throw Exception(data['message'] ?? 'Terjadi kesalahan, silakan coba lagi.');
   }
 }

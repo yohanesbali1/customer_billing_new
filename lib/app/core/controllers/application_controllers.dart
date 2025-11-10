@@ -4,33 +4,18 @@ import 'package:vigo_customer_billing/app/core/services/session_serivce.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'package:vigo_customer_billing/app/data/repositories/profile_repository.dart';
 
-class ProfileController extends GetxController {
+class ApplicationControllers extends GetxController {
   final ProfileRepository repository;
-
-  ProfileController({required this.repository});
-
-  // Rxn<ProfileModel> user = Rxn<ProfileModel>();
+  ApplicationControllers({required this.repository});
   Rxn<AccountBillModel> accountbillData = Rxn<AccountBillModel>();
   RxBool isLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
-    // getProfile();
     changeToken();
+    getData();
   }
-
-  // Future<dynamic> getProfile() async {
-  //   try {
-  //     final result = await repository.getProfile();
-  //     if (result != null) {
-  //       user.value = result;
-  //       Get.find<SessionService>().setUser(result);
-  //     }
-  //   } catch (e) {
-  //     Helper().AlertSnackBar();
-  //   }
-  // }
 
   Future<void> getData() async {
     try {

@@ -1,5 +1,4 @@
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/home/controllers/home_controller.dart';
 import 'package:vigo_customer_billing/app/modules/profile/controllers/profile_controller.dart';
 import 'package:vigo_customer_billing/app/modules/profile/widget/list_menu_profile.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:get/get.dart';
 class ProfilePage extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
-    final home_c = Get.put(HomeController());
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -24,10 +22,9 @@ class ProfilePage extends GetView<ProfileController> {
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back), // Custom back icon
+          icon: Icon(Icons.arrow_back),
           onPressed: () {
-            // Define the action for the back button (e.g., navigate to the previous screen)
-            home_c.change_page(0); // Go back to the previous screen
+            controller.home_c.change_page(0);
           },
         ),
       ),
@@ -51,7 +48,7 @@ class ProfilePage extends GetView<ProfileController> {
               margin: EdgeInsets.only(top: 16),
               child: Obx(
                 () => Text(
-                  '${auth_c.profile.value?.name ?? '-'}',
+                  '${controller.application_c.accountbillData.value?.customer.name ?? '-'}',
                   textAlign: TextAlign.center,
                   style: monseratTextFont.copyWith(
                     fontSize: 16,
@@ -63,7 +60,7 @@ class ProfilePage extends GetView<ProfileController> {
             Container(
               margin: EdgeInsets.only(top: 4, bottom: 30),
               child: Text(
-                '${auth_c.profile.value?.code ?? '-'}',
+                '${controller.application_c.accountbillData.value?.customer.code ?? '-'}',
                 textAlign: TextAlign.center,
                 style: monseratTextFont.copyWith(
                   fontSize: 13,

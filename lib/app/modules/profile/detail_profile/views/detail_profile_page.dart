@@ -1,4 +1,4 @@
-import 'package:vigo_customer_billing/app/core/controllers/profile_controller.dart';
+import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -10,7 +10,8 @@ class DetailProfilePage extends GetView<DetailProfileController> {
   const DetailProfilePage({super.key});
   @override
   Widget build(BuildContext context) {
-    final profile_c = Get.find<ProfileController>();
+    final ApplicationControllers application_c =
+        Get.find<ApplicationControllers>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: bgColor,
@@ -68,7 +69,7 @@ class DetailProfilePage extends GetView<DetailProfileController> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          '${profile_c.accountbillData.value!.customer.name ?? '-'}',
+                          '${application_c.accountbillData.value!.customer.name ?? '-'}',
                           style: GoogleFonts.montserrat(
                             color: textPrimaryColor,
                             fontSize: 14,
@@ -102,7 +103,7 @@ class DetailProfilePage extends GetView<DetailProfileController> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          '${profile_c.accountbillData.value!.customer.email ?? '-'}',
+                          '${application_c.accountbillData.value!.customer.email ?? '-'}',
                           style: GoogleFonts.montserrat(
                             color: textPrimaryColor,
                             fontSize: 14,
@@ -136,7 +137,7 @@ class DetailProfilePage extends GetView<DetailProfileController> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          '${profile_c.accountbillData.value!.customer?.phone ?? '-'}',
+                          '${application_c.accountbillData.value!.customer?.phone ?? '-'}',
                           style: GoogleFonts.montserrat(
                             color: textPrimaryColor,
                             fontSize: 14,
@@ -171,7 +172,7 @@ class DetailProfilePage extends GetView<DetailProfileController> {
                         const SizedBox(height: 4),
                         Html(
                           data:
-                              "${profile_c.accountbillData.value!.customer.address ?? '-'}",
+                              "${application_c.accountbillData.value!.customer.address ?? '-'}",
                           style: {
                             "p": Style(
                               color: textPrimaryColor,
@@ -207,7 +208,7 @@ class DetailProfilePage extends GetView<DetailProfileController> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          '${profile_c.accountbillData.value!.customer.province?.name ?? '-'}',
+                          '${application_c.accountbillData.value!.customer.province?.name ?? '-'}',
                           style: GoogleFonts.montserrat(
                             color: textPrimaryColor,
                             fontSize: 14,
@@ -241,7 +242,7 @@ class DetailProfilePage extends GetView<DetailProfileController> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          ' ${profile_c.accountbillData.value!.customer.city?.name ?? '-'}',
+                          ' ${application_c.accountbillData.value!.customer.city?.name ?? '-'}',
                           style: GoogleFonts.montserrat(
                             color: textPrimaryColor,
                             fontSize: 14,
@@ -275,7 +276,7 @@ class DetailProfilePage extends GetView<DetailProfileController> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          ' ${profile_c.accountbillData.value!.customer.subdistrict?.name ?? '-'}',
+                          ' ${application_c.accountbillData.value!.customer.subdistrict?.name ?? '-'}',
                           style: GoogleFonts.montserrat(
                             color: textPrimaryColor,
                             fontSize: 14,
@@ -305,7 +306,7 @@ class DetailProfilePage extends GetView<DetailProfileController> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          ' ${profile_c.accountbillData.value!.customer.vilage ?? '-'}',
+                          ' ${application_c.accountbillData.value!.customer.vilage ?? '-'}',
                           style: GoogleFonts.montserrat(
                             color: textPrimaryColor,
                             fontSize: 14,
