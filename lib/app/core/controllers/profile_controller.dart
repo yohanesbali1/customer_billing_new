@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/core/services/session_serivce.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'package:vigo_customer_billing/app/data/repositories/profile_repository.dart';
@@ -8,29 +9,56 @@ class ProfileController extends GetxController {
 
   ProfileController({required this.repository});
 
-  Rxn<ProfileModel> user = Rxn<ProfileModel>();
+  // Rxn<ProfileModel> user = Rxn<ProfileModel>();
+  Rxn<AccountBillModel> accountbillData = Rxn<AccountBillModel>();
   RxBool isLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
-    getProfile();
+    // getProfile();
+    changeToken();
   }
 
-  Future<void> getProfile() async {
+  // Future<dynamic> getProfile() async {
+  //   try {
+  //     final result = await repository.getProfile();
+  //     if (result != null) {
+  //       user.value = result;
+  //       Get.find<SessionService>().setUser(result);
+  //     }
+  //   } catch (e) {
+  //     Helper().AlertSnackBar();
+  //   }
+  // }
+
+  Future<void> getData() async {
     try {
+      isLoading(true);
       final result = await repository.getProfile();
       if (result != null) {
-        user.value = result;
-        Get.find<SessionService>().setUser(result);
+        accountbillData.value = result;
+        Get.find<SessionService>().setUser(accountbillData.value!);
       }
+      isLoading(false);
     } catch (e) {
-      print('Get profile error: $e');
+      isLoading(false);
+      Helper().AlertSnackBar();
+      return;
+    }
+  }
+
+  Future<dynamic> changeToken() async {
+    try {
+      await repository.updateDataTokenFCM();
+      return true;
+    } catch (e) {
+      Helper().AlertSnackBar();
     }
   }
 
   void clearProfile() {
-    user.value = null;
+    accountbillData.value = null;
     Get.find<SessionService>().clear();
   }
 }

@@ -24,4 +24,10 @@ Color bgcircleWaringAlert = const Color(0xFF29363f);
 Color redColor = const Color(0xFFF50808);
 Color iconColor = const Color(0xFFD64418);
 
+const kRedGradient = LinearGradient(
+  colors: [Color(0xFF690305), Color(0xFFAC0205)],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
 TextStyle monseratTextFont = GoogleFonts.montserrat();

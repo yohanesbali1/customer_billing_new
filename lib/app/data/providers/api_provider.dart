@@ -27,26 +27,71 @@ class ApiProvider {
 
   Future<Map<String, dynamic>> post(
     String endpoint,
-    Map<String, dynamic> data,
-  ) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl$endpoint'),
-      headers: {...await _headers(), 'Content-Type': 'application/json'},
-      body: jsonEncode(data),
-    );
-    return _handleResponse(response);
+    Map<String, dynamic> data, {
+    Map<String, String>? files,
+  }) async {
+    final uri = Uri.parse('$baseUrl$endpoint');
+    final headers = await _headers();
+
+    if (files == null || files.isEmpty) {
+      final response = await http.post(
+        uri,
+        headers: {...headers, 'Content-Type': 'application/json'},
+        body: jsonEncode(data),
+      );
+      return _handleResponse(response);
+    } else {
+      final request = http.MultipartRequest('POST', uri);
+      request.headers.addAll(headers);
+      data.forEach((key, value) {
+        request.fields[key] = value.toString();
+      });
+      for (var entry in files.entries) {
+        request.files.add(
+          await http.MultipartFile.fromPath(entry.key, entry.value),
+        );
+      }
+
+      final streamed = await request.send();
+      final response = await http.Response.fromStream(streamed);
+      return _handleResponse(response);
+    }
   }
 
   Future<Map<String, dynamic>> put(
     String endpoint,
-    Map<String, dynamic> data,
-  ) async {
-    final response = await http.put(
-      Uri.parse('$baseUrl$endpoint'),
-      headers: {...await _headers(), 'Content-Type': 'application/json'},
-      body: jsonEncode(data),
-    );
-    return _handleResponse(response);
+    Map<String, dynamic> data, {
+    Map<String, String>? files, // fieldName:filePath
+  }) async {
+    final uri = Uri.parse('$baseUrl$endpoint');
+    final headers = await _headers();
+
+    if (files == null || files.isEmpty) {
+      final response = await http.put(
+        uri,
+        headers: {...headers, 'Content-Type': 'application/json'},
+        body: jsonEncode(data),
+      );
+      return _handleResponse(response);
+    } else {
+      final request = http.MultipartRequest('PUT', uri);
+      request.headers.addAll(headers);
+
+      data.forEach((key, value) {
+        request.fields[key] = value.toString();
+      });
+
+      // Files
+      for (var entry in files.entries) {
+        request.files.add(
+          await http.MultipartFile.fromPath(entry.key, entry.value),
+        );
+      }
+
+      final streamed = await request.send();
+      final response = await http.Response.fromStream(streamed);
+      return _handleResponse(response);
+    }
   }
 
   Future<Map<String, dynamic>> delete(String endpoint) async {
@@ -61,6 +106,9 @@ class ApiProvider {
     final Map<String, dynamic> data = jsonDecode(response.body);
 
     if (response.statusCode == 200 || response.statusCode == 201) {
+      if (data.containsKey('meta')) {
+        return {'meta': data['meta'], 'data': data['data']};
+      }
       return data;
     }
 

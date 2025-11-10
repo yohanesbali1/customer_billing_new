@@ -1,35 +1,43 @@
+import 'package:vigo_customer_billing/app/core/controllers/profile_controller.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:vigo_customer_billing/app/modules/dashboard/widget/card_member/card_member.dart';
+import 'package:vigo_customer_billing/app/modules/dashboard/widget/header_dashboard/header_dashboard.dart';
 import 'package:vigo_customer_billing/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../widget/clip_path/card_member_clip_path.dart';
-import '../widget/clip_path/header_dashboard_clip_path.dart';
 
-class DashboardPage extends GetView<DashboardController> {
+class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final home_c = Get.find<HomeController>();
+    final profile_c = Get.find<ProfileController>();
     return Scaffold(
       backgroundColor: bgColor,
       body: Container(
         child: RefreshIndicator(
           color: mainColor,
           onRefresh: () {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              controller.getData();
-            });
-            return Future.value(true);
+            return profile_c.getData();
+            // WidgetsBinding.instance.addPostFrameCallback((_) {
+            //   controller.getData();
+            // });
+            // return Future.value(true);
           },
           child: ListView(
             padding: EdgeInsets.zero,
+            physics: const AlwaysScrollableScrollPhysics(),
             children: [
               Stack(
                 children: [
-                  Container(width: double.infinity, height: 330),
+                  // Container(width: double.infinity, height: 330),
                   HeaderDashboard(),
-                  CardMember(controller: controller),
+                  Positioned(
+                    top: 260, // sesuaikan supaya tidak tenggelam
+                    left: 0,
+                    right: 0,
+                    child: CardMember(controller: profile_c),
+                  ),
                 ],
               ),
               Container(

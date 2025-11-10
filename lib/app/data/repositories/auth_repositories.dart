@@ -1,4 +1,3 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:vigo_customer_billing/app/core/controllers/profile_controller.dart';
 import 'package:vigo_customer_billing/app/core/services/local_storage_service.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
@@ -9,7 +8,6 @@ class AuthRepository {
   final ApiProvider api;
   final ProfileController profileController = Get.find<ProfileController>();
   final LocalStorageService storage = LocalStorageService();
-  final FirebaseMessaging firebaseMessage = FirebaseMessaging.instance;
 
   AuthRepository({required this.api});
 
@@ -38,17 +36,6 @@ class AuthRepository {
       await storage.clear();
       profileController.clearProfile();
       return null;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<dynamic> updateDataTokenFCM() async {
-    try {
-      final token_fcm = await firebaseMessage.getToken();
-      final form = {'id': token_fcm};
-      await api.post('/auth/save-token', form);
-      return true;
     } catch (e) {
       rethrow;
     }

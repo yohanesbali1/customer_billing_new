@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HelpController extends GetxController {
+  final 
   var isLoading = false.obs;
   var report_data = <ReportModel>[].obs;
   var page_index = 0.obs;

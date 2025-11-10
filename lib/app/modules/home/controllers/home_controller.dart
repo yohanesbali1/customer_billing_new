@@ -1,5 +1,3 @@
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
-import 'package:vigo_customer_billing/app/data/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -12,7 +10,6 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getData();
   }
 
   @override
@@ -23,7 +20,7 @@ class HomeController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    this.pagecontroller.dispose();
+    pagecontroller.dispose();
   }
 
   @override
@@ -33,15 +30,7 @@ class HomeController extends GetxController {
   }
 
   void change_page(dynamic payload) {
-    this.page_index.value = payload;
-    this.pagecontroller.jumpToPage(payload);
-  }
-
-  void getData() async {
-    try {
-      await AuthProvider().updateDataTokenFCM();
-    } catch (e) {
-      Helper().AlertSnackBar();
-    }
+    page_index.value = payload;
+    pagecontroller.jumpToPage(payload);
   }
 }
