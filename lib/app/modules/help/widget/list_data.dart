@@ -1,6 +1,6 @@
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/core/widgets/not_found.dart';
-import 'package:vigo_customer_billing/app/modules/help/help_controller.dart';
+import 'package:vigo_customer_billing/app/modules/help/controllers/help_controller.dart';
 import 'package:vigo_customer_billing/app/modules/help/widget/item_help.dart';
 import 'package:vigo_customer_billing/app/modules/help/widget/skeleton.dart';
 import 'package:flutter/material.dart';

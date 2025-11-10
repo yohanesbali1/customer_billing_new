@@ -7,7 +7,6 @@ class HelpRepository {
   HelpRepository({required this.api});
 
   Future<HelpResponseModel> getHelpData({
-    required String status,
     int page = 1,
     int perPage = 10,
   }) async {
@@ -21,7 +20,7 @@ class HelpRepository {
     }
   }
 
-  Future<HelpModelDetail?> showinvoiceData(dynamic id) async {
+  Future<HelpModelDetail?> showHelpData(dynamic id) async {
     try {
       final response = await api.get('/customer/complaint/$id');
       return HelpModelDetail.fromJson(response['data']);
@@ -47,6 +46,17 @@ class HelpRepository {
     try {
       final response = await api.delete('/customer/complaint/$id');
       return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> getTypeHelp() async {
+    try {
+      final response = await api.delete('/customer/type-complaint');
+      return (response['data'] as List)
+          .map((e) => TypeTopic.fromJson(e))
+          .toList();
     } catch (e) {
       rethrow;
     }

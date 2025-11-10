@@ -20,8 +20,11 @@ class ApiProvider {
   Future<Map<String, dynamic>> get(
     String endpoint, {
     Map<String, dynamic>? query,
+    bool customUrl = false,
   }) async {
-    final uri = Uri.parse('$baseUrl$endpoint').replace(queryParameters: query);
+    final uri = Uri.parse(
+      customUrl ? endpoint : '$baseUrl$endpoint',
+    ).replace(queryParameters: query);
     final response = await http.get(uri, headers: await _headers());
     return _handleResponse(response);
   }

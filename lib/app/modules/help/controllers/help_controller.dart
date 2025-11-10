@@ -2,15 +2,16 @@ import 'dart:async';
 
 import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/data/models/models.dart';
-import 'package:vigo_customer_billing/app/data/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vigo_customer_billing/app/data/models/models.dart';
+import 'package:vigo_customer_billing/app/data/repositories/help_repository.dart';
 
 class HelpController extends GetxController {
-  final 
+  final HelpRepository repository;
+  HelpController({required this.repository});
   var isLoading = false.obs;
-  var report_data = <ReportModel>[].obs;
+  var report_data = <HelpModel>[].obs;
   var page_index = 0.obs;
   var isLoadMore = false.obs;
   var currentPage = 1.obs;
@@ -67,7 +68,7 @@ class HelpController extends GetxController {
 
       int _currentPage;
       _currentPage = loadMore ? currentPage.value + 1 : 1;
-      final response = await HelperProvider().getData(
+      final response = await repository.getHelpData(
         page: _currentPage,
         perPage: perPage.value,
       );

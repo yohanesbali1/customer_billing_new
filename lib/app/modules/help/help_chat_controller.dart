@@ -9,8 +9,12 @@ import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
+import 'package:vigo_customer_billing/app/data/repositories/chat_repository.dart';
 
 class HelpChatController extends GetxController {
+  final ChatRepository repository;
+  HelpChatController({required this.repository});
+
   var isLoading = true.obs;
   var data = [].obs;
   var firebase_data = [].obs;
@@ -44,7 +48,7 @@ class HelpChatController extends GetxController {
   getData() async {
     try {
       isLoading.value = true;
-      data.value = await HelperProvider().get_chat(id.value, page.value);
+      data.value = await repository.get_chat(id.value, page.value);
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (scrollController.hasClients) {
           scrollController.jumpTo(scrollController.position.maxScrollExtent);

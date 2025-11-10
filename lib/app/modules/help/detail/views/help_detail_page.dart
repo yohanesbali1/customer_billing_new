@@ -2,22 +2,18 @@ import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/core/widgets/not_found.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
-import 'package:vigo_customer_billing/app/modules/help/help_detail_controller.dart';
+import 'package:vigo_customer_billing/app/modules/help/detail/controlllers/help_detail_controller.dart';
 import 'package:vigo_customer_billing/app/modules/help/widget/skeleton_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/cupertino.dart';
 
-class DetailHelpPage extends StatelessWidget {
-  final controller = Get.put(HelpDetailController());
+class DetailHelpPage extends GetView<HelpDetailController> {
   final FocusNode _buttonFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-    controller.getData();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: bgColor,
@@ -120,9 +116,11 @@ class DetailHelpPage extends StatelessWidget {
         }
         return RefreshIndicator(
           color: mainColor,
-          onRefresh: () {
-            Future.microtask(() => controller.getData());
-            return Future.value(true);
+          onRefresh: () async {
+            final String id = Get.parameters['id'] ?? '';
+            if (id.isNotEmpty) return await controller.getData(id);
+            // Future.microtask(() => controller.getData());
+            // return Future.value(true);
           },
           child: data == null
               ? SingleChildScrollView(
@@ -133,7 +131,7 @@ class DetailHelpPage extends StatelessWidget {
                   ),
                 )
               : buildReportItem(
-                  controller.reportData.value as ReportModelDetail,
+                  controller.reportData.value as HelpModelDetail,
                   context,
                 ),
         );
@@ -141,7 +139,7 @@ class DetailHelpPage extends StatelessWidget {
     );
   }
 
-  Widget buildReportItem(ReportModelDetail data, context) {
+  Widget buildReportItem(HelpModelDetail data, context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: defaultMargin, vertical: 20),
       child: ListView(

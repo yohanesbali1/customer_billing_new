@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
-import 'package:vigo_customer_billing/app/data/providers/providers.dart';
-import 'package:vigo_customer_billing/app/modules/help/help_controller.dart';
-import 'package:vigo_customer_billing/app/modules/help/help_detail_controller.dart';
+import 'package:vigo_customer_billing/app/data/repositories/help_repository.dart';
+import 'package:vigo_customer_billing/app/data/repositories/maps_repository.dart';
+import 'package:vigo_customer_billing/app/modules/help/controllers/help_controller.dart';
+import 'package:vigo_customer_billing/app/modules/help/detail/controlllers/help_detail_controller.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
@@ -13,21 +14,29 @@ import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 
 class HelpFormController extends GetxController {
+  final HelpRepository repository;
+  final MapsRepository mapsRepository;
+  HelpFormController({required this.repository, required this.mapsRepository});
+
+  final detail_controller = Get.find<HelpDetailController>();
+
   var isLoading = false.obs;
   var isoptionLoading = false.obs;
   var id = ''.obs;
-  Rxn<ReportModelDetail?> data = Rxn<ReportModelDetail?>();
+
   Rxn<TypeTopic?> type_topic_value = Rxn<TypeTopic?>();
-  final formkey = GlobalKey<FormState>();
-  var address = TextEditingController().obs;
-  var phone = TextEditingController().obs;
-  var type_topic_id = TextEditingController().obs;
   int type_topic_select = 0;
-  var description = TextEditingController().obs;
-  var maps = TextEditingController().obs;
+
+  final formkey = GlobalKey<FormState>();
+
+  var addressController = TextEditingController();
+  var phoneController = TextEditingController();
+  var typeTopicController = TextEditingController();
+  var descriptionController = TextEditingController();
+  var mapsController = TextEditingController();
+
   var type_topic_data = <TypeTopic>[].obs;
-  final detail_controller = Get.put(HelpDetailController());
-  final help_controller = Get.put(HelpController());
+
   var currentPosition = Rxn<Position>();
   Rxn<LatLng> selectedLocation = Rxn<LatLng>();
   final MapController flutterMapController = MapController();
@@ -58,11 +67,11 @@ class HelpFormController extends GetxController {
   }
 
   clear_form() {
-    address.value.clear();
-    phone.value.clear();
-    description.value.clear();
-    maps.value.clear();
-    type_topic_id.value.clear();
+    addressController.clear();
+    phoneController.clear();
+    descriptionController.clear();
+    mapsController.clear();
+    typeTopicController.clear();
     image.value = null;
   }
 
@@ -70,21 +79,31 @@ class HelpFormController extends GetxController {
     return value!.isEmpty ? 'Field ini harus diisi' : null;
   }
 
-  getData() async {
+  Future<dynamic> getTypeData() async {
+    try {
+      isLoading.value = true;
+      type_topic_data.value = await repository.getTypeHelp();
+    } catch (e) {
+      rethrow;
+    } finally {
+      isLoading.value = true;
+    }
+  }
+
+  Future<dynamic> getData() async {
     try {
       id.value = Get.parameters['id'] ?? '';
       isLoading.value = true;
-      type_topic_data.value = await HelperProvider().get_type();
       if (id.value != '') {
-        data.value = detail_controller.reportData.value;
-        address.value.text = data.value!.address!;
-        phone.value.text = data.value!.phone!;
-        description.value.text = data.value!.description!;
-        type_topic_id.value.text = data.value!.typeTopic!.type!;
-        type_topic_value.value = data.value!.typeTopic!;
-        var parts = data.value!.maps!.split(',');
+        final HelpModelDetail data = detail_controller.reportData.value!;
+        addressController.text = data.address!;
+        phoneController.text = data.phone!;
+        descriptionController.text = data.description!;
+        typeTopicController.text = data.typeTopic!.type!;
+        type_topic_value.value = data.typeTopic!;
+        var parts = data.maps!.split(',');
         if (parts.length >= 2) {
-          maps.value.text = data.value!.maps!;
+          mapsController.text = data.maps!;
           await updateLocation(
             LatLng(double.parse(parts[0]), double.parse(parts[1])),
           );
@@ -102,29 +121,29 @@ class HelpFormController extends GetxController {
     }
   }
 
-  submit_data() async {
+  Future<dynamic> submit_data() async {
     try {
       isLoading(true);
       Helper().AlertGetX('loading', null);
       var data = {
         "id": id.value,
         "form": {
-          'phone': phone.value.text,
-          'address': address.value.text,
+          'phone': phoneController.text,
+          'address': addressController.text,
           'maps':
               "${selectedLocation.value!.latitude},${selectedLocation.value!.longitude}",
           'type_topic_id': type_topic_value.value!.id.toString(),
-          'description': description.value.text,
+          'description': descriptionController.value.text,
           'img': image.value,
         },
       };
-      await HelperProvider().submitReportData(data);
-      if (id.value == '') {
-        // help_controller.report_data.value = await HelperProvider().getData();
-      } else {
-        detail_controller.reportData.value = await HelperProvider()
-            .showreportData(id.value);
-      }
+      await repository.submitHelp(data);
+      // if (id.value == '') {
+      //   await repository.getHelpData();
+      // } else {
+      //   detail_controller.reportData.value = await HelperProvider()
+      //       .showreportData(id.value);
+      // }
       Get.back();
       await Helper().AlertGetX('success', "Data berhasil disimpan");
       Get.back();
@@ -139,10 +158,10 @@ class HelpFormController extends GetxController {
     }
   }
 
-  select_type_data() async {
+  Future<dynamic> select_type_data() async {
     try {
       type_topic_value.value = type_topic_data.value[type_topic_select];
-      type_topic_id.value.text = type_topic_value.value!.type.toString();
+      typeTopicController.text = type_topic_value.value!.type.toString();
     } catch (e) {
       String errorMessage = e is String
           ? e
@@ -151,7 +170,7 @@ class HelpFormController extends GetxController {
     }
   }
 
-  getCurrentLocation() async {
+  Future<dynamic> getCurrentLocation() async {
     try {
       isLoading(true);
       Helper().AlertGetX('loading', null);
@@ -172,7 +191,6 @@ class HelpFormController extends GetxController {
       Get.back();
       isLoading(false);
     } catch (e) {
-      print(e);
       Get.back();
       String errorMessage = e is String
           ? e
@@ -181,15 +199,15 @@ class HelpFormController extends GetxController {
     }
   }
 
-  Future<void> updateLocation(LatLng latlng) async {
+  Future<dynamic> updateLocation(LatLng latlng) async {
     selectedLocation.value = latlng;
     flutterMapController.move(latlng, 17);
   }
 
-  getSearch(String filter) async {
+  Future<dynamic> getSearch(String filter) async {
     try {
       isoptionLoading.value = true;
-      searchItem.value = await MapProvider().get_option_place(filter);
+      searchItem.value = await mapsRepository.getMap(filter);
       isoptionLoading.value = false;
     } catch (e) {
       isoptionLoading.value = false;
@@ -201,7 +219,7 @@ class HelpFormController extends GetxController {
     }
   }
 
-  pickImage(ImageSource source) async {
+  Future<dynamic> pickImage(ImageSource source) async {
     final pickedFile = await picker.pickImage(
       source: source,
       preferredCameraDevice: CameraDevice.rear,

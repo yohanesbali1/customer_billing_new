@@ -1,15 +1,23 @@
 import 'package:vigo_customer_billing/app/data/models/models.dart';
-import 'package:vigo_customer_billing/app/data/providers/providers.dart';
 import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
-import 'package:vigo_customer_billing/app/modules/help/help_controller.dart';
+import 'package:vigo_customer_billing/app/data/repositories/help_repository.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HelpDetailController extends GetxController {
+  final HelpRepository repository;
+  HelpDetailController({required this.repository});
+
   var isLoading = false.obs;
   var id = ''.obs;
-  Rxn<ReportModelDetail?> reportData = Rxn<ReportModelDetail?>();
-  final help_controller = Get.put(HelpController());
+  Rxn<HelpModelDetail?> reportData = Rxn<HelpModelDetail?>();
+
+  @override
+  void onInit() {
+    super.onInit();
+    id.value = Get.parameters['id'] ?? '';
+    if (id.value.isNotEmpty) getData(id.value);
+  }
 
   @override
   void onReady() {
@@ -19,14 +27,14 @@ class HelpDetailController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    reportData.value = null;
   }
 
   @override
-  Future<void> getData() async {
+  Future<dynamic> getData(String id) async {
     try {
       isLoading.value = true;
-      id.value = Get.parameters['id'] ?? '';
-      reportData.value = await HelperProvider().showreportData(id.value);
+      reportData.value = await repository.showHelpData(id);
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
@@ -38,11 +46,11 @@ class HelpDetailController extends GetxController {
   }
 
   @override
-  deleteData() async {
+  Future<dynamic> deleteData() async {
     try {
       isLoading.value = true;
       Helper().AlertGetX('loading', null);
-      await HelperProvider().deletereportData(id.value);
+      await repository.deleteHelp(id.value);
       // help_controller.report_data.value = await HelperProvider().getData();
       Get.back();
       await Helper().AlertGetX('success', "Data berhasil dihapus");
@@ -58,7 +66,7 @@ class HelpDetailController extends GetxController {
     }
   }
 
-  void openWebsite(data) async {
+  Future<dynamic> openWebsite(data) async {
     try {
       var parts = data!.maps!.split(',');
       if (parts.length <= 1) {

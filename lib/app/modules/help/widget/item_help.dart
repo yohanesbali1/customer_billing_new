@@ -1,14 +1,13 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/help/help_controller.dart';
+import 'package:vigo_customer_billing/app/modules/help/controllers/help_controller.dart';
 
 class ItemHelp extends StatelessWidget {
-  final ReportModel data;
+  final HelpModel data;
   final HelpController controller;
   const ItemHelp({required this.data, required this.controller});
   Widget build(BuildContext context) {

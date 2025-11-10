@@ -1,7 +1,7 @@
 import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/core/widgets/form.dart';
-import 'package:vigo_customer_billing/app/modules/help/help_add_controller.dart';
+import 'package:vigo_customer_billing/app/modules/help/form/controllers/help_form_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
@@ -10,9 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 
-class FormHelpPage extends StatelessWidget {
-  final controller = Get.find<HelpFormController>();
-
+class FormHelpPage extends GetView<HelpFormController> {
   @override
   Widget build(BuildContext context) {
     void showDialog(Widget child) {
@@ -316,7 +314,7 @@ class FormHelpPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomFormLabel('Tipe Gangguan'),
+                        // CustomFormLabel('Tipe Gangguan'),
                         GestureDetector(
                           onTap: () {
                             FocusScope.of(context).unfocus();
@@ -388,13 +386,23 @@ class FormHelpPage extends StatelessWidget {
                               ),
                             );
                           },
-                          child: CustomFormInput(
-                            isLoading: controller.isLoading.value,
-                            placeholder: '',
-                            disabled: false,
-                            validator_input_text: controller.validator_input,
-                            controller: controller.type_topic_id.value,
-                          ),
+                          // child: CustomFormField(
+                          //   label: 'Password Baru',
+                          //   placeholder: 'Masukkan password baru',
+                          //   controller: controller.newPasswordController,
+                          //   type: FormFieldType.password,
+                          //   isLoading: controller.isLoading.value,
+                          //   validator: (value) =>
+                          //       controller.validatorPassword(value),
+                          // ),
+
+                          // CustomFormInput(
+                          //   isLoading: controller.isLoading.value,
+                          //   placeholder: '',
+                          //   disabled: false,
+                          //   validator_input_text: controller.validator_input,
+                          //   controller: controller.type_topic_id.value,
+                          // ),
                         ),
                       ],
                     ),
@@ -404,15 +412,15 @@ class FormHelpPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomFormLabel('Permasalahan'),
-                        Obx(
-                          () => CustomFormAreaInput(
-                            isLoading: controller.isLoading.value,
-                            placeholder: '',
-                            validator_input_text: controller.validator_input,
-                            controller: controller.description.value,
-                          ),
-                        ),
+                        // CustomFormLabel('Permasalahan'),
+                        // Obx(
+                        //   () => CustomFormAreaInput(
+                        //     isLoading: controller.isLoading.value,
+                        //     placeholder: '',
+                        //     validator_input_text: controller.validator_input,
+                        //     controller: controller.description.value,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -421,16 +429,16 @@ class FormHelpPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomFormLabel('No HP'),
-                        Obx(
-                          () => CustomFormInput(
-                            isLoading: controller.isLoading.value,
-                            placeholder: '',
-                            type_keyboard: 'number',
-                            validator_input_text: controller.validator_input,
-                            controller: controller.phone.value,
-                          ),
-                        ),
+                        // CustomFormLabel('No HP'),
+                        // Obx(
+                        //   () => CustomFormInput(
+                        //     isLoading: controller.isLoading.value,
+                        //     placeholder: '',
+                        //     type_keyboard: 'number',
+                        //     validator_input_text: controller.validator_input,
+                        //     controller: controller.phone.value,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -439,15 +447,15 @@ class FormHelpPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomFormLabel('Alamat'),
-                        Obx(
-                          () => CustomFormAreaInput(
-                            isLoading: controller.isLoading.value,
-                            placeholder: '',
-                            validator_input_text: controller.validator_input,
-                            controller: controller.address.value,
-                          ),
-                        ),
+                        // CustomFormLabel('Alamat'),
+                        // Obx(
+                        //   () => CustomFormAreaInput(
+                        //     isLoading: controller.isLoading.value,
+                        //     placeholder: '',
+                        //     validator_input_text: controller.validator_input,
+                        //     controller: controller.address.value,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -457,7 +465,7 @@ class FormHelpPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        CustomFormLabel('Gambar'),
+                        // CustomFormLabel('Gambar'),
                         SizedBox(height: 10),
                         Obx(
                           () => Container(
@@ -543,7 +551,7 @@ class FormHelpPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomFormLabel('Map'),
+                        // CustomFormLabel('Map'),
                         Obx(() {
                           return SizedBox(
                             height: 300,

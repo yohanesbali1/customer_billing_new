@@ -1,4 +1,4 @@
-import 'package:vigo_customer_billing/app/modules/help/help_controller.dart';
+import 'package:vigo_customer_billing/app/modules/help/controllers/help_controller.dart';
 import 'package:vigo_customer_billing/app/modules/home/controllers/home_controller.dart';
 import 'package:vigo_customer_billing/app/modules/invoice/controllers/invoice_controller.dart';
 import 'package:vigo_customer_billing/app/modules/profile/controllers/profile_controller.dart';
