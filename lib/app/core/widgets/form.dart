@@ -14,7 +14,7 @@ class CustomFormField extends StatelessWidget {
   final bool disabled;
   final String? Function(String?)? validator;
 
-  /// Internal for password toggle
+  /// Obs digunakan hanya untuk password field
   final RxBool _obscureText = true.obs;
 
   CustomFormField({
@@ -105,35 +105,37 @@ class CustomFormField extends StatelessWidget {
                 ),
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: Colors.red, width: 0.5),
+                  borderSide: const BorderSide(color: Colors.red, width: 0.5),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: Colors.red, width: 0.5),
+                  borderSide: const BorderSide(color: Colors.red, width: 0.5),
                 ),
                 errorStyle: GoogleFonts.montserrat(
                   color: Colors.red,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
                 ),
-                suffixIcon: isPassword
-                    ? IconButton(
-                        icon: Icon(
-                          _obscureText.value
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: textSecondaryColor,
-                        ),
-                        onPressed: () {
-                          _obscureText.value = !_obscureText.value;
-                        },
-                      )
-                    : null,
+                suffixIcon: _buildSuffixIcon(),
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  /// suffix icon toggle password
+  Widget? _buildSuffixIcon() {
+    if (!isPassword) return null;
+    return IconButton(
+      icon: Icon(
+        _obscureText.value ? Icons.visibility_off : Icons.visibility,
+        color: textSecondaryColor,
+      ),
+      onPressed: () {
+        _obscureText.value = !_obscureText.value;
+      },
     );
   }
 }

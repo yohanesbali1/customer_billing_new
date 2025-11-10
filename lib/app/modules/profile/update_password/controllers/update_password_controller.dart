@@ -8,8 +8,8 @@ class UpdatePasswordController extends GetxController {
   UpdatePasswordController({required this.repository});
   final formkey = GlobalKey<FormState>();
   var passwordController = TextEditingController();
-  var cpasswordController = TextEditingController();
-  var newpasswordController = TextEditingController();
+  var cPasswordController = TextEditingController();
+  var newPasswordController = TextEditingController();
 
   // OverlayEntry? overlayEntry = null;
   var isLoading = false.obs;
@@ -36,13 +36,13 @@ class UpdatePasswordController extends GetxController {
 
   void clear_form() {
     passwordController.clear();
-    cpasswordController.clear();
-    newpasswordController.clear();
+    cPasswordController.clear();
+    newPasswordController.clear();
   }
 
-  String? validator_password(value) {
+  String? validatorPassword(String? value) {
     final regex = RegExp(r'^(?=.*[A-Z])(?=.*\d).{8,}$');
-    if (value.isEmpty) {
+    if (value == null || value.isEmpty) {
       return 'Field ini harus diisi';
     } else if (!regex.hasMatch(value)) {
       return 'Password min 8 karakter, 1 huruf besar dan 1 angka';
@@ -50,10 +50,10 @@ class UpdatePasswordController extends GetxController {
     return null;
   }
 
-  String? validator_c_password(value) {
-    if (value.isEmpty) {
+  String? validatorConfirmPassword(String? value, TextEditingController ref) {
+    if (value == null || value.isEmpty) {
       return 'Field ini harus diisi';
-    } else if (value != newpasswordController.text) {
+    } else if (value != ref.text) {
       return 'Password tidak sama';
     }
     return null;
@@ -69,8 +69,8 @@ class UpdatePasswordController extends GetxController {
       Helper().AlertGetX('loading', null);
       var data = {
         'password': passwordController.text,
-        'c_password': cpasswordController.text,
-        'new_password': newpasswordController.text,
+        'c_password': cPasswordController.text,
+        'new_password': newPasswordController.text,
       };
       await repository.changePassword(data);
       clear_form();

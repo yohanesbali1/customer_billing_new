@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final auth_c = Get.put(AuthController());
-
 class ListMenuProfile extends StatelessWidget {
   final ProfileController controller;
   const ListMenuProfile({required this.controller});

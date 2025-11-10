@@ -37,16 +37,23 @@ class UpdatePasswordPage extends GetView<UpdatePasswordController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomFormLabel('Password Lama'),
-                        Obx(
-                          () => CustomFormInput(
-                            isLoading: controller.isLoading.value,
-                            placeholder: 'Masukkan password lama',
-                            controller: controller.password.value,
-                            status: controller.password_status.value,
-                            validator_input_text: controller.validator_input,
-                            change_type: controller.password_status,
-                          ),
+                        // CustomFormLabel('Password Lama'),
+                        // Obx(
+                        //   () => CustomFormInput(
+                        //     isLoading: controller.isLoading.value,
+                        //     placeholder: 'Masukkan password lama',
+                        //     controller: controller.password.value,
+                        //     status: controller.password_status.value,
+                        //     validator_input_text: controller.validator_input,
+                        //     change_type: controller.password_status,
+                        //   ),
+                        // ),
+                        CustomFormField(
+                          label: 'Password Lama',
+                          placeholder: 'Masukkan password lama',
+                          controller: controller.passwordController,
+                          type: FormFieldType.password,
+                          isLoading: controller.isLoading.value,
                         ),
                       ],
                     ),
@@ -56,18 +63,27 @@ class UpdatePasswordPage extends GetView<UpdatePasswordController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomFormLabel('Password Baru'),
-                        Obx(() {
-                          return CustomFormInput(
-                            isLoading: controller.isLoading.value,
-                            placeholder: 'Masukkan password baru',
-                            controller: controller.new_password.value,
-                            type: 'password',
-                            validator_input_text: controller.validator_password,
-                            status: controller.new_password_status.value,
-                            change_type: controller.new_password_status,
-                          );
-                        }),
+                        // CustomFormLabel('Password Baru'),
+                        // Obx(() {
+                        //   return CustomFormInput(
+                        //     isLoading: controller.isLoading.value,
+                        //     placeholder: 'Masukkan password baru',
+                        //     controller: controller.new_password.value,
+                        //     type: 'password',
+                        //     validator_input_text: controller.validator_password,
+                        //     status: controller.new_password_status.value,
+                        //     change_type: controller.new_password_status,
+                        //   );
+                        // }),
+                        CustomFormField(
+                          label: 'Password Baru',
+                          placeholder: 'Masukkan password baru',
+                          controller: controller.newPasswordController,
+                          type: FormFieldType.password,
+                          isLoading: controller.isLoading.value,
+                          validator: (value) =>
+                              controller.validatorPassword(value),
+                        ),
                       ],
                     ),
                   ),
@@ -92,11 +108,14 @@ class UpdatePasswordPage extends GetView<UpdatePasswordController> {
                         CustomFormField(
                           label: 'Konfirmasi Password',
                           placeholder: 'Masukkan konfirmasi password',
-                          controller: controller.cpasswordController,
-                          validator: controller.validator_input,
-                          type: FormFieldType.text,
+                          controller: controller.cPasswordController,
+                          type: FormFieldType.password,
                           isLoading: controller.isLoading.value,
-                          validator_input_text: controller.validator_c_password,
+                          validator: (value) =>
+                              controller.validatorConfirmPassword(
+                                value,
+                                controller.newPasswordController,
+                              ),
                         ),
                       ],
                     ),
