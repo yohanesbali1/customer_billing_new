@@ -30,6 +30,7 @@ class ListDataReportPage extends StatelessWidget {
                 ),
               )
             : ListView.builder(
+                shrinkWrap: true,
                 controller: controller.scrollController,
                 physics: const AlwaysScrollableScrollPhysics(),
                 itemCount:

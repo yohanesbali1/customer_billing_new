@@ -1,3 +1,4 @@
+import 'package:vigo_customer_billing/app/data/repositories/auth_repositories.dart';
 import 'package:vigo_customer_billing/app/modules/help/controllers/help_controller.dart';
 import 'package:vigo_customer_billing/app/modules/home/controllers/home_controller.dart';
 import 'package:vigo_customer_billing/app/modules/invoice/controllers/invoice_controller.dart';
@@ -16,6 +17,10 @@ class HomeBinding extends Bindings {
     );
     Get.lazyPut<HelpRepository>(
       () => HelpRepository(api: Get.find()),
+      fenix: true,
+    );
+    Get.lazyPut<AuthRepository>(
+      () => AuthRepository(api: Get.find()),
       fenix: true,
     );
 

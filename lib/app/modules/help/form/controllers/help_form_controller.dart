@@ -16,9 +16,9 @@ import 'package:latlong2/latlong.dart';
 class HelpFormController extends GetxController {
   final HelpRepository repository;
   final MapsRepository mapsRepository;
+  late final HelpDetailController detailController;
   HelpFormController({required this.repository, required this.mapsRepository});
-
-  final detail_controller = Get.find<HelpDetailController>();
+  GlobalKey<FormState>? formKey;
 
   var isLoading = false.obs;
   var isoptionLoading = false.obs;
@@ -26,8 +26,6 @@ class HelpFormController extends GetxController {
 
   Rxn<TypeTopic?> type_topic_value = Rxn<TypeTopic?>();
   int type_topic_select = 0;
-
-  final formkey = GlobalKey<FormState>();
 
   var addressController = TextEditingController();
   var phoneController = TextEditingController();
@@ -48,6 +46,8 @@ class HelpFormController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    detailController = Get.find<HelpDetailController>();
+    formKey = GlobalKey<FormState>();
     getData();
     debounce(search, (String value) async {
       await Future.delayed(Duration(milliseconds: 300)); // Optional delay
@@ -94,23 +94,23 @@ class HelpFormController extends GetxController {
     try {
       id.value = Get.parameters['id'] ?? '';
       isLoading.value = true;
-      if (id.value != '') {
-        final HelpModelDetail data = detail_controller.reportData.value!;
-        addressController.text = data.address!;
-        phoneController.text = data.phone!;
-        descriptionController.text = data.description!;
-        typeTopicController.text = data.typeTopic!.type!;
-        type_topic_value.value = data.typeTopic!;
-        var parts = data.maps!.split(',');
-        if (parts.length >= 2) {
-          mapsController.text = data.maps!;
-          await updateLocation(
-            LatLng(double.parse(parts[0]), double.parse(parts[1])),
-          );
-        }
-      } else {
-        await getCurrentLocation();
-      }
+      // if (id.value != '') {
+      //   final HelpModelDetail data = detail_controller.reportData.value!;
+      //   addressController.text = data.address!;
+      //   phoneController.text = data.phone!;
+      //   descriptionController.text = data.description!;
+      //   typeTopicController.text = data.typeTopic!.type!;
+      //   type_topic_value.value = data.typeTopic!;
+      //   var parts = data.maps!.split(',');
+      //   if (parts.length >= 2) {
+      //     mapsController.text = data.maps!;
+      //     await updateLocation(
+      //       LatLng(double.parse(parts[0]), double.parse(parts[1])),
+      //     );
+      //   }
+      // } else {
+      //   await getCurrentLocation();
+      // }
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;

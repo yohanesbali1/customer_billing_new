@@ -33,7 +33,7 @@ class DashboardPage extends StatelessWidget {
                   // Container(width: double.infinity, height: 330),
                   HeaderDashboard(),
                   Positioned(
-                    top: 260, // sesuaikan supaya tidak tenggelam
+                    top: 130, // sesuaikan supaya tidak tenggelam
                     left: 0,
                     right: 0,
                     child: CardMember(controller: application_c),
@@ -43,6 +43,7 @@ class DashboardPage extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 14, vertical: 15),
                 margin: EdgeInsets.only(
+                  top: 30,
                   bottom: 18,
                   left: defaultMargin,
                   right: defaultMargin,

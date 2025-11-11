@@ -9,14 +9,16 @@ class HelpBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<HelpRepository>(() => HelpRepository(api: Get.find()));
     Get.lazyPut<MapsRepository>(() => MapsRepository(api: Get.find()));
+
+    Get.lazyPut<HelpDetailController>(
+      () => HelpDetailController(repository: Get.find()),
+    );
+
     Get.lazyPut<HelpFormController>(
       () => HelpFormController(
         repository: Get.find(),
         mapsRepository: Get.find(),
       ),
-    );
-    Get.lazyPut<HelpDetailController>(
-      () => HelpDetailController(repository: Get.find()),
     );
   }
 }
