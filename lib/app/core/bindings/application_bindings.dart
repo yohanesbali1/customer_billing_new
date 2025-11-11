@@ -8,8 +8,10 @@ class ApplicationBindings extends Bindings {
   @override
   void dependencies() {
     Get.put(ApiProvider(), permanent: true);
-    Get.put(ProfileRepository(api: Get.find()), permanent: true);
     Get.put(LocalStorageService(), permanent: true);
     Get.put(ApplicationControllers(repository: Get.find()), permanent: true);
+
+    //repository
+    Get.put(ProfileRepository(api: Get.find()), permanent: true);
   }
 }

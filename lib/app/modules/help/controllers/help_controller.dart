@@ -46,7 +46,7 @@ class HelpController extends GetxController {
     scrollController.dispose();
   }
 
-  void onScroll() {
+  dynamic onScroll() {
     if (scrollController.position.pixels ==
             scrollController.position.maxScrollExtent &&
         !isLoadMore.value) {
@@ -87,7 +87,7 @@ class HelpController extends GetxController {
     }
   }
 
-  change_status(status) {
+  Map<String, dynamic> change_status(status) {
     final payload;
     switch (status) {
       case '8':
