@@ -28,12 +28,25 @@ class DashboardPage extends StatelessWidget {
           physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
             children: [
-              HeaderDashboard(),
-              CardMember(controller: application_c),
+              SizedBox(
+                height: 350,
+                child: Stack(
+                  children: [
+                    HeaderDashboard(),
+                    Text('asd'),
+                    Positioned(
+                      top: 150,
+                      left: 0,
+                      right: 0,
+                      child: CardMember(controller: application_c),
+                    ),
+                  ],
+                ),
+              ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 14, vertical: 15),
                 margin: EdgeInsets.only(
-                  top: 0,
+                  top: 30,
                   bottom: 18,
                   left: defaultMargin,
                   right: defaultMargin,

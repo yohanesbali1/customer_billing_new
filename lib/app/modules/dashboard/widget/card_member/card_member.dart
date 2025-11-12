@@ -54,8 +54,8 @@ class _MemberCard extends StatelessWidget {
     return ClipPath(
       clipper: CardMemberClipPath(),
       child: Container(
-        // width: double.infinity,
-        // height: 120,
+        width: double.infinity,
+        height: 400,
         margin: EdgeInsets.symmetric(horizontal: defaultMargin),
         decoration: const BoxDecoration(gradient: kRedGradient),
         child: Column(

@@ -12,6 +12,8 @@ class SkeletonCardMember extends StatelessWidget {
       clipper: CardMemberClipPath(),
       child: Skeletonizer.zone(
         child: Container(
+          width: double.infinity,
+          height: 400,
           margin: EdgeInsets.symmetric(horizontal: defaultMargin),
           decoration: const BoxDecoration(gradient: kRedGradient),
           child: Padding(
@@ -27,7 +29,7 @@ class SkeletonCardMember extends StatelessWidget {
                 Bone.text(words: 3),
                 const SizedBox(height: 5),
                 Bone.text(words: 2),
-                const SizedBox(height: 10),
+                const SizedBox(height: 30),
                 Bone.text(words: 3),
               ],
             ),

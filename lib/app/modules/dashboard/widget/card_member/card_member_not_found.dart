@@ -11,8 +11,9 @@ class NotFoundCardMember extends StatelessWidget {
     return ClipPath(
       clipper: CardMemberClipPath(),
       child: Container(
-        width: 335,
-        height: 170,
+        width: double.infinity,
+        height: 400,
+        margin: EdgeInsets.symmetric(horizontal: defaultMargin),
         decoration: const BoxDecoration(gradient: kRedGradient),
         child: Center(
           child: Column(

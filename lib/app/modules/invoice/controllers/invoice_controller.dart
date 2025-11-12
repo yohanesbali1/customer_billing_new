@@ -39,6 +39,12 @@ class InvoiceController extends GetxController {
   }
 
   @override
+  void onReady() {
+    super.onReady();
+    page_index.value = 0; // reset setiap halaman ditampilkan lagi
+  }
+
+  @override
   void onClose() {
     super.onClose();
     pagecontroller.dispose();

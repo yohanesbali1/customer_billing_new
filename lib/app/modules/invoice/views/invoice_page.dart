@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 class InvoicePage extends GetView<InvoiceController> {
   @override
   Widget build(BuildContext context) {
+    controller.page_index.value = 0;
     final home_c = Get.find<HomeController>();
     return Scaffold(
       backgroundColor: bgColor,
@@ -35,83 +36,79 @@ class InvoicePage extends GetView<InvoiceController> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Stack(
+            Row(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          controller.change_page(0);
-                        },
-                        child: Obx(
-                          () => Container(
-                            padding: EdgeInsets.only(bottom: 12),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: controller.page_index.value == 0
-                                      ? mainColor
-                                      : Colors.grey.shade300,
-                                  width: controller.page_index.value == 0
-                                      ? 2.0
-                                      : 1.0,
-                                ),
-                              ),
-                            ),
-                            child: Text(
-                              'Tagihan',
-                              style: GoogleFonts.montserrat(
-                                color: controller.page_index.value == 0
-                                    ? mainColor
-                                    : textPrimaryColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              textAlign: TextAlign.center,
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      controller.change_page(0);
+                    },
+                    child: Obx(
+                      () => Container(
+                        padding: EdgeInsets.only(bottom: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border(
+                            bottom: BorderSide(
+                              color: controller.page_index.value == 0
+                                  ? mainColor
+                                  : Colors.grey.shade300,
+                              width: controller.page_index.value == 0
+                                  ? 2.0
+                                  : 1.0,
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          controller.change_page(1);
-                        },
-                        child: Obx(
-                          () => Container(
-                            padding: EdgeInsets.only(bottom: 12),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: controller.page_index.value == 1
-                                      ? mainColor
-                                      : Colors.grey.shade300,
-                                  width: controller.page_index.value == 1
-                                      ? 2.0
-                                      : 1.0,
-                                ),
-                              ),
-                            ),
-                            child: Text(
-                              'Lunas',
-                              style: GoogleFonts.montserrat(
-                                color: controller.page_index.value == 1
-                                    ? mainColor
-                                    : textPrimaryColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
+                        child: Text(
+                          'Tagihan',
+                          style: GoogleFonts.montserrat(
+                            color: controller.page_index.value == 0
+                                ? mainColor
+                                : textPrimaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
-                  ],
+                  ),
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      controller.change_page(1);
+                    },
+                    child: Obx(
+                      () => Container(
+                        padding: EdgeInsets.only(bottom: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border(
+                            bottom: BorderSide(
+                              color: controller.page_index.value == 1
+                                  ? mainColor
+                                  : Colors.grey.shade300,
+                              width: controller.page_index.value == 1
+                                  ? 2.0
+                                  : 1.0,
+                            ),
+                          ),
+                        ),
+                        child: Text(
+                          'Lunas',
+                          style: GoogleFonts.montserrat(
+                            color: controller.page_index.value == 1
+                                ? mainColor
+                                : textPrimaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
