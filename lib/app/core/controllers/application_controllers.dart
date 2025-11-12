@@ -13,8 +13,15 @@ class ApplicationControllers extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    changeToken();
-    getData();
+    everAll([Get.routing.obs], (_) {
+      final current = Get.currentRoute;
+      final previous = Get.previousRoute;
+
+      if (previous == '/login' && current == '/home') {
+        changeToken();
+        getData();
+      }
+    });
   }
 
   Future<void> getData() async {

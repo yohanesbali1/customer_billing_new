@@ -1,7 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
 import 'package:vigo_customer_billing/app/core/services/local_storage_service.dart';
-import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'package:vigo_customer_billing/app/data/providers/api_provider.dart';
 import 'package:get/get.dart';
 
@@ -16,8 +15,7 @@ class AuthRepository {
   Future<dynamic> loginData(form) async {
     try {
       final response = await api.post('/auth/login', form);
-      await storage.write('token', response['data']['token']);
-      return LoginModel.fromJson(response['data']);
+      await storage.write('token', response['token']);
     } catch (e) {
       rethrow;
     }

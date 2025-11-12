@@ -43,8 +43,8 @@ class LoginController extends GetxController {
         'password': passwordController.text,
         'group_app': 'VIGO',
       };
-      await FirebaseMessaging.instance.deleteToken();
       await repository.loginData(data);
+      await FirebaseMessaging.instance.deleteToken();
       isLoading(false);
       Get.back();
       Get.offAllNamed('/home');

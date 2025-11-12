@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
 import 'app/core/bindings/application_bindings.dart';
 import 'app/routes/app_pages.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

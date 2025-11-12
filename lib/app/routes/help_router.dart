@@ -1,6 +1,6 @@
 import 'package:vigo_customer_billing/app/core/middleware/auth_middleware.dart';
 import 'package:vigo_customer_billing/app/modules/help/binddings/help_bindding.dart';
-import 'package:vigo_customer_billing/app/modules/help/page/help_chat_page.dart';
+import 'package:vigo_customer_billing/app/modules/help/chat/views/help_chat_page.dart';
 import 'package:vigo_customer_billing/app/modules/help/detail/views/help_detail_page.dart';
 import 'package:vigo_customer_billing/app/modules/help/form/views/form_help_page.dart';
 import 'package:get/get.dart';

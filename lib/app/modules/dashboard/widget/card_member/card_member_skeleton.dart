@@ -12,8 +12,7 @@ class SkeletonCardMember extends StatelessWidget {
       clipper: CardMemberClipPath(),
       child: Skeletonizer.zone(
         child: Container(
-          width: 335,
-          height: 150,
+          margin: EdgeInsets.symmetric(horizontal: defaultMargin),
           decoration: const BoxDecoration(gradient: kRedGradient),
           child: Padding(
             padding: const EdgeInsets.all(16),

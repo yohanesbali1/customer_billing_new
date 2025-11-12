@@ -14,36 +14,26 @@ class DashboardPage extends StatelessWidget {
     final application_c = Get.find<ApplicationControllers>();
     return Scaffold(
       backgroundColor: bgColor,
-      body: Container(
-        child: RefreshIndicator(
-          color: mainColor,
-          onRefresh: () {
-            return application_c.getData();
-            // WidgetsBinding.instance.addPostFrameCallback((_) {
-            //   controller.getData();
-            // });
-            // return Future.value(true);
-          },
-          child: ListView(
-            padding: EdgeInsets.zero,
-            physics: const AlwaysScrollableScrollPhysics(),
+      body: RefreshIndicator(
+        color: mainColor,
+        onRefresh: () {
+          return application_c.getData();
+          // WidgetsBinding.instance.addPostFrameCallback((_) {
+          //   controller.getData();
+          // });
+          // return Future.value(true);
+        },
+        child: SingleChildScrollView(
+          padding: EdgeInsets.zero,
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
             children: [
-              Stack(
-                children: [
-                  // Container(width: double.infinity, height: 330),
-                  HeaderDashboard(),
-                  Positioned(
-                    top: 130, // sesuaikan supaya tidak tenggelam
-                    left: 0,
-                    right: 0,
-                    child: CardMember(controller: application_c),
-                  ),
-                ],
-              ),
+              HeaderDashboard(),
+              CardMember(controller: application_c),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 14, vertical: 15),
                 margin: EdgeInsets.only(
-                  top: 30,
+                  top: 0,
                   bottom: 18,
                   left: defaultMargin,
                   right: defaultMargin,

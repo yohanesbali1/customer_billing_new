@@ -15,37 +15,31 @@ class CardMember extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 130,
-      left: 0,
-      right: 0,
-      child: Obx(() {
-        if (controller.isLoading.value) {
-          return const Center(child: SkeletonCardMember());
-        }
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return SkeletonCardMember();
+      }
 
-        final data = controller.accountbillData.value;
-        if (data == null) {
-          return const Center(child: NotFoundCardMember());
-        }
+      final data = controller.accountbillData.value;
+      if (data == null) {
+        return const Center(child: NotFoundCardMember());
+      }
 
-        final accountBill = data as AccountBillModel;
+      final accountBill = data as AccountBillModel;
 
-        return CarouselSlider(
-          options: CarouselOptions(
-            autoPlay: true,
-            enableInfiniteScroll: false,
-            viewportFraction: 1,
-          ),
-          items: accountBill.orders.map((order) {
-            return Builder(
-              builder: (context) =>
-                  _MemberCard(data: accountBill, order: order),
-            );
-          }).toList(),
-        );
-      }),
-    );
+      return CarouselSlider(
+        options: CarouselOptions(
+          autoPlay: true,
+          enableInfiniteScroll: false,
+          viewportFraction: 1,
+        ),
+        items: accountBill.orders.map((order) {
+          return Builder(
+            builder: (context) => _MemberCard(data: accountBill, order: order),
+          );
+        }).toList(),
+      );
+    });
   }
 }
 
@@ -60,8 +54,8 @@ class _MemberCard extends StatelessWidget {
     return ClipPath(
       clipper: CardMemberClipPath(),
       child: Container(
-        width: double.infinity,
-        height: 120,
+        // width: double.infinity,
+        // height: 120,
         margin: EdgeInsets.symmetric(horizontal: defaultMargin),
         decoration: const BoxDecoration(gradient: kRedGradient),
         child: Column(
