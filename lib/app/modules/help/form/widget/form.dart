@@ -1,13 +1,15 @@
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:vigo_customer_billing/app/core/widgets/form.dart';
+import 'package:vigo_customer_billing/app/modules/help/form/controllers/help_form_controller.dart';
 
-class FormHelpWidget extends StatelessWidget {
-  final controller;
-  const FormHelpWidget({required this.controller});
+class FormHelpWidget extends GetView<HelpFormController> {
+  const FormHelpWidget();
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: controller.formKey,
+      key: controller.formkey,
       child: Column(
         children: [
           // Container(
@@ -113,21 +115,34 @@ class FormHelpWidget extends StatelessWidget {
           // ),
           Container(
             margin: const EdgeInsets.only(bottom: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // CustomFormLabel('Permasalahan'),
-                // Obx(
-                //   () => CustomFormAreaInput(
-                //     isLoading: controller.isLoading.value,
-                //     placeholder: '',
-                //     validator_input_text: controller.validator_input,
-                //     controller: controller.description.value,
-                //   ),
-                // ),
-              ],
+            child: Obx(
+              () => CustomFormField(
+                label: 'Permasalahan',
+                placeholder: 'Masukkan password baru',
+                controller: controller.descriptionController,
+                type: FormFieldType.textarea,
+                isLoading: controller.isLoading.value,
+                validator: (value) => controller.validator_input(value),
+              ),
             ),
           ),
+          // Container(
+          //   margin: const EdgeInsets.only(bottom: 16),
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       // CustomFormLabel('Permasalahan'),
+          //       // Obx(
+          //       //   () => CustomFormAreaInput(
+          //       //     isLoading: controller.isLoading.value,
+          //       //     placeholder: '',
+          //       //     validator_input_text: controller.validator_input,
+          //       //     controller: controller.description.value,
+          //       //   ),
+          //       // ),
+          //     ],
+          //   ),
+          // ),
           // Container(
           //   margin: const EdgeInsets.only(bottom: 16),
           //   child: Column(

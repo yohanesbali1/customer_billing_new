@@ -29,11 +29,10 @@ class DashboardPage extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: 350,
+                height: 330,
                 child: Stack(
                   children: [
                     HeaderDashboard(),
-                    Text('asd'),
                     Positioned(
                       top: 150,
                       left: 0,

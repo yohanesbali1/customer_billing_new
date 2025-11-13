@@ -1,7 +1,6 @@
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/modules/invoice/controllers/invoice_controller.dart';
 import 'package:vigo_customer_billing/app/modules/invoice/views/list_invoice.dart';
-import 'package:vigo_customer_billing/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,7 +9,6 @@ class InvoicePage extends GetView<InvoiceController> {
   @override
   Widget build(BuildContext context) {
     controller.page_index.value = 0;
-    final home_c = Get.find<HomeController>();
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -28,7 +26,7 @@ class InvoicePage extends GetView<InvoiceController> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back), // Custom back icon
           onPressed: () {
-            home_c.change_page(0); // Go back to the previous screen
+            controller.home_c.change_page(0); // Go back to the previous screen
           },
         ),
       ),
@@ -116,6 +114,7 @@ class InvoicePage extends GetView<InvoiceController> {
               child: PageView(
                 physics: NeverScrollableScrollPhysics(),
                 controller: controller.pagecontroller,
+                onPageChanged: (index) => controller.page_index.value = index,
                 children: <Widget>[
                   ListInvoicePage(controller: controller, type: 'not_paid'),
                   ListInvoicePage(controller: controller, type: 'paid'),

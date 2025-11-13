@@ -1,5 +1,5 @@
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/about/about_controller.dart';
+import 'package:vigo_customer_billing/app/modules/profile/about/about_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +15,7 @@ class AboutPage extends GetView<AboutController> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
+        backgroundColor: Colors.white,
         title: Text(
           'Kembali',
           style: GoogleFonts.montserrat(
@@ -24,19 +25,20 @@ class AboutPage extends GetView<AboutController> {
           ),
         ),
       ),
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            SizedBox(height: 10),
-            Container(
-              constraints: BoxConstraints(maxWidth: 209, maxHeight: 102),
-              child: Image.asset('assets/images/logo-icon.png'),
-            ),
-            const SizedBox(height: 20),
-            Container(
-              child: Text(
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(height: 10),
+              Container(
+                constraints: BoxConstraints(maxWidth: 209, maxHeight: 102),
+                child: Image.asset('assets/images/logo-icon.png'),
+              ),
+              const SizedBox(height: 20),
+              Text(
                 '''
 WNG merupakan salah satu brand penjualan utama dari PT. Wisuandha Network Globalindo, dimana kami merupakan sebuah perusahaan yang bergerak dalam bidang penyedia Jasa Layanan Internet (Internet Service Provider). Perusahaan kami berdiri pada tahun 2013. Pada awalnya kami merupakan Reseller dari salah satu Perusahaan Internet terkemuka di Indonesia.
 
@@ -46,8 +48,8 @@ Dengan berjalannya waktu dan dengan komitmen kuat dalam mengutamakan layanan kep
                   color: textPrimaryColor,
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

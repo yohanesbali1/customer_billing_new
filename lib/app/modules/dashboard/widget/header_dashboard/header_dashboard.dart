@@ -23,41 +23,42 @@ class HeaderDashboard extends StatelessWidget {
             colors: [Color(0xFF690305), Color(0xFFAC0205)],
           ),
         ),
-        child: Container(
-          margin: EdgeInsets.only(top: 50),
-          alignment: Alignment.topCenter,
-          padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Selamat Datang, ',
-                      style: monseratTextFont.copyWith(
-                        color: Colors.white,
-                        fontSize: 13,
+        child: SafeArea(
+          child: Container(
+            alignment: Alignment.topCenter,
+            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Selamat Datang, ',
+                        style: monseratTextFont.copyWith(
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
                       ),
-                    ),
-                    Obx(
-                      () => Skeletonizer(
-                        enabled: applicationControllers.isLoading.value,
-                        child: Text(
-                          '${applicationControllers.accountbillData.value?.customer.name ?? 'Tidak Diketahui'}',
-                          style: monseratTextFont.copyWith(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                      Obx(
+                        () => Skeletonizer(
+                          enabled: applicationControllers.isLoading.value,
+                          child: Text(
+                            '${applicationControllers.accountbillData.value?.customer.name ?? 'Tidak Diketahui'}',
+                            style: monseratTextFont.copyWith(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

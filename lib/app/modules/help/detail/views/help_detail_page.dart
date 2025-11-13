@@ -19,6 +19,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
       backgroundColor: bgColor,
       appBar: AppBar(
         elevation: 0,
+        backgroundColor: Colors.white,
         scrolledUnderElevation: 0,
         title: Text(
           'Detail Bantuan',

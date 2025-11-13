@@ -1,4 +1,6 @@
 import 'package:vigo_customer_billing/app/core/middleware/auth_middleware.dart';
+import 'package:vigo_customer_billing/app/modules/profile/about/about_bindding.dart';
+import 'package:vigo_customer_billing/app/modules/profile/about/about_page.dart';
 import 'package:vigo_customer_billing/app/modules/profile/detail_profile/binddings/detail_profile_bindding.dart';
 import 'package:vigo_customer_billing/app/modules/profile/detail_profile/views/detail_profile_page.dart';
 import 'package:vigo_customer_billing/app/modules/profile/information/information_bindding.dart';
@@ -29,6 +31,11 @@ class ProfileRoutes {
       page: () => const InformationPage(),
       binding: InformationBinding(),
       middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name: '/profile/about/app',
+      page: () => const AboutPage(),
+      binding: AboutBinding(),
     ),
     GetPage(
       name: '/profile/setting',

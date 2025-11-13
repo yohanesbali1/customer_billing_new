@@ -3,11 +3,13 @@ import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vigo_customer_billing/app/data/repositories/invoice_repository.dart';
+import 'package:vigo_customer_billing/app/modules/home/controllers/home_controller.dart';
 
 class InvoiceController extends GetxController {
   final InvoiceRepository repository;
   InvoiceController({required this.repository});
 
+  final home_c = Get.find<HomeController>();
   final ScrollController scrollController = ScrollController();
   var invoice_not_paid_data = <InvoiceModel>[].obs;
   var invoice_paid_data = <InvoiceModel>[].obs;

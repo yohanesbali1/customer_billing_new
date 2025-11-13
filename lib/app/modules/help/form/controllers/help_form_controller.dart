@@ -18,7 +18,8 @@ class HelpFormController extends GetxController {
   final MapsRepository mapsRepository;
   late final HelpDetailController detailController;
   HelpFormController({required this.repository, required this.mapsRepository});
-  GlobalKey<FormState>? formKey;
+
+  final formkey = GlobalKey<FormState>();
 
   var isLoading = false.obs;
   var isoptionLoading = false.obs;
@@ -47,12 +48,11 @@ class HelpFormController extends GetxController {
   void onInit() {
     super.onInit();
     detailController = Get.find<HelpDetailController>();
-    formKey = GlobalKey<FormState>();
-    getData();
-    debounce(search, (String value) async {
-      await Future.delayed(Duration(milliseconds: 300)); // Optional delay
-      getSearch(value);
-    }, time: Duration(milliseconds: 500));
+    // getData();
+    // debounce(search, (String value) async {
+    //   await Future.delayed(Duration(milliseconds: 300)); // Optional delay
+    //   getSearch(value);
+    // }, time: Duration(milliseconds: 500));
   }
 
   @override

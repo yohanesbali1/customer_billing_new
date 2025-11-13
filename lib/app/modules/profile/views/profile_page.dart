@@ -12,6 +12,7 @@ class ProfilePage extends GetView<ProfileController> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
+        backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
           'Profile',

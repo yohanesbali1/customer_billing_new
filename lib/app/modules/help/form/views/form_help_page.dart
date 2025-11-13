@@ -1,13 +1,9 @@
-import 'package:flutter_map/flutter_map.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/modules/help/form/controllers/help_form_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:vigo_customer_billing/app/modules/help/form/widget/form.dart';
-import 'package:vigo_customer_billing/app/modules/help/form/widget/modal_camera.dart';
 
 class FormHelpPage extends GetView<HelpFormController> {
   @override
@@ -228,10 +224,10 @@ class FormHelpPage extends GetView<HelpFormController> {
           ),
         ),
       ),
-      body: Container(
-        margin: EdgeInsets.only(top: 20),
-        padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.only(top: 20),
+          padding: EdgeInsets.symmetric(horizontal: defaultMargin),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -261,18 +257,20 @@ class FormHelpPage extends GetView<HelpFormController> {
                   ],
                 ),
               ),
-              FormHelpWidget(controller: controller),
+              FormHelpWidget(),
               Container(
                 margin: const EdgeInsets.only(top: 10, bottom: 20),
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () async {
                     // return true;
-                    // if (controller.formkey.currentState!.validate() &&
-                    //     controller.selectedLocation.value != null) {
-                    //   FocusScope.of(context).unfocus();
-                    //   await controller.submit_data();
-                    // } else {
+                    controller.isLoading.value = true;
+                    print('asd');
+                    if (controller.formkey.currentState!.validate()) {
+                      FocusScope.of(context).unfocus();
+                      await controller.submit_data();
+                    }
+                    //else {
                     //   Helper().AlertGetX(
                     //     null,
                     //     'Cek kembali data yang anda masukkan',

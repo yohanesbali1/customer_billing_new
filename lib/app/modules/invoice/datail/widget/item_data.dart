@@ -297,7 +297,7 @@ class ItemDataInvoice extends StatelessWidget {
                                                                 .value
                                                                 ?.code !=
                                                             null
-                                                        ? "${controller.bank_data.value!.code}${applicationControllers.accountbillData.value!.paymentCode}"
+                                                        ? "${controller.bank_data.value!.code}${applicationControllers.accountbillData.value?.paymentCode ?? '-'}"
                                                         : "",
                                                     style:
                                                         GoogleFonts.montserrat(

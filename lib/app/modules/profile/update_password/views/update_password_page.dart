@@ -14,6 +14,7 @@ class UpdatePasswordPage extends GetView<UpdatePasswordController> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
+        backgroundColor: Colors.white,
         title: Text(
           'Kembali',
           style: GoogleFonts.montserrat(
@@ -23,133 +24,84 @@ class UpdatePasswordPage extends GetView<UpdatePasswordController> {
           ),
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            Form(
-              key: controller.formkey,
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 16, top: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // CustomFormLabel('Password Lama'),
-                        // Obx(
-                        //   () => CustomFormInput(
-                        //     isLoading: controller.isLoading.value,
-                        //     placeholder: 'Masukkan password lama',
-                        //     controller: controller.password.value,
-                        //     status: controller.password_status.value,
-                        //     validator_input_text: controller.validator_input,
-                        //     change_type: controller.password_status,
-                        //   ),
-                        // ),
-                        CustomFormField(
-                          label: 'Password Lama',
-                          placeholder: 'Masukkan password lama',
-                          controller: controller.passwordController,
-                          type: FormFieldType.password,
-                          isLoading: controller.isLoading.value,
-                        ),
-                      ],
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+          child: Form(
+            key: controller.formkey,
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10, top: 20),
+                  child: Obx(
+                    () => CustomFormField(
+                      label: 'Password Lama',
+                      placeholder: 'Masukkan password lama',
+                      controller: controller.passwordController,
+                      type: FormFieldType.password,
+                      isLoading: controller.isLoading.value,
+                      validator: (value) => controller.validatorPassword(value),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // CustomFormLabel('Password Baru'),
-                        // Obx(() {
-                        //   return CustomFormInput(
-                        //     isLoading: controller.isLoading.value,
-                        //     placeholder: 'Masukkan password baru',
-                        //     controller: controller.new_password.value,
-                        //     type: 'password',
-                        //     validator_input_text: controller.validator_password,
-                        //     status: controller.new_password_status.value,
-                        //     change_type: controller.new_password_status,
-                        //   );
-                        // }),
-                        CustomFormField(
-                          label: 'Password Baru',
-                          placeholder: 'Masukkan password baru',
-                          controller: controller.newPasswordController,
-                          type: FormFieldType.password,
-                          isLoading: controller.isLoading.value,
-                          validator: (value) =>
-                              controller.validatorPassword(value),
-                        ),
-                      ],
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: Obx(
+                    () => CustomFormField(
+                      label: 'Password Baru',
+                      placeholder: 'Masukkan password baru',
+                      controller: controller.newPasswordController,
+                      type: FormFieldType.password,
+                      isLoading: controller.isLoading.value,
+                      validator: (value) => controller.validatorPassword(value),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // CustomFormLabel('Konfirmasi Password'),
-                        // Obx(() {
-                        //   return CustomFormInput(
-                        //     isLoading: controller.isLoading.value,
-                        //     placeholder: 'Masukkan password baru',
-                        //     controller: controller.c_password.value,
-                        //     type: 'c_password',
-                        //     validator_input_text:
-                        //         controller.validator_c_password,
-                        //     status: controller.c_password_status.value,
-                        //     change_type: controller.c_password_status,
-                        //   );
-                        // }),
-                        CustomFormField(
-                          label: 'Konfirmasi Password',
-                          placeholder: 'Masukkan konfirmasi password',
-                          controller: controller.cPasswordController,
-                          type: FormFieldType.password,
-                          isLoading: controller.isLoading.value,
-                          validator: (value) =>
-                              controller.validatorConfirmPassword(
-                                value,
-                                controller.newPasswordController,
-                              ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 24, bottom: 16),
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (controller.formkey.currentState!.validate()) {
-                          await controller.update_password();
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: mainColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                      ),
-                      child: Text(
-                        "Simpan Perubahan",
-                        style: GoogleFonts.montserrat(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: Obx(
+                    () => CustomFormField(
+                      label: 'Konfirmasi Password',
+                      placeholder: 'Masukkan konfirmasi password',
+                      controller: controller.cPasswordController,
+                      type: FormFieldType.password,
+                      isLoading: controller.isLoading.value,
+                      validator: (value) => controller.validatorConfirmPassword(
+                        value,
+                        controller.newPasswordController,
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 24, bottom: 16),
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      if (controller.formkey.currentState!.validate()) {
+                        await controller.update_password();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: mainColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                    ),
+                    child: Text(
+                      "Simpan Perubahan",
+                      style: GoogleFonts.montserrat(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

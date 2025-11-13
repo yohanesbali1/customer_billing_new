@@ -22,7 +22,8 @@ class CardMember extends StatelessWidget {
 
       final data = controller.accountbillData.value;
       if (data == null) {
-        return const Center(child: NotFoundCardMember());
+        print('gak ada data');
+        return NotFoundCardMember();
       }
 
       final accountBill = data as AccountBillModel;
@@ -55,7 +56,7 @@ class _MemberCard extends StatelessWidget {
       clipper: CardMemberClipPath(),
       child: Container(
         width: double.infinity,
-        height: 400,
+        height: 160,
         margin: EdgeInsets.symmetric(horizontal: defaultMargin),
         decoration: const BoxDecoration(gradient: kRedGradient),
         child: Column(

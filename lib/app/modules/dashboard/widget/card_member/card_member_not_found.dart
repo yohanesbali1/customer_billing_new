@@ -12,7 +12,7 @@ class NotFoundCardMember extends StatelessWidget {
       clipper: CardMemberClipPath(),
       child: Container(
         width: double.infinity,
-        height: 400,
+        height: 160,
         margin: EdgeInsets.symmetric(horizontal: defaultMargin),
         decoration: const BoxDecoration(gradient: kRedGradient),
         child: Center(

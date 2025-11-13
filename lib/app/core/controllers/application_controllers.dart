@@ -13,7 +13,9 @@ class ApplicationControllers extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    print('asd');
     everAll([Get.routing.obs], (_) {
+      print('ini dalam');
       final current = Get.currentRoute;
       final previous = Get.previousRoute;
 

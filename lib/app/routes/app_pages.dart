@@ -7,7 +7,6 @@ import 'register_router.dart';
 import 'package_router.dart';
 import 'home_routes.dart';
 import 'service_router.dart';
-import 'about_router.dart';
 
 class AppPages {
   AppPages._();
@@ -23,7 +22,6 @@ class AppPages {
     ...InvoiceRoutes.routes,
     ...PackageRoutes.routes,
     ...ServiceRoutes.routes,
-    ...AboutRoutes.routes,
     ...FAQRoutes.routes,
   ];
 }

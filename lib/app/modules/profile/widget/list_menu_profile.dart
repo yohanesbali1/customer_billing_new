@@ -67,7 +67,7 @@ class ListMenuProfile extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Get.toNamed('/about/app');
+            Get.toNamed('/profile/about/app');
           },
           child: Container(
             // color: Colors.white,
