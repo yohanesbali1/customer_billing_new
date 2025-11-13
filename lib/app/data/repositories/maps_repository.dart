@@ -7,10 +7,10 @@ class MapsRepository {
 
   Future<List<MapModel>> getMap(String filter) async {
     try {
-      final response = await api.get(
-        'https://us1.locationiq.com/v1/search.php?key=pk.352d883cedfc088c2ad81167d4b4b673&q=$filter&format=json',
-      );
-      return (response as List).map((e) => MapModel.fromJson(e)).toList();
+      final response = await api.get('/customer/maps?search=$filter');
+      return (response['data'] as List)
+          .map((e) => MapModel.fromJson(e))
+          .toList();
     } catch (e) {
       rethrow;
     }

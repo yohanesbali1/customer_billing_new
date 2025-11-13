@@ -4,61 +4,84 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// class HeaderDashboard extends StatelessWidget {
+//   const HeaderDashboard({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final ApplicationControllers applicationControllers =
+//         Get.find<ApplicationControllers>();
+//     return ClipPath(
+//       clipper: HeaderDashboardClipPath(),
+//       child: Container(
+//         height: 269,
+//         width: double.infinity,
+//         decoration: BoxDecoration(
+//           gradient: LinearGradient(
+//             begin: Alignment.topCenter,
+//             end: Alignment.bottomCenter,
+//             colors: [Color(0xFF690305), Color(0xFFAC0205)],
+//           ),
+//         ),
+//         child: Container(),
+//         // child: SafeArea(
+//         //   child: Container(
+//         //     alignment: Alignment.topCenter,
+//         //     padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+//         //     child: Row(
+//         //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         //       children: [
+//         //         Expanded(
+//         //           child: Column(
+//         //             crossAxisAlignment: CrossAxisAlignment.start,
+//         //             children: [
+//         //               Text(
+//         //                 'Selamat Datang, ',
+//         //                 style: monseratTextFont.copyWith(
+//         //                   color: Colors.white,
+//         //                   fontSize: 13,
+//         //                 ),
+//         //               ),
+//         //               Obx(
+//         //                 () => Skeletonizer(
+//         //                   enabled: applicationControllers.isLoading.value,
+//         //                   child: Text(
+//         //                     '${applicationControllers.accountbillData.value?.customer.name ?? 'Tidak Diketahui'}',
+//         //                     style: monseratTextFont.copyWith(
+//         //                       color: Colors.white,
+//         //                       fontSize: 16,
+//         //                       fontWeight: FontWeight.w600,
+//         //                     ),
+//         //                   ),
+//         //                 ),
+//         //               ),
+//         //             ],
+//         //           ),
+//         //         ),
+//         //       ],
+//         //     ),
+//         //   ),
+//         // ),
+//       ),
+//     );
+//   }
+// }
+
 class HeaderDashboard extends StatelessWidget {
   const HeaderDashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ApplicationControllers applicationControllers =
-        Get.find<ApplicationControllers>();
     return ClipPath(
       clipper: HeaderDashboardClipPath(),
       child: Container(
-        height: 269,
+        height: 150, // tinggi sesuai yang diinginkan
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [Color(0xFF690305), Color(0xFFAC0205)],
-          ),
-        ),
-        child: SafeArea(
-          child: Container(
-            alignment: Alignment.topCenter,
-            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Selamat Datang, ',
-                        style: monseratTextFont.copyWith(
-                          color: Colors.white,
-                          fontSize: 13,
-                        ),
-                      ),
-                      Obx(
-                        () => Skeletonizer(
-                          enabled: applicationControllers.isLoading.value,
-                          child: Text(
-                            '${applicationControllers.accountbillData.value?.customer.name ?? 'Tidak Diketahui'}',
-                            style: monseratTextFont.copyWith(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
       ),

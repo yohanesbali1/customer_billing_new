@@ -12,8 +12,6 @@ class LoginController extends GetxController {
   final passwordController = TextEditingController();
 
   var isLoading = false.obs;
-  OverlayEntry? overlayEntry = null;
-  var password_status = true.obs;
 
   @override
   void onInit() {

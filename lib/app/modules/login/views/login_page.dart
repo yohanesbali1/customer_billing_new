@@ -54,65 +54,27 @@ class LoginPage extends GetView<LoginController> {
                         textAlign: TextAlign.left,
                       ),
                     ),
-                    // Container(
-                    //   margin: const EdgeInsets.only(bottom: 16),
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: [
-                    // CustomFormLabel('Username'),
-                    // Obx(
-                    //   () => CustomFormInput(
-                    //     isLoading: controller.isLoading.value,
-                    //     placeholder: 'Masukkan username anda',
-                    //     validator_input_text: controller.validator_input,
-                    //     controller: controller.usernameController,
-                    //   ),
-                    // ),
-                    CustomFormField(
-                      label: 'Username',
-                      placeholder: 'Masukkan username anda',
-                      controller: controller.usernameController,
-                      validator: controller.validator_input,
-                      type: FormFieldType.text,
-                      isLoading: controller.isLoading.value,
+                    Obx(
+                      () => CustomFormField(
+                        label: 'Username',
+                        placeholder: 'Masukkan username anda',
+                        controller: controller.usernameController,
+                        validator: controller.validator_input,
+                        type: FormFieldType.text,
+                        isLoading: controller.isLoading.value,
+                      ),
                     ),
-                    //     ],
-                    //   ),
-                    // ),
-                    // Container(
-                    //   margin: const EdgeInsets.only(bottom: 16),
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: [
-                    //       // CustomFormLabel('Password'),
-                    //       // Obx(
-                    //       //   () => CustomFormInput(
-                    //       //     status: controller.password_status.value,
-                    //       //     isLoading: controller.isLoading.value,
-                    //       //     placeholder: 'Masukkan password anda',
-                    //       //     validator_input_text: controller.validator_input,
-                    //       //     controller: controller.passwordController,
-                    //       //     change_type: controller.password_status,
-                    //       //   ),
-                    //       // ),
-                    //       // CustomFormField(
-                    //       //   label: 'Password',
-                    //       //   placeholder: 'Masukkan password anda',
-                    //       //   controller: controller.passwordController,
-                    //       //   validator: controller.validator_input,
-                    //       //   type: FormFieldType.password,
-                    //       // ),
-                    CustomFormField(
-                      label: 'Password',
-                      placeholder: 'Masukkan password anda',
-                      controller: controller.passwordController,
-                      validator: controller.validator_input,
-                      type: FormFieldType.password,
-                      isLoading: controller.isLoading.value,
+                    Obx(
+                      () => CustomFormField(
+                        label: 'Password',
+                        placeholder: 'Masukkan password anda',
+                        controller: controller.passwordController,
+                        validator: controller.validator_input,
+                        type: FormFieldType.password,
+                        isLoading: controller.isLoading.value,
+                      ),
                     ),
-                    //     ],
-                    //   ),
-                    // ),
+
                     Container(
                       margin: const EdgeInsets.only(top: 24),
                       width: double.infinity,

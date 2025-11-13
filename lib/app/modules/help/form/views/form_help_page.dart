@@ -1,3 +1,4 @@
+import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/modules/help/form/controllers/help_form_controller.dart';
 import 'package:flutter/material.dart';
@@ -263,19 +264,16 @@ class FormHelpPage extends GetView<HelpFormController> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () async {
-                    // return true;
-                    controller.isLoading.value = true;
-                    print('asd');
-                    if (controller.formkey.currentState!.validate()) {
+                    if (controller.formkey.currentState!.validate() &&
+                        controller.image.value != null) {
                       FocusScope.of(context).unfocus();
                       await controller.submit_data();
+                    } else {
+                      Helper().AlertGetX(
+                        null,
+                        'Cek kembali data yang anda masukkan',
+                      );
                     }
-                    //else {
-                    //   Helper().AlertGetX(
-                    //     null,
-                    //     'Cek kembali data yang anda masukkan',
-                    //   );
-                    // }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: mainColor,

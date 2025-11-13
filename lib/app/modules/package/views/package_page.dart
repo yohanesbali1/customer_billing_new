@@ -19,6 +19,7 @@ class PackagePage extends GetView<PackageController> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
+        backgroundColor: Colors.white,
         title: Text(
           'Kembali',
           style: GoogleFonts.montserrat(
@@ -29,17 +30,26 @@ class PackagePage extends GetView<PackageController> {
         ),
       ),
       body: Obx(() {
+        final data = controller.applicationControllers.accountbillData.value;
         if (controller.isLoading.value) {
           return SkeletonAccountBill();
         }
-        if (controller.applicationControllers.accountbillData.value == null) {
-          return NotFoundPage();
-        }
-        return Container(
-          child: buildInvoiceItem(
-            controller.applicationControllers.accountbillData.value
-                as AccountBillModel,
-            context,
+        return RefreshIndicator(
+          color: mainColor,
+          onRefresh: () async {
+            await controller.applicationControllers.getData();
+          },
+          child: ScrollConfiguration(
+            behavior: ScrollBehavior().copyWith(overscroll: false),
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: data == null
+                  ? SizedBox(
+                      height: MediaQuery.of(context).size.height - 300,
+                      child: NotFoundPage(),
+                    )
+                  : buildInvoiceItem(data as AccountBillModel, context),
+            ),
           ),
         );
       }),
@@ -49,8 +59,7 @@ class PackagePage extends GetView<PackageController> {
   Widget buildInvoiceItem(AccountBillModel data, context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-      child: ListView(
-        padding: EdgeInsets.zero,
+      child: Column(
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 10, top: 20),

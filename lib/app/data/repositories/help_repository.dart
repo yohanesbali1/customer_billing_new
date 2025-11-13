@@ -51,9 +51,9 @@ class HelpRepository {
     }
   }
 
-  Future<dynamic> getTypeHelp() async {
+  Future<List<TypeTopic>> getTypeHelp() async {
     try {
-      final response = await api.delete('/customer/type-complaint');
+      final response = await api.get('/customer/type-complaint');
       return (response['data'] as List)
           .map((e) => TypeTopic.fromJson(e))
           .toList();

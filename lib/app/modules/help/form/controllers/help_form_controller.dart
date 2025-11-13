@@ -48,11 +48,12 @@ class HelpFormController extends GetxController {
   void onInit() {
     super.onInit();
     detailController = Get.find<HelpDetailController>();
-    // getData();
-    // debounce(search, (String value) async {
-    //   await Future.delayed(Duration(milliseconds: 300)); // Optional delay
-    //   getSearch(value);
-    // }, time: Duration(milliseconds: 500));
+    getData();
+    getTypeData();
+    debounce(search, (String value) async {
+      await Future.delayed(Duration(milliseconds: 300)); // Optional delay
+      getSearch(value);
+    }, time: Duration(milliseconds: 500));
   }
 
   @override
@@ -86,7 +87,7 @@ class HelpFormController extends GetxController {
     } catch (e) {
       rethrow;
     } finally {
-      isLoading.value = true;
+      isLoading.value = false;
     }
   }
 

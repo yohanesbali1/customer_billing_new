@@ -23,9 +23,10 @@ class HomePage extends GetView<HomeController> {
           children: [
             Expanded(
               child: PageView(
-                physics: NeverScrollableScrollPhysics(),
+                // physics: const NeverScrollableScrollPhysics(),
                 controller: controller.pagecontroller,
                 onPageChanged: (index) {
+                  controller.change_page(index);
                   // setState(() {
                   //   bottomNavBarIndex = index;
                   // });

@@ -15,6 +15,7 @@ class FAQPage extends GetView<FAQController> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
+        backgroundColor: Colors.white,
         title: Text(
           'Kembali',
           style: GoogleFonts.montserrat(
