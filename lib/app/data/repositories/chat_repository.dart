@@ -6,8 +6,7 @@ class ChatRepository {
 
   ChatRepository({required this.api});
 
-  Future<ChatResponse> getChatData({
-    required String status,
+  Future<ChatResponseModel> getChatData({
     int page = 1,
     int perPage = 10,
     int? id,
@@ -16,7 +15,7 @@ class ChatRepository {
       final response = await api.get(
         '/customer/complaint/$id/chat?page=$page&per_page=$perPage',
       );
-      return ChatResponse.fromJson(response);
+      return ChatResponseModel.fromJson(response);
     } catch (e) {
       rethrow;
     }

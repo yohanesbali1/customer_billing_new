@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'package:vigo_customer_billing/app/data/providers/api_provider.dart';
 
@@ -29,12 +31,24 @@ class HelpRepository {
     }
   }
 
-  Future<dynamic> submitHelp(form) async {
+  Future<dynamic> submitHelp(
+    String id,
+    Map<String, dynamic> form,
+    File? file,
+  ) async {
     try {
-      final response = await api.post(
-        '/customer/complaint${form['id'] == '' ? '' : '/${form['id']}'}',
+      Map<String, String>? files;
+
+      if (file != null) {
+        files = {
+          'img': file.path, // ambil path dari File
+        };
+      }
+
+      await api.post(
+        '/customer/complaint${id == '' ? '' : '/$id'}',
         form,
-        files: form.image,
+        files: files,
       );
       return true;
     } catch (e) {
@@ -44,7 +58,7 @@ class HelpRepository {
 
   Future<dynamic> deleteHelp(dynamic id) async {
     try {
-      final response = await api.delete('/customer/complaint/$id');
+      await api.delete('/customer/complaint/$id');
       return true;
     } catch (e) {
       rethrow;

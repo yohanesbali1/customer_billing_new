@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
@@ -6,7 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:video_player/video_player.dart';
+import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'package:vigo_customer_billing/app/data/repositories/chat_repository.dart';
 
 class HelpChatController extends GetxController {
@@ -28,9 +27,22 @@ class HelpChatController extends GetxController {
   var image = Rxn<File>();
   XFile? videoFile;
 
+  var chat_data = <ChatModel>[].obs;
+  var page_index = 0.obs;
+  var isLoadMore = false.obs;
+  var currentPage = 1.obs;
+  var lastPage = 1.obs;
+  var perPage = 10.obs;
+
   void onInit() {
     super.onInit();
     id.value = Get.parameters['id'] ?? '';
+  }
+
+  void onReady() {
+    super.onReady();
+
+    scrollController.addListener(() => onScroll());
     FirebaseMessaging.onMessage.listen((message) {
       if (message.data != null &&
           message.data['type'] == "ticket_${id.value}") {
@@ -43,22 +55,63 @@ class HelpChatController extends GetxController {
     message.value.clear();
   }
 
-  getData() async {
+  dynamic onScroll() {
+    if (scrollController.position.pixels ==
+            scrollController.position.maxScrollExtent &&
+        !isLoadMore.value) {
+      if (currentPage.value < lastPage.value) {
+        getData(loadMore: true);
+      }
+    }
+  }
+
+  // getData() async {
+  //   try {
+  //     isLoading.value = true;
+  //     data.value = await repository.getChatData(id: id.value, page: page.value);
+  //     WidgetsBinding.instance.addPostFrameCallback((_) {
+  //       if (scrollController.hasClients) {
+  //         scrollController.jumpTo(scrollController.position.maxScrollExtent);
+  //       }
+  //     });
+  //     isLoading.value = false;
+  //   } catch (e) {
+  //     isLoading.value = false;
+  //     String errorMessage = e is String
+  //         ? e
+  //         : 'Maaf ada kesalahan, silahkan coba lagi';
+  //     Helper().AlertGetX(null, errorMessage);
+  //   }
+  // }
+
+  Future<void> getData({bool loadMore = false}) async {
     try {
-      isLoading.value = true;
-      // data.value = await repository.get_chat(id.value, page.value);
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (scrollController.hasClients) {
-          scrollController.jumpTo(scrollController.position.maxScrollExtent);
-        }
-      });
-      isLoading.value = false;
+      if (loadMore && currentPage.value >= lastPage.value) return;
+      // isLoadMore(true);
+      if (loadMore) {
+        isLoadMore.value = true;
+      } else {
+        isLoading.value = true;
+      }
+
+      int _currentPage;
+      _currentPage = loadMore ? currentPage.value + 1 : 1;
+      final response = await repository.getChatData(
+        page: _currentPage,
+        perPage: perPage.value,
+      );
+      if (loadMore) {
+        chat_data.addAll(response.data);
+      } else {
+        chat_data.assignAll(response.data);
+      }
+      currentPage.value = loadMore ? _currentPage : 1;
+      lastPage.value = response.meta?.lastPage ?? 1;
     } catch (e) {
-      isLoading.value = false;
-      String errorMessage = e is String
-          ? e
-          : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertSnackBar();
+    } finally {
+      isLoading(false);
+      isLoadMore(false);
     }
   }
 
@@ -162,90 +215,5 @@ class HelpChatController extends GetxController {
 
     image.value = File(pickedFile.path);
     submit_data(file: true);
-  }
-}
-
-class ChatVideoController extends GetxController {
-  late VideoPlayerController videoController;
-
-  var isPlaying = false.obs;
-  var isInitialized = false.obs;
-  var currentPosition = Duration.zero.obs;
-
-  var showControls = true.obs;
-
-  Timer? _hideTimer;
-
-  ChatVideoController(String url) {
-    videoController = VideoPlayerController.network(url)
-      ..initialize().then((_) {
-        isInitialized.value = true;
-        videoController.addListener(_videoListener);
-        videoController.setLooping(false);
-      });
-  }
-
-  void _videoListener() {
-    if (videoController.value.isInitialized) {
-      currentPosition.value = videoController.value.position;
-
-      if (videoController.value.position >= videoController.value.duration) {
-        if (videoController.value.isPlaying) {
-          videoController.pause();
-        }
-        isPlaying.value = false;
-        showControls.value = true;
-        _hideTimer?.cancel();
-      }
-    }
-  }
-
-  void togglePlayPause() {
-    if (videoController.value.isPlaying) {
-      videoController.pause();
-      isPlaying.value = false;
-      showControls.value = true;
-      _hideTimer?.cancel();
-    } else {
-      if (videoController.value.position >= videoController.value.duration) {
-        videoController.seekTo(Duration.zero).then((_) {
-          videoController.play();
-          isPlaying.value = true;
-          _startHideTimer();
-        });
-      } else {
-        videoController.play();
-        isPlaying.value = true;
-        _startHideTimer();
-      }
-    }
-  }
-
-  void toggleControlsVisibility() {
-    showControls.value = !showControls.value;
-
-    if (showControls.value && isPlaying.value) {
-      _startHideTimer();
-    } else {
-      _hideTimer?.cancel();
-    }
-  }
-
-  void _startHideTimer() {
-    _hideTimer?.cancel();
-    _hideTimer = Timer(const Duration(seconds: 3), () {
-      if (isPlaying.value) {
-        showControls.value = false;
-      }
-    });
-  }
-
-  @override
-  void onClose() {
-    _hideTimer?.cancel();
-    videoController.removeListener(_videoListener);
-    videoController.pause();
-    videoController.dispose();
-    super.onClose();
   }
 }

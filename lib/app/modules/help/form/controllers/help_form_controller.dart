@@ -16,7 +16,9 @@ import 'package:latlong2/latlong.dart';
 class HelpFormController extends GetxController {
   final HelpRepository repository;
   final MapsRepository mapsRepository;
-  late final HelpDetailController detailController;
+  final HelpDetailController detailController =
+      Get.find<HelpDetailController>();
+  final HelpController helpController = Get.find<HelpController>();
   HelpFormController({required this.repository, required this.mapsRepository});
 
   final formkey = GlobalKey<FormState>();
@@ -47,9 +49,7 @@ class HelpFormController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    detailController = Get.find<HelpDetailController>();
-    getData();
-    getTypeData();
+    id.value = Get.parameters['id'] ?? '';
     debounce(search, (String value) async {
       await Future.delayed(Duration(milliseconds: 300)); // Optional delay
       getSearch(value);
@@ -59,6 +59,7 @@ class HelpFormController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    Future.microtask(() => getData());
   }
 
   @override
@@ -67,7 +68,7 @@ class HelpFormController extends GetxController {
     super.onClose();
   }
 
-  clear_form() {
+  void clear_form() {
     addressController.clear();
     phoneController.clear();
     descriptionController.clear();
@@ -93,25 +94,27 @@ class HelpFormController extends GetxController {
 
   Future<dynamic> getData() async {
     try {
-      id.value = Get.parameters['id'] ?? '';
       isLoading.value = true;
-      // if (id.value != '') {
-      //   final HelpModelDetail data = detail_controller.reportData.value!;
-      //   addressController.text = data.address!;
-      //   phoneController.text = data.phone!;
-      //   descriptionController.text = data.description!;
-      //   typeTopicController.text = data.typeTopic!.type!;
-      //   type_topic_value.value = data.typeTopic!;
-      //   var parts = data.maps!.split(',');
-      //   if (parts.length >= 2) {
-      //     mapsController.text = data.maps!;
-      //     await updateLocation(
-      //       LatLng(double.parse(parts[0]), double.parse(parts[1])),
-      //     );
-      //   }
-      // } else {
-      //   await getCurrentLocation();
-      // }
+      Helper().AlertGetX('loading', null);
+      await getTypeData();
+      if (id.value != '') {
+        final HelpModelDetail data = detailController.reportData.value!;
+        addressController.text = data.address!;
+        phoneController.text = data.phone!;
+        descriptionController.text = data.description!;
+        typeTopicController.text = data.typeTopic!.type!;
+        type_topic_value.value = data.typeTopic!;
+        var parts = data.maps!.split(',');
+        if (parts.length >= 2) {
+          mapsController.text = data.maps!;
+          await updateLocation(
+            LatLng(double.parse(parts[0]), double.parse(parts[1])),
+          );
+        }
+      } else {
+        await getCurrentLocation();
+      }
+      Get.back();
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
@@ -126,25 +129,26 @@ class HelpFormController extends GetxController {
     try {
       isLoading(true);
       Helper().AlertGetX('loading', null);
-      var data = {
-        "id": id.value,
-        "form": {
-          'phone': phoneController.text,
-          'address': addressController.text,
-          'maps':
-              "${selectedLocation.value!.latitude},${selectedLocation.value!.longitude}",
-          'type_topic_id': type_topic_value.value!.id.toString(),
-          'description': descriptionController.value.text,
-          'img': image.value,
-        },
+      var form = {
+        'phone': phoneController.text,
+        'address': addressController.text,
+        'maps':
+            "${selectedLocation.value!.latitude},${selectedLocation.value!.longitude}",
+        'type_topic_id': type_topic_value.value!.id.toString(),
+        'description': descriptionController.text,
       };
-      await repository.submitHelp(data);
-      // if (id.value == '') {
-      //   await repository.getHelpData();
-      // } else {
-      //   detail_controller.reportData.value = await HelperProvider()
-      //       .showreportData(id.value);
-      // }
+
+      await repository.submitHelp(
+        id.value,
+        form,
+        image.value, // kirim File di sini
+      );
+      if (id.value == '') {
+        await helpController.getData();
+      } else {
+        await detailController.getData(id.value);
+      }
+      ;
       Get.back();
       await Helper().AlertGetX('success', "Data berhasil disimpan");
       Get.back();
@@ -174,7 +178,6 @@ class HelpFormController extends GetxController {
   Future<dynamic> getCurrentLocation() async {
     try {
       isLoading(true);
-      Helper().AlertGetX('loading', null);
       LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
@@ -189,7 +192,6 @@ class HelpFormController extends GetxController {
         desiredAccuracy: LocationAccuracy.high,
       );
       await updateLocation(LatLng(position.latitude, position.longitude));
-      Get.back();
       isLoading(false);
     } catch (e) {
       Get.back();

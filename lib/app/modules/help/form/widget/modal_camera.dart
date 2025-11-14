@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vigo_customer_billing/app/modules/help/form/controllers/help_form_controller.dart';
 
 class CameraPickerSheet extends StatelessWidget {
-  final dynamic
-  controller; // bisa diganti dengan tipe spesifik kalau kamu punya
+  // bisa diganti dengan tipe spesifik kalau kamu punya
   final Color borderColor;
 
   const CameraPickerSheet({
     Key? key,
-    required this.controller,
     this.borderColor = const Color(0xFFDDDDDD),
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final HelpFormController controller = Get.find<HelpFormController>();
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(

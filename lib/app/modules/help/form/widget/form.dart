@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +6,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/core/widgets/form.dart';
 import 'package:vigo_customer_billing/app/modules/help/form/controllers/help_form_controller.dart';
+import 'package:vigo_customer_billing/app/modules/help/form/widget/modal_camera.dart';
 import 'package:vigo_customer_billing/app/modules/help/form/widget/modal_location.dart';
 import 'package:vigo_customer_billing/app/modules/help/form/widget/modal_type_topic.dart';
 
@@ -20,7 +20,7 @@ class FormHelpWidget extends GetView<HelpFormController> {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.only(bottom: 16),
+            margin: const EdgeInsets.only(bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -49,7 +49,7 @@ class FormHelpWidget extends GetView<HelpFormController> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(bottom: 16),
+            margin: const EdgeInsets.only(bottom: 10),
             child: Obx(
               () => CustomFormField(
                 label: 'Permasalahan',
@@ -63,7 +63,7 @@ class FormHelpWidget extends GetView<HelpFormController> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(bottom: 16),
+            margin: const EdgeInsets.only(bottom: 10),
             child: Obx(
               () => CustomFormField(
                 label: 'No HP',
@@ -76,7 +76,7 @@ class FormHelpWidget extends GetView<HelpFormController> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(bottom: 16),
+            margin: const EdgeInsets.only(bottom: 10),
             child: Obx(
               () => CustomFormField(
                 label: 'Alamat',
@@ -88,26 +88,20 @@ class FormHelpWidget extends GetView<HelpFormController> {
               ),
             ),
           ),
-          // Container(
-          //   margin: const EdgeInsets.only(bottom: 16),
-          //   child: Obx(
-          //     () => CustomFormField(
-          //       label: 'No HP',
-          //       placeholder: 'Masukkan no hp',
-          //       controller: controller.addressController,
-          //       type: FormFieldType.textarea,
-          //       isLoading: controller.isLoading.value,
-          //       validator: (value) => controller.validator_input(value),
-          //     ),
-          //   ),
-          // ),
           Container(
-            margin: const EdgeInsets.only(bottom: 16),
+            margin: const EdgeInsets.only(bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                // CustomFormLabel('Gambar'),
+                Text(
+                  "Gambar",
+                  style: GoogleFonts.montserrat(
+                    color: textPrimaryColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 SizedBox(height: 10),
                 Obx(
                   () => Container(
@@ -126,12 +120,9 @@ class FormHelpWidget extends GetView<HelpFormController> {
                               controller.image.value!,
                               width: double.infinity,
                               height: double.infinity,
-                              fit: BoxFit
-                                  .cover, // Use BoxFit.fill if you want stretching instead
+                              fit: BoxFit.cover,
                             )
-                          :
-                            // Empty state if no image
-                            Column(
+                          : Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
@@ -157,7 +148,19 @@ class FormHelpWidget extends GetView<HelpFormController> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () async {
-                      // showModalMenuCamera();
+                      return showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: false,
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(16),
+                          ),
+                        ),
+                        builder: (context) {
+                          return CameraPickerSheet();
+                        },
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: mainColor,
@@ -178,18 +181,22 @@ class FormHelpWidget extends GetView<HelpFormController> {
                     ),
                   ),
                 ),
-                // ElevatedButton(
-                //     onPressed: controller.pickImage,
-                //     child: Text('test'))
               ],
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(bottom: 16),
+            margin: const EdgeInsets.only(bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // CustomFormLabel('Map'),
+                Text(
+                  "Lokasi",
+                  style: GoogleFonts.montserrat(
+                    color: textPrimaryColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 Obx(() {
                   return SizedBox(
                     height: 300,

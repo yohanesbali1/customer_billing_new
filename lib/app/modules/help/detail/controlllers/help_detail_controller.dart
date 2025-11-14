@@ -3,11 +3,12 @@ import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/data/repositories/help_repository.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vigo_customer_billing/app/modules/help/controllers/help_controller.dart';
 
 class HelpDetailController extends GetxController {
   final HelpRepository repository;
   HelpDetailController({required this.repository});
-
+  final HelpController helpController = Get.find<HelpController>();
   var isLoading = false.obs;
   var id = ''.obs;
   Rxn<HelpModelDetail?> reportData = Rxn<HelpModelDetail?>();
@@ -51,7 +52,8 @@ class HelpDetailController extends GetxController {
       isLoading.value = true;
       Helper().AlertGetX('loading', null);
       await repository.deleteHelp(id.value);
-      // help_controller.report_data.value = await HelperProvider().getData();
+      reportData.value = null;
+      await helpController.getData();
       Get.back();
       await Helper().AlertGetX('success', "Data berhasil dihapus");
       Get.back();

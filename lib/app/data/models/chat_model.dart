@@ -1,13 +1,13 @@
 part of "models.dart";
 
-class ChatResponse {
+class ChatModel {
   final String date;
   final List<Chat> chat;
 
-  ChatResponse({required this.date, required this.chat});
+  ChatModel({required this.date, required this.chat});
 
-  factory ChatResponse.fromJson(Map<String, dynamic> json) {
-    return ChatResponse(
+  factory ChatModel.fromJson(Map<String, dynamic> json) {
+    return ChatModel(
       date: json['date'],
       chat: List<Chat>.from(json['chat'].map((x) => Chat.fromJson(x))),
     );
@@ -61,6 +61,31 @@ class Chat {
       'file': file,
       'is_image': is_image,
       'created_at': createdAt.toIso8601String(),
+    };
+  }
+}
+
+class ChatResponseModel {
+  final List<ChatModel> data;
+  final MetaData? meta;
+
+  ChatResponseModel({required this.data, this.meta});
+
+  factory ChatResponseModel.fromJson(Map<String, dynamic> json) {
+    return ChatResponseModel(
+      data:
+          (json['data'] as List<dynamic>?)
+              ?.map((e) => ChatModel.fromJson(e))
+              .toList() ??
+          [],
+      meta: json['meta'] != null ? MetaData.fromJson(json['meta']) : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data.map((e) => e.toJson()).toList(),
+      'meta': meta?.toJson(),
     };
   }
 }
