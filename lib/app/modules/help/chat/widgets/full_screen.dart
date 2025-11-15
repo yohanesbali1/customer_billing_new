@@ -1,8 +1,7 @@
-import 'package:vigo_customer_billing/app/modules/help/chat/controllers/help_chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
-import 'package:vigo_customer_billing/app/modules/help/chat/controllers/help_chat_controller.dart';
+import 'package:vigo_customer_billing/app/modules/help/chat/controllers/help_chat_video_controller.dart';
 
 enum MediaType { image, video }
 
@@ -26,9 +25,11 @@ class FullscreenMediaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (mediaType == MediaType.video) {
-      final controller = Get.isRegistered<ChatVideoController>(tag: url)
-          ? Get.find<ChatVideoController>(tag: url)
-          : Get.put(ChatVideoController(url), tag: url);
+      // final controller = Get.isRegistered<ChatVideoController>(tag: url)
+      //     ? Get.find<ChatVideoController>(tag: url)
+      //     : Get.put(ChatVideoController(url), tag: url);
+
+      final controller = Get.find<ChatVideoController>(tag: url);
 
       return WillPopScope(
         onWillPop: () async {

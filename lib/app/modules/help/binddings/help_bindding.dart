@@ -17,7 +17,11 @@ class HelpBinding extends Bindings {
     Get.lazyPut<HelpChatController>(
       () => HelpChatController(repository: Get.find()),
     );
+    Get.lazyPut<HelpChatController>(
+      () => HelpChatController(repository: Get.find()),
+    );
     Get.lazyPut<ChatVideoController>(() => ChatVideoController());
+
     Get.lazyPut<HelpDetailController>(
       () => HelpDetailController(repository: Get.find()),
     );
