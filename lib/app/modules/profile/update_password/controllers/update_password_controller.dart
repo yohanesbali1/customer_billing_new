@@ -66,7 +66,7 @@ class UpdatePasswordController extends GetxController {
   update_password() async {
     try {
       isLoading(true);
-      Helper().AlertGetX('loading', null);
+      Helper().AlertGetX(type: 'loading');
       var data = {
         'password': passwordController.text,
         'c_password': cPasswordController.text,
@@ -75,7 +75,10 @@ class UpdatePasswordController extends GetxController {
       await repository.changePassword(data);
       clear_form();
       Get.back();
-      await Helper().AlertGetX('success', "Password berhasil diubah");
+      await Helper().AlertGetX(
+        type: 'success',
+        message: "Password berhasil diubah",
+      );
       Get.back();
       isLoading(false);
     } catch (e) {
@@ -84,7 +87,7 @@ class UpdatePasswordController extends GetxController {
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertGetX(message: errorMessage);
     }
   }
 }

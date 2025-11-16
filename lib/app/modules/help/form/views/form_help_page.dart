@@ -270,8 +270,7 @@ class FormHelpPage extends GetView<HelpFormController> {
                       await controller.submit_data();
                     } else {
                       Helper().AlertGetX(
-                        null,
-                        'Cek kembali data yang anda masukkan',
+                        message: 'Cek kembali data yang anda masukkan',
                       );
                     }
                   },

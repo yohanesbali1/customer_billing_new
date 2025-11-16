@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:vigo_customer_billing/app/data/repositories/chat_repository.dart';
 import 'package:vigo_customer_billing/app/data/repositories/help_repository.dart';
 import 'package:vigo_customer_billing/app/data/repositories/maps_repository.dart';
 import 'package:vigo_customer_billing/app/modules/help/chat/controllers/help_chat_controller.dart';
@@ -12,6 +13,7 @@ class HelpBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<HelpRepository>(() => HelpRepository(api: Get.find()));
     Get.lazyPut<MapsRepository>(() => MapsRepository(api: Get.find()));
+    Get.lazyPut<ChatRepository>(() => ChatRepository(api: Get.find()));
 
     Get.lazyPut<HelpController>(() => HelpController(repository: Get.find()));
     Get.lazyPut<HelpChatController>(
@@ -20,7 +22,9 @@ class HelpBinding extends Bindings {
     Get.lazyPut<HelpChatController>(
       () => HelpChatController(repository: Get.find()),
     );
-    Get.lazyPut<ChatVideoController>(() => ChatVideoController());
+    Get.lazyPut<ChatVideoController>(
+      () => ChatVideoController(Get.arguments['url']),
+    );
 
     Get.lazyPut<HelpDetailController>(
       () => HelpDetailController(repository: Get.find()),

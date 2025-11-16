@@ -29,7 +29,7 @@ class ProfileController extends GetxController {
 
   Future<dynamic> logoutData() async {
     try {
-      Helper().AlertGetX('loading', null);
+      Helper().AlertGetX(type: 'loading');
       await repository.logoutData();
       Get.offAllNamed('/login');
       Get.back();
@@ -38,7 +38,7 @@ class ProfileController extends GetxController {
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertGetX(message: errorMessage);
     }
   }
 }

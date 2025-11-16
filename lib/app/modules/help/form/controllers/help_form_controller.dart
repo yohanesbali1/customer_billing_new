@@ -95,7 +95,7 @@ class HelpFormController extends GetxController {
   Future<dynamic> getData() async {
     try {
       isLoading.value = true;
-      Helper().AlertGetX('loading', null);
+      Helper().AlertGetX(type: 'loading');
       await getTypeData();
       if (id.value != '') {
         final HelpModelDetail data = detailController.reportData.value!;
@@ -121,14 +121,14 @@ class HelpFormController extends GetxController {
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertGetX(message: errorMessage);
     }
   }
 
   Future<dynamic> submit_data() async {
     try {
       isLoading(true);
-      Helper().AlertGetX('loading', null);
+      Helper().AlertGetX(type: 'loading');
       var form = {
         'phone': phoneController.text,
         'address': addressController.text,
@@ -150,7 +150,10 @@ class HelpFormController extends GetxController {
       }
       ;
       Get.back();
-      await Helper().AlertGetX('success', "Data berhasil disimpan");
+      await Helper().AlertGetX(
+        type: 'success',
+        message: "Data berhasil disimpan",
+      );
       Get.back();
       isLoading(false);
     } catch (e) {
@@ -159,7 +162,7 @@ class HelpFormController extends GetxController {
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertGetX(message: errorMessage);
     }
   }
 
@@ -171,7 +174,7 @@ class HelpFormController extends GetxController {
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertGetX(message: errorMessage);
     }
   }
 
@@ -184,7 +187,7 @@ class HelpFormController extends GetxController {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied ||
             permission == LocationPermission.deniedForever) {
-          Helper().AlertGetX(null, 'Aktifkan akses lokasi di pengaturan');
+          Helper().AlertGetX(message: 'Aktifkan akses lokasi di pengaturan');
           return;
         }
       }
@@ -198,7 +201,7 @@ class HelpFormController extends GetxController {
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertGetX(message: errorMessage);
     }
   }
 
@@ -217,7 +220,7 @@ class HelpFormController extends GetxController {
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertGetX(message: errorMessage);
       return [];
     }
   }

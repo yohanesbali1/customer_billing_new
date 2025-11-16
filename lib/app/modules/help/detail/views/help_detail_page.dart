@@ -67,8 +67,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                     MenuItemButton(
                       onPressed: () async {
                         bool confirm = await Helper().AlertGetX(
-                          'question',
-                          null,
+                          type: 'question',
                         );
                         if (confirm) {
                           await controller.deleteData();

@@ -119,37 +119,43 @@ class HelpChatController extends GetxController {
     return value!.isEmpty ? '' : null;
   }
 
-  submit_data({bool file = false}) async {
+  Future<dynamic> submit_data({bool file = false}) async {
     try {
       isLoading(true);
-      Helper().AlertGetX('loading', null);
+      await Helper().AlertGetX(type: 'loading');
+      await Future.delayed(Duration(seconds: 3));
       var payload;
       if (file) {
         payload = {"file": image.value};
       } else {
         payload = {'message': message.value.text};
       }
-      // await HelperProvider().submitChat(payload, id);
-      // await HelperProvider().submitFireStoreChat(result, id.value);
-      await getData();
+      payload['id'] = id.value;
+      await repository.submitChat(payload);
       Get.back();
-      // await Helper().AlertGetX('success', null);
+      await Helper().AlertGetX(
+        type: 'success',
+        message: "Pesan berhasil dikirim",
+      );
       clear_form();
       isLoading(false);
     } catch (e) {
+      print(e);
       Get.back();
       isLoading(false);
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertGetX(message: errorMessage);
+    } finally {
+      image.value = null;
     }
   }
 
   delete_data(payload) async {
     try {
       isLoading(true);
-      Helper().AlertGetX('loading', null);
+      Helper().AlertGetX(type: 'loading');
       var items = {"chat_id": payload};
       // await HelperProvider().deleteChat(items);
       await getData();
@@ -161,7 +167,7 @@ class HelpChatController extends GetxController {
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertGetX(message: errorMessage);
     }
   }
 

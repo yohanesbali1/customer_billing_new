@@ -35,7 +35,7 @@ class LoginController extends GetxController {
   Future<void> submit_login() async {
     try {
       isLoading(true);
-      Helper().AlertGetX('loading', null);
+      Helper().AlertGetX(type: 'loading');
       var data = {
         'username': usernameController.text,
         'password': passwordController.text,
@@ -52,7 +52,7 @@ class LoginController extends GetxController {
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertGetX(message: errorMessage);
     }
   }
 }

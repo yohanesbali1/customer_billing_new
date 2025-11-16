@@ -16,7 +16,7 @@ class Helper {
     return formatter.format(amount);
   }
 
-  AlertGetX(type, message) async {
+  Future<dynamic> AlertGetX({type = "", message = ""}) async {
     switch (type) {
       case "success":
         Get.dialog(

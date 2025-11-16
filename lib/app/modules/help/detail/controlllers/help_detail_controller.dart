@@ -42,7 +42,7 @@ class HelpDetailController extends GetxController {
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertGetX(message: errorMessage);
     }
   }
 
@@ -50,12 +50,15 @@ class HelpDetailController extends GetxController {
   Future<dynamic> deleteData() async {
     try {
       isLoading.value = true;
-      Helper().AlertGetX('loading', null);
+      Helper().AlertGetX(type: 'loading');
       await repository.deleteHelp(id.value);
       reportData.value = null;
       await helpController.getData();
       Get.back();
-      await Helper().AlertGetX('success', "Data berhasil dihapus");
+      await Helper().AlertGetX(
+        type: 'success',
+        message: "Data berhasil dihapus",
+      );
       Get.back();
       isLoading.value = false;
     } catch (e) {
@@ -64,7 +67,7 @@ class HelpDetailController extends GetxController {
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertGetX(message: errorMessage);
     }
   }
 
@@ -73,7 +76,7 @@ class HelpDetailController extends GetxController {
       var parts = data!.maps!.split(',');
       if (parts.length <= 1) {
         String errorMessage = 'Maaf ada kesalahan, silahkan coba lagi';
-        Helper().AlertGetX(null, errorMessage);
+        Helper().AlertGetX(message: errorMessage);
 
         return;
       }
@@ -84,12 +87,12 @@ class HelpDetailController extends GetxController {
 
       if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
         String errorMessage = 'Maaf ada kesalahan, silahkan coba lagi';
-        Helper().AlertGetX(null, errorMessage);
+        Helper().AlertGetX(message: errorMessage);
         return;
       }
     } catch (e) {
       String errorMessage = 'Maaf ada kesalahan, silahkan coba lagi';
-      Helper().AlertGetX(null, errorMessage);
+      Helper().AlertGetX(message: errorMessage);
     }
   }
 }

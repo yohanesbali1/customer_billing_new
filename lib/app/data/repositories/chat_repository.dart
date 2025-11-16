@@ -12,21 +12,28 @@ class ChatRepository {
     int? id,
   }) async {
     try {
+      print('/customer/complaint/$id/chat?page=$page&per_page=$perPage');
       final response = await api.get(
         '/customer/complaint/$id/chat?page=$page&per_page=$perPage',
       );
       return ChatResponseModel.fromJson(response);
     } catch (e) {
+      print(e);
       rethrow;
     }
   }
 
   Future<dynamic> submitChat(form) async {
     try {
+      final imageFile = form['image'];
       await api.post(
-        '/customer/complaint${form['id']}/chat',
+        '/customer/complaint${form['id'] != '' ? '/${form['id']}' : ''}/chat',
         form,
-        files: form.image,
+        files: imageFile == null
+            ? null
+            : {
+                "image": imageFile.path, // pastikan String
+              },
       );
       return true;
     } catch (e) {
