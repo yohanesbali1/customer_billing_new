@@ -64,28 +64,3 @@ class Chat {
     };
   }
 }
-
-class ChatResponseModel {
-  final List<ChatModel> data;
-  final MetaData? meta;
-
-  ChatResponseModel({required this.data, this.meta});
-
-  factory ChatResponseModel.fromJson(Map<String, dynamic> json) {
-    return ChatResponseModel(
-      data:
-          (json['data'] as List<dynamic>?)
-              ?.map((e) => ChatModel.fromJson(e))
-              .toList() ??
-          [],
-      meta: json['meta'] != null ? MetaData.fromJson(json['meta']) : null,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'data': data.map((e) => e.toJson()).toList(),
-      'meta': meta?.toJson(),
-    };
-  }
-}

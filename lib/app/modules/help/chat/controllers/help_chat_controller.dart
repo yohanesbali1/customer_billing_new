@@ -13,7 +13,7 @@ class HelpChatController extends GetxController {
   HelpChatController({required this.repository});
 
   var isLoading = true.obs;
-  var data = [].obs;
+  var data = <ChatModel>[].obs;
   var firebase_data = [].obs;
   var id = ''.obs;
   var page = 1.obs;
@@ -27,7 +27,6 @@ class HelpChatController extends GetxController {
   var image = Rxn<File>();
   XFile? videoFile;
 
-  var chat_data = <ChatModel>[].obs;
   var page_index = 0.obs;
   var isLoadMore = false.obs;
   var currentPage = 1.obs;
@@ -37,6 +36,8 @@ class HelpChatController extends GetxController {
   void onInit() {
     super.onInit();
     id.value = Get.parameters['id'] ?? '';
+    final context = Get.context!;
+    perPage.value = Helper().calculatePerPage(context);
   }
 
   void onReady() {
@@ -86,32 +87,13 @@ class HelpChatController extends GetxController {
 
   Future<void> getData({bool loadMore = false}) async {
     try {
-      if (loadMore && currentPage.value >= lastPage.value) return;
-      // isLoadMore(true);
-      if (loadMore) {
-        isLoadMore.value = true;
-      } else {
-        isLoading.value = true;
-      }
-
-      int _currentPage;
-      _currentPage = loadMore ? currentPage.value + 1 : 1;
-      final response = await repository.getChatData(
-        page: _currentPage,
-        perPage: perPage.value,
-      );
-      if (loadMore) {
-        chat_data.addAll(response.data);
-      } else {
-        chat_data.assignAll(response.data);
-      }
-      currentPage.value = loadMore ? _currentPage : 1;
-      lastPage.value = response.meta?.lastPage ?? 1;
+      isLoading.value = true;
+      final response = await repository.getChatData(id.value);
+      data.assignAll(response);
     } catch (e) {
       Helper().AlertSnackBar();
     } finally {
       isLoading(false);
-      isLoadMore(false);
     }
   }
 
@@ -126,12 +108,14 @@ class HelpChatController extends GetxController {
       await Future.delayed(Duration(seconds: 3));
       var payload;
       if (file) {
-        payload = {"file": image.value};
+        payload = {"image": image.value};
       } else {
         payload = {'message': message.value.text};
       }
       payload['id'] = id.value;
-      await repository.submitChat(payload);
+
+      print(payload);
+      // await repository.submitChat(payload);
       Get.back();
       await Helper().AlertGetX(
         type: 'success',

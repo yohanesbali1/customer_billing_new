@@ -6,35 +6,31 @@ class ChatRepository {
 
   ChatRepository({required this.api});
 
-  Future<ChatResponseModel> getChatData({
-    int page = 1,
-    int perPage = 10,
-    int? id,
-  }) async {
+  Future<List<ChatModel>> getChatData(String id) async {
     try {
-      print('/customer/complaint/$id/chat?page=$page&per_page=$perPage');
-      final response = await api.get(
-        '/customer/complaint/$id/chat?page=$page&per_page=$perPage',
+      final response = await api.get('/customer/complaint/$id/chat');
+      return List<ChatModel>.from(
+        response['data'].map((x) => ChatModel.fromJson(x)),
       );
-      return ChatResponseModel.fromJson(response);
     } catch (e) {
-      print(e);
       rethrow;
     }
   }
 
   Future<dynamic> submitChat(form) async {
     try {
+      print('halo kawan');
+      print(form);
       final imageFile = form['image'];
-      await api.post(
-        '/customer/complaint${form['id'] != '' ? '/${form['id']}' : ''}/chat',
-        form,
-        files: imageFile == null
-            ? null
-            : {
-                "image": imageFile.path, // pastikan String
-              },
-      );
+      // await api.post(
+      //   '/customer/complaint${form['id'] != '' ? '/${form['id']}' : ''}/chat',
+      //   form,
+      //   files: imageFile == null
+      //       ? null
+      //       : {
+      //           "image": imageFile.path, // pastikan String
+      //         },
+      // );
       return true;
     } catch (e) {
       rethrow;
