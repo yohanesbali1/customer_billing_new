@@ -23,9 +23,24 @@ class ChatVideoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<ChatVideoController>(tag: videoUrl);
+    final controller = Get.put(
+      ChatVideoController(videoUrl),
+      tag: videoUrl,
+      permanent: false,
+    );
 
     return Obx(() {
+      if (controller.hasError.value) {
+        return Container(
+          height: 200,
+          alignment: Alignment.center,
+          child: const Text(
+            "Video Not Found",
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
+        );
+      }
+
       if (!controller.isInitialized.value) {
         return const Center(child: CircularProgressIndicator());
       }

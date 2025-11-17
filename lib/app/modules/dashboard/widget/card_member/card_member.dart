@@ -22,7 +22,6 @@ class CardMember extends StatelessWidget {
 
       final data = controller.accountbillData.value;
       if (data == null) {
-        print('gak ada data');
         return NotFoundCardMember();
       }
 

@@ -106,16 +106,14 @@ class HelpChatController extends GetxController {
       isLoading(true);
       await Helper().AlertGetX(type: 'loading');
       await Future.delayed(Duration(seconds: 3));
-      var payload;
+      Map<String, dynamic> payload = {};
       if (file) {
         payload = {"image": image.value};
       } else {
         payload = {'message': message.value.text};
       }
       payload['id'] = id.value;
-
-      print(payload);
-      // await repository.submitChat(payload);
+      await repository.submitChat(payload);
       Get.back();
       await Helper().AlertGetX(
         type: 'success',
@@ -124,7 +122,6 @@ class HelpChatController extends GetxController {
       clear_form();
       isLoading(false);
     } catch (e) {
-      print(e);
       Get.back();
       isLoading(false);
       String errorMessage = e is String

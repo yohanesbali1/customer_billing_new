@@ -73,6 +73,7 @@ class ChatHelpPage extends GetView<HelpChatController> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
+        backgroundColor: Colors.white,
         title: Text(
           'Chat',
           style: GoogleFonts.montserrat(

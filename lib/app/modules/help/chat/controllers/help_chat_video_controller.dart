@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
@@ -8,6 +7,7 @@ class ChatVideoController extends GetxController {
 
   var isPlaying = false.obs;
   var isInitialized = false.obs;
+  var hasError = false.obs;
   var currentPosition = Duration.zero.obs;
 
   var showControls = true.obs;
@@ -15,12 +15,28 @@ class ChatVideoController extends GetxController {
   Timer? _hideTimer;
 
   ChatVideoController(String url) {
-    videoController = VideoPlayerController.network(url)
-      ..initialize().then((_) {
-        isInitialized.value = true;
-        videoController.addListener(_videoListener);
-        videoController.setLooping(false);
+    _initVideo(url);
+  }
+
+  Future<void> _initVideo(String url) async {
+    try {
+      videoController = VideoPlayerController.networkUrl(Uri.parse(url));
+
+      await videoController.initialize().catchError((e) {
+        hasError.value = true;
       });
+
+      if (!videoController.value.isInitialized) {
+        hasError.value = true;
+        return;
+      }
+
+      isInitialized.value = true;
+      videoController.addListener(_videoListener);
+      videoController.setLooping(false);
+    } catch (e) {
+      hasError.value = true;
+    }
   }
 
   void _videoListener() {
@@ -39,6 +55,8 @@ class ChatVideoController extends GetxController {
   }
 
   void togglePlayPause() {
+    if (hasError.value) return;
+
     if (videoController.value.isPlaying) {
       videoController.pause();
       isPlaying.value = false;
@@ -81,9 +99,11 @@ class ChatVideoController extends GetxController {
   @override
   void onClose() {
     _hideTimer?.cancel();
-    videoController.removeListener(_videoListener);
-    videoController.pause();
-    videoController.dispose();
+    if (!hasError.value) {
+      videoController.removeListener(_videoListener);
+      videoController.pause();
+      videoController.dispose();
+    }
     super.onClose();
   }
 }

@@ -145,7 +145,7 @@ class NotificationService {
         Get.toNamed('/chat');
       }
     } catch (e) {
-      print("Gagal parse payload: $e");
+      rethrow;
     }
 
     pendingPayload = null;

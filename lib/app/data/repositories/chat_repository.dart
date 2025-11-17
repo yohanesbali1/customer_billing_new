@@ -19,18 +19,19 @@ class ChatRepository {
 
   Future<dynamic> submitChat(form) async {
     try {
-      print('halo kawan');
-      print(form);
       final imageFile = form['image'];
-      // await api.post(
-      //   '/customer/complaint${form['id'] != '' ? '/${form['id']}' : ''}/chat',
-      //   form,
-      //   files: imageFile == null
-      //       ? null
-      //       : {
-      //           "image": imageFile.path, // pastikan String
-      //         },
-      // );
+      Map<String, String>? files;
+      if (imageFile != null) {
+        files = {
+          'img': imageFile.path, // ambil path dari File
+        };
+      }
+
+      await api.post(
+        '/customer/complaint${form['id'] != '' ? '/${form['id']}' : ''}/chat',
+        form,
+        files: files,
+      );
       return true;
     } catch (e) {
       rethrow;

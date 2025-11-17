@@ -80,40 +80,47 @@ class ListDataChatWidget extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                 ),
                               )
-                            : chat.is_image == true
-                            ? GestureDetector(
-                                onTap: () => {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => FullscreenMediaWidget(
-                                        url: chat.file!,
-                                        mediaType: MediaType.image,
-                                      ),
-                                    ),
-                                  ),
-                                },
-                                child: Image.network(
-                                  chat.file ?? '',
-                                  width: size.width / 2,
-                                  height: size.height / 2,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Center(
-                                      child: Text('Failed to load image'),
-                                    );
-                                  },
-                                  loadingBuilder:
-                                      (context, child, loadingProgress) {
-                                        if (loadingProgress == null)
-                                          return child;
-                                        return Center(
-                                          child: CircularProgressIndicator(),
-                                        );
+                            : chat.file != null
+                            ? chat.is_image == true
+                                  ? GestureDetector(
+                                      onTap: () => {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) =>
+                                                FullscreenMediaWidget(
+                                                  url: chat.file!,
+                                                  mediaType: MediaType.image,
+                                                ),
+                                          ),
+                                        ),
                                       },
-                                ),
-                              )
-                            : ChatVideoWidget(videoUrl: chat.file!),
+                                      child: Image.network(
+                                        chat.file ?? '',
+                                        width: size.width / 2,
+                                        height: size.height / 2,
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                              return Center(
+                                                child: Text(
+                                                  'Failed to load image',
+                                                ),
+                                              );
+                                            },
+                                        loadingBuilder:
+                                            (context, child, loadingProgress) {
+                                              if (loadingProgress == null)
+                                                return child;
+                                              return Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              );
+                                            },
+                                      ),
+                                    )
+                                  : ChatVideoWidget(videoUrl: chat.file!)
+                            : null,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
