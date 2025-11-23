@@ -70,11 +70,7 @@ class HelpChatController extends GetxController {
   //   try {
   //     isLoading.value = true;
   //     data.value = await repository.getChatData(id: id.value, page: page.value);
-  //     WidgetsBinding.instance.addPostFrameCallback((_) {
-  //       if (scrollController.hasClients) {
-  //         scrollController.jumpTo(scrollController.position.maxScrollExtent);
-  //       }
-  //     });
+
   //     isLoading.value = false;
   //   } catch (e) {
   //     isLoading.value = false;
@@ -90,6 +86,11 @@ class HelpChatController extends GetxController {
       isLoading.value = true;
       final response = await repository.getChatData(id.value);
       data.assignAll(response);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (scrollController.hasClients) {
+          scrollController.jumpTo(scrollController.position.maxScrollExtent);
+        }
+      });
     } catch (e) {
       Helper().AlertSnackBar();
     } finally {

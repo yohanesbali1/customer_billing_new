@@ -16,6 +16,7 @@ class ServicePage extends GetView<ServiceController> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
+        backgroundColor: Colors.white,
         title: Text(
           'Kembali',
           style: GoogleFonts.montserrat(

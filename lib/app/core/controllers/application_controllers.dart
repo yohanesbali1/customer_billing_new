@@ -13,15 +13,20 @@ class ApplicationControllers extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    everAll([Get.routing.obs], (_) {
-      final current = Get.currentRoute;
-      final previous = Get.previousRoute;
+    final current = Get.currentRoute;
+    if (current != '/login') {
+      changeToken();
+      getData();
+    }
+    // everAll([Get.routing.obs], (_) {
+    //   final current = Get.currentRoute;
+    //   final previous = Get.previousRoute;
 
-      if (previous == '/login' && current == '/home') {
-        changeToken();
-        getData();
-      }
-    });
+    //   if (previous == '/login' && current == '/home') {
+    //     changeToken();
+    //     getData();
+    //   }
+    // });
   }
 
   Future<void> getData() async {
@@ -45,6 +50,7 @@ class ApplicationControllers extends GetxController {
       await repository.updateDataTokenFCM();
       return true;
     } catch (e) {
+      print('harusnya error');
       Helper().AlertSnackBar();
     }
   }

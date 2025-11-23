@@ -57,168 +57,174 @@ class PackagePage extends GetView<PackageController> {
   }
 
   Widget buildInvoiceItem(AccountBillModel data, context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(bottom: 10, top: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Detail Langganan',
-                  style: GoogleFonts.montserrat(
-                    color: textPrimaryColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 0),
-                Text(
-                  'Informasi langganan layanan anda',
-                  style: GoogleFonts.montserrat(
-                    color: textPrimaryColor,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                  decoration: BoxDecoration(
-                    color: data.status == 'active' ? greenColor : redColor,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Text(
-                    data.status == 'active'
-                        ? 'Langganan Aktif'
-                        : 'Langganan Tidak Aktif',
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height,
+      ),
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(bottom: 10, top: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Detail Langganan',
                     style: GoogleFonts.montserrat(
-                      color: Colors.white,
-                      fontSize: 12,
+                      color: textPrimaryColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 0),
+                  Text(
+                    'Informasi langganan layanan anda',
+                    style: GoogleFonts.montserrat(
+                      color: textPrimaryColor,
+                      fontSize: 13,
                       fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.italic,
                     ),
                   ),
-                ),
-
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'ID pelanggan',
-                            style: GoogleFonts.montserrat(
-                              color: textPrimaryColor,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          Text(
-                            data.customer.code,
-                            style: GoogleFonts.montserrat(
-                              color: textPrimaryColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
+                  const SizedBox(height: 20),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: data.status == 'active' ? greenColor : redColor,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Text(
+                      data.status == 'active'
+                          ? 'Langganan Aktif'
+                          : 'Langganan Tidak Aktif',
+                      style: GoogleFonts.montserrat(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.italic,
                       ),
                     ),
-                    const SizedBox(width: 30),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Jatuh Tempo',
-                            style: GoogleFonts.montserrat(
-                              color: textPrimaryColor,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          Text(
-                            "${DateFormat("d MMMM yyyy").format(data.endDate)}",
-                            style: GoogleFonts.montserrat(
-                              color: textPrimaryColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 10),
-
-                // const SizedBox(height: 20),
-                Text(
-                  'Rincian Langganan',
-                  style: GoogleFonts.montserrat(
-                    color: textPrimaryColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    fontStyle: FontStyle.italic,
                   ),
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  width: double.infinity,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                  const SizedBox(height: 20),
+                  Row(
                     children: [
-                      ListView.separated(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: data.orders.length,
-                        itemBuilder: (context, index) {
-                          final item = data.orders[index];
-                          return Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                color: borderboxColor, // Set the border color
-                                width: 0.5, // Set the border width
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'ID pelanggan',
+                              style: GoogleFonts.montserrat(
+                                color: textPrimaryColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
                               ),
-                              borderRadius: BorderRadius.circular(5.0),
                             ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '${item.productName}',
-                                  style: GoogleFonts.montserrat(
-                                    color: textPrimaryColor,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                              ],
+                            Text(
+                              data.customer.code,
+                              style: GoogleFonts.montserrat(
+                                color: textPrimaryColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) =>
-                            SizedBox(height: 10),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 30),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Jatuh Tempo',
+                              style: GoogleFonts.montserrat(
+                                color: textPrimaryColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            Text(
+                              "${DateFormat("d MMMM yyyy").format(data.endDate)}",
+                              style: GoogleFonts.montserrat(
+                                color: textPrimaryColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
+
+                  const SizedBox(height: 10),
+
+                  // const SizedBox(height: 20),
+                  Text(
+                    'Rincian Langganan',
+                    style: GoogleFonts.montserrat(
+                      color: textPrimaryColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListView.separated(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: data.orders.length,
+                          itemBuilder: (context, index) {
+                            final item = data.orders[index];
+                            return Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                  color: borderboxColor, // Set the border color
+                                  width: 0.5, // Set the border width
+                                ),
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '${item.productName}',
+                                    style: GoogleFonts.montserrat(
+                                      color: textPrimaryColor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                ],
+                              ),
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              SizedBox(height: 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
