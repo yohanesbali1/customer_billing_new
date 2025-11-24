@@ -50,7 +50,6 @@ class ApplicationControllers extends GetxController {
       await repository.updateDataTokenFCM();
       return true;
     } catch (e) {
-      print('harusnya error');
       Helper().AlertSnackBar();
     }
   }

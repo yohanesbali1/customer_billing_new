@@ -7,6 +7,7 @@ class MetaData {
   final int? perPage;
   final int? to;
   final int? total;
+  final int? total_unread;
 
   MetaData({
     this.currentPage,
@@ -15,6 +16,7 @@ class MetaData {
     this.perPage,
     this.to,
     this.total,
+    this.total_unread,
   });
 
   factory MetaData.fromJson(Map<String, dynamic> json) {
@@ -27,6 +29,7 @@ class MetaData {
           : json['per_page'],
       to: json['to'],
       total: json['total'],
+      total_unread: json['total_unread'],
     );
   }
 
@@ -38,6 +41,7 @@ class MetaData {
       'per_page': perPage,
       'to': to,
       'total': total,
+      'total_unread': total_unread,
     };
   }
 }

@@ -11,3 +11,4 @@ part 'help_model.dart';
 part 'map_model.dart';
 part 'meta_model.dart';
 part 'chat_model.dart';
+part 'notification_model.dart';

@@ -66,21 +66,6 @@ class HelpChatController extends GetxController {
     }
   }
 
-  // getData() async {
-  //   try {
-  //     isLoading.value = true;
-  //     data.value = await repository.getChatData(id: id.value, page: page.value);
-
-  //     isLoading.value = false;
-  //   } catch (e) {
-  //     isLoading.value = false;
-  //     String errorMessage = e is String
-  //         ? e
-  //         : 'Maaf ada kesalahan, silahkan coba lagi';
-  //     Helper().AlertGetX(null, errorMessage);
-  //   }
-  // }
-
   Future<void> getData({bool loadMore = false}) async {
     try {
       isLoading.value = true;

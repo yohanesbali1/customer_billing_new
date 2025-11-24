@@ -54,9 +54,43 @@ class DashboardPage extends GetView<DashboardController> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.notifications, color: Colors.white),
-            onPressed: () {},
+          Stack(
+            children: [
+              IconButton(
+                icon: Icon(Icons.notifications, color: Colors.white),
+                onPressed: () {
+                  Get.toNamed('/notification');
+                },
+              ),
+
+              // BADGE
+              Positioned(
+                right: 6,
+                top: 6,
+                child: Obx(() {
+                  int count = 10.obs.value;
+                  if (count == 0) return SizedBox();
+
+                  String displayCount = count > 99 ? "99+" : count.toString();
+
+                  return Container(
+                    padding: EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      displayCount,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ],
           ),
         ],
       ),

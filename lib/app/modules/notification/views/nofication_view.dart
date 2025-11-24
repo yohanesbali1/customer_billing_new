@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/core/widgets/not_found.dart';
 import 'package:vigo_customer_billing/app/modules/notification/controllers/notification_controller.dart';
+import 'package:vigo_customer_billing/app/modules/notification/widgets/list_data_widget.dart';
 
 class NotificationPage extends GetView<NotificationController> {
   const NotificationPage({super.key});
@@ -18,7 +18,7 @@ class NotificationPage extends GetView<NotificationController> {
         scrolledUnderElevation: 0,
         backgroundColor: Colors.white,
         title: Text(
-          'Kembali',
+          'Notifikasi',
           style: GoogleFonts.montserrat(
             color: textPrimaryColor,
             fontSize: 14,
@@ -26,7 +26,7 @@ class NotificationPage extends GetView<NotificationController> {
           ),
         ),
       ),
-      body: NotFoundPage(),
+      body: ListDataNotificationPage(),
     );
   }
 }

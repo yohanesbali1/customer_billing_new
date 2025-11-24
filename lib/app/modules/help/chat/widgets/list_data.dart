@@ -1,14 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
+import 'package:vigo_customer_billing/app/modules/help/chat/controllers/help_chat_controller.dart';
 import 'package:vigo_customer_billing/app/modules/help/chat/widgets/chat_video_widget.dart';
 import 'package:vigo_customer_billing/app/modules/help/chat/widgets/full_screen.dart';
 
-class ListDataChatWidget extends StatelessWidget {
+class ListDataChatWidget extends GetView<HelpChatController> {
   final ChatModel data;
   const ListDataChatWidget({super.key, required this.data});
+
+  void _showDropdownMenu(BuildContext context, Offset position, id) async {
+    final selected = await showMenu(
+      context: context,
+      color: Colors.white,
+      shadowColor: Colors.grey.shade300,
+      position: RelativeRect.fromLTRB(
+        position.dx,
+        position.dy,
+        position.dx + 1,
+        position.dy + 1,
+      ),
+      items: [
+        PopupMenuItem(
+          value: 'delete',
+          height: 10,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.delete, color: textPrimaryColor, size: 14),
+              SizedBox(width: 5),
+              Text(
+                'Delete',
+                style: GoogleFonts.montserrat(
+                  color: textPrimaryColor,
+                  fontSize: 15,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+
+    if (selected == 'delete') {
+      bool confirm = await Helper().AlertGetX(type: 'question');
+      if (confirm) {
+        deleteData(id);
+      }
+    }
+  }
+
+  submitData(BuildContext context) async {
+    if (controller.formkey.currentState!.validate()) {
+      FocusScope.of(context).unfocus();
+      await controller.submit_data();
+    }
+  }
+
+  deleteData(id) async {
+    if (controller.formkey.currentState!.validate()) {
+      await controller.delete_data(id);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +100,7 @@ class ListDataChatWidget extends StatelessWidget {
                     : Alignment.centerLeft,
                 child: GestureDetector(
                   onLongPressStart: (details) {
-                    // _showDropdownMenu(context, details.globalPosition, chat.id);
+                    _showDropdownMenu(context, details.globalPosition, chat.id);
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

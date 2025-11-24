@@ -9,61 +9,6 @@ import 'package:vigo_customer_billing/app/modules/help/chat/widgets/input_chat_w
 import 'package:vigo_customer_billing/app/modules/help/chat/widgets/list_data.dart';
 
 class ChatHelpPage extends GetView<HelpChatController> {
-  void _showDropdownMenu(BuildContext context, Offset position, id) async {
-    final selected = await showMenu(
-      context: context,
-      color: Colors.white,
-      shadowColor: Colors.grey.shade300,
-      position: RelativeRect.fromLTRB(
-        position.dx,
-        position.dy,
-        position.dx + 1,
-        position.dy + 1,
-      ),
-      items: [
-        PopupMenuItem(
-          value: 'delete',
-          height: 10,
-          padding: EdgeInsets.symmetric(vertical: 5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.delete, color: textPrimaryColor, size: 14),
-              SizedBox(width: 5),
-              Text(
-                'Delete',
-                style: GoogleFonts.montserrat(
-                  color: textPrimaryColor,
-                  fontSize: 15,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-
-    if (selected == 'delete') {
-      bool confirm = await Helper().AlertGetX(type: 'question');
-      if (confirm) {
-        deleteData(id);
-      }
-    }
-  }
-
-  submitData(BuildContext context) async {
-    if (controller.formkey.currentState!.validate()) {
-      FocusScope.of(context).unfocus();
-      await controller.submit_data();
-    }
-  }
-
-  deleteData(id) async {
-    if (controller.formkey.currentState!.validate()) {
-      await controller.delete_data(id);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     controller.getData();
