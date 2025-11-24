@@ -1,3 +1,4 @@
+import 'notification_page.dart';
 import 'faq_router.dart';
 import 'invoice_router.dart';
 import 'help_router.dart';
@@ -23,5 +24,6 @@ class AppPages {
     ...PackageRoutes.routes,
     ...ServiceRoutes.routes,
     ...FAQRoutes.routes,
+    ...NotificationRoutes.routes,
   ];
 }
