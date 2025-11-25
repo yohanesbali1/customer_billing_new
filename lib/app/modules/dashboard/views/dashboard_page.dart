@@ -63,17 +63,17 @@ class DashboardPage extends GetView<DashboardController> {
                 },
               ),
 
-              // BADGE
-              Positioned(
-                right: 6,
-                top: 6,
-                child: Obx(() {
-                  int count = 10.obs.value;
-                  if (count == 0) return SizedBox();
+              Obx(() {
+                int count = controller.total_unread.value;
 
-                  String displayCount = count > 99 ? "99+" : count.toString();
+                if (count == 0) return SizedBox();
 
-                  return Container(
+                String displayCount = count > 99 ? "99+" : count.toString();
+
+                return Positioned(
+                  right: 6,
+                  top: 6,
+                  child: Container(
                     padding: EdgeInsets.symmetric(vertical: 2, horizontal: 6),
                     decoration: BoxDecoration(
                       color: Colors.red,
@@ -81,15 +81,15 @@ class DashboardPage extends GetView<DashboardController> {
                     ),
                     child: Text(
                       displayCount,
-                      style: TextStyle(
+                      style: GoogleFonts.montserrat(
                         color: Colors.white,
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  );
-                }),
-              ),
+                  ),
+                );
+              }),
             ],
           ),
         ],
@@ -97,11 +97,9 @@ class DashboardPage extends GetView<DashboardController> {
       body: RefreshIndicator(
         color: mainColor,
         onRefresh: () {
-          return controller.application_c.getData();
-          // WidgetsBinding.instance.addPostFrameCallback((_) {
-          //   controller.getData();
-          // });
-          // return Future.value(true);
+          controller.application_c.getData();
+          controller.getData();
+          return Future.value(true);
         },
         child: ScrollConfiguration(
           behavior: ScrollBehavior().copyWith(overscroll: false),

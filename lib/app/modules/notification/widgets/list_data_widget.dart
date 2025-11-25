@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vigo_customer_billing/app/modules/notification/controllers/notification_controller.dart';
 import 'package:vigo_customer_billing/app/modules/notification/widgets/item_data_widget.dart';
+import 'package:vigo_customer_billing/app/modules/notification/widgets/skeleton_widget.dart';
 
 class ListDataNotificationPage extends GetView<NotificationController> {
   const ListDataNotificationPage({super.key});
@@ -13,7 +14,7 @@ class ListDataNotificationPage extends GetView<NotificationController> {
     return Obx(() {
       final data_report = controller.list_data;
       if (controller.isLoading.value && !controller.isLoadMore.value) {
-        return SkeletonListReport();
+        return SkeletonListNotification();
       }
       return RefreshIndicator(
         color: mainColor,

@@ -3,10 +3,13 @@ import 'package:get/get.dart';
 import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'package:vigo_customer_billing/app/data/repositories/notification_repositoriy.dart';
+import 'package:vigo_customer_billing/app/modules/dashboard/controllers/dashboard_controller.dart';
 
 class NotificationController extends GetxController {
   final NotificationRepositoriy repository;
   NotificationController({required this.repository});
+
+  final dashboard_controller = Get.find<DashboardController>();
 
   var isLoading = false.obs;
   var list_data = <NotificationModel>[].obs;
@@ -21,8 +24,14 @@ class NotificationController extends GetxController {
     final context = Get.context!;
     perPage.value = Helper().calculatePerPage(context);
     getData();
-    readAll();
     scrollController.addListener(() => onScroll());
+  }
+
+  @override
+  void onClose() {
+    super.onReady();
+    readAll();
+    dashboard_controller.total_unread.value = 0;
   }
 
   @override

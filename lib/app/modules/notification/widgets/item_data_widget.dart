@@ -41,17 +41,15 @@ class ItemDataNotification extends GetView<NotificationController> {
             Text(
               data.type,
               style: GoogleFonts.montserrat(
-                color: data.is_read ? textPrimaryColor : Colors.white,
+                color: data.is_read ? textSecondaryColor : Colors.white,
                 fontSize: 14,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
               ),
             ),
-            SizedBox(height: 4),
+            SizedBox(height: 10),
             Text(
               data.title,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
               style: GoogleFonts.montserrat(
                 color: data.is_read ? textPrimaryColor : Colors.white,
                 fontSize: 15,
@@ -61,8 +59,10 @@ class ItemDataNotification extends GetView<NotificationController> {
             SizedBox(height: 5),
             Text(
               data.message,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
               style: GoogleFonts.montserrat(
-                color: data.is_read ? textSecondaryColor : Colors.white,
+                color: data.is_read ? textPrimaryColor : Colors.white,
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),

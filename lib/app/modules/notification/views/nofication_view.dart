@@ -21,7 +21,7 @@ class NotificationPage extends GetView<NotificationController> {
           'Notifikasi',
           style: GoogleFonts.montserrat(
             color: textPrimaryColor,
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
         ),
