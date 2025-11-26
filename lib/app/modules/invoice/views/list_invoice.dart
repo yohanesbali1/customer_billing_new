@@ -51,37 +51,42 @@ class ListInvoicePage extends StatelessWidget {
                   }
                   return false;
                 },
-                child: ListView.builder(
-                  controller: controller.scrollController,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount:
-                      invoices.length + (controller.isLoadMore.value ? 1 : 0),
-                  itemBuilder: (context, index) {
-                    if (index < invoices.length) {
-                      return ListDataInovicePage(
-                        data: invoices[index],
-                        controller: controller,
-                      );
-                    } else {
-                      // 🎨 STYLE LOADINGNYA DI SINI
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Column(
-                          children: [
-                            // indikator bulat dengan warna utama
-                            SizedBox(
-                              height: 28,
-                              width: 28,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 3,
-                                valueColor: AlwaysStoppedAnimation(mainColor),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height,
+                  ),
+                  child: ListView.builder(
+                    controller: controller.scrollController,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemCount:
+                        invoices.length + (controller.isLoadMore.value ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index < invoices.length) {
+                        return ListDataInovicePage(
+                          data: invoices[index],
+                          controller: controller,
+                        );
+                      } else {
+                        // 🎨 STYLE LOADINGNYA DI SINI
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Column(
+                            children: [
+                              // indikator bulat dengan warna utama
+                              SizedBox(
+                                height: 28,
+                                width: 28,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 3,
+                                  valueColor: AlwaysStoppedAnimation(mainColor),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-                  },
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                  ),
                 ),
               ),
       );

@@ -30,33 +30,39 @@ class ListDataNotificationPage extends GetView<NotificationController> {
                   child: NotFoundPage(),
                 ),
               )
-            : ListView.builder(
-                shrinkWrap: true,
-                controller: controller.scrollController,
-                physics: const AlwaysScrollableScrollPhysics(),
-                itemCount:
-                    data_report.length + (controller.isLoadMore.value ? 1 : 0),
-                itemBuilder: (context, index) {
-                  if (index < data_report.length) {
-                    return ItemDataNotification(data: data_report[index]);
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 28,
-                            width: 28,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 3,
-                              valueColor: AlwaysStoppedAnimation(mainColor),
+            : ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height,
+                ),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  controller: controller.scrollController,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount:
+                      data_report.length +
+                      (controller.isLoadMore.value ? 1 : 0),
+                  itemBuilder: (context, index) {
+                    if (index < data_report.length) {
+                      return ItemDataNotification(data: data_report[index]);
+                    } else {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 28,
+                              width: 28,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 3,
+                                valueColor: AlwaysStoppedAnimation(mainColor),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                },
+                          ],
+                        ),
+                      );
+                    }
+                  },
+                ),
               ),
       );
     });

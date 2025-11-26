@@ -23,7 +23,7 @@ class AuthRepository {
 
   Future<dynamic> changePassword(form) async {
     try {
-      final response = await api.post('/customer/auth/change-password', form);
+      await api.post('/customer/auth/change-password', form);
       return true;
     } catch (e) {
       rethrow;

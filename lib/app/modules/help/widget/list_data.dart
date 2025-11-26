@@ -29,36 +29,52 @@ class ListDataReportPage extends StatelessWidget {
                   child: NotFoundPage(),
                 ),
               )
-            : ListView.builder(
-                shrinkWrap: true,
-                controller: controller.scrollController,
-                physics: const AlwaysScrollableScrollPhysics(),
-                itemCount:
-                    data_report.length + (controller.isLoadMore.value ? 1 : 0),
-                itemBuilder: (context, index) {
-                  if (index < data_report.length) {
-                    return ItemHelp(
-                      data: data_report[index],
-                      controller: controller,
-                    );
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 28,
-                            width: 28,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 3,
-                              valueColor: AlwaysStoppedAnimation(mainColor),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
+            : NotificationListener<ScrollNotification>(
+                onNotification: (scrollInfo) {
+                  if (scrollInfo.metrics.pixels ==
+                          scrollInfo.metrics.maxScrollExtent &&
+                      !controller.isLoadMore.value) {
+                    controller.getData(loadMore: true);
                   }
+                  return false;
                 },
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height,
+                  ),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    controller: controller.scrollController,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemCount:
+                        data_report.length +
+                        (controller.isLoadMore.value ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index < data_report.length) {
+                        return ItemHelp(
+                          data: data_report[index],
+                          controller: controller,
+                        );
+                      } else {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 28,
+                                width: 28,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 3,
+                                  valueColor: AlwaysStoppedAnimation(mainColor),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ),
               ),
       );
     });
