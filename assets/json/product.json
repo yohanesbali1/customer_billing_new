@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "name": "Beef Lasagna",
+    "price": 65000,
+    "category_id": 1,
+    "type": "dine_in"
+  },
+  {
+    "id": 2,
+    "name": "Chicken Alfredo Pasta",
+    "price": 72000,
+    "category_id": 1,
+    "type": "dine_in"
+  },
+  {
+    "id": 3,
+    "name": "Classic Caesar Salad",
+    "price": 58000,
+    "category_id": 2,
+    "type": "takeaway"
+  },
+  {
+    "id": 4,
+    "name": "Smoked Salmon Salad",
+    "price": 85000,
+    "category_id": 2,
+    "type": "dine_in"
+  },
+  {
+    "id": 5,
+    "name": "Creamy Mushroom Soup",
+    "price": 55000,
+    "category_id": 3,
+    "type": "dine_in"
+  },
+  {
+    "id": 6,
+    "name": "French Onion Soup",
+    "price": 60000,
+    "category_id": 3,
+    "type": "takeaway"
+  },
+  {
+    "id": 7,
+    "name": "Grilled Ribeye Steak",
+    "price": 180000,
+    "category_id": 4,
+    "type": "dine_in"
+  },
+  {
+    "id": 8,
+    "name": "Grilled BBQ Chicken",
+    "price": 120000,
+    "category_id": 4,
+    "type": "dine_in"
+  },
+  {
+    "id": 9,
+    "name": "Garlic Bread",
+    "price": 50000,
+    "category_id": 5,
+    "type": "takeaway"
+  },
+  {
+    "id": 10,
+    "name": "Mozzarella Sticks",
+    "price": 65000,
+    "category_id": 5,
+    "type": "dine_in"
+  },
+  {
+    "id": 11,
+    "name": "Chocolate Lava Cake",
+    "price": 70000,
+    "category_id": 6,
+    "type": "dine_in"
+  },
+  {
+    "id": 12,
+    "name": "Classic Cheesecake",
+    "price": 75000,
+    "category_id": 6,
+    "type": "takeaway"
+  }
+]

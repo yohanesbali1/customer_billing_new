@@ -17,30 +17,33 @@ class HomePage extends GetView<HomeController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      body: Container(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: PageView(
-                // physics: const NeverScrollableScrollPhysics(),
-                controller: controller.pagecontroller,
-                onPageChanged: (index) {
-                  controller.change_page(index);
-                  // setState(() {
-                  //   bottomNavBarIndex = index;
-                  // });
-                },
-                children: <Widget>[
-                  DashboardPage(),
-                  InvoicePage(),
-                  HelpPage(),
-                  ProfilePage(),
-                ],
+      body: SafeArea(
+        top: false,
+        child: Container(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Expanded(
+                child: PageView(
+                  // physics: const NeverScrollableScrollPhysics(),
+                  controller: controller.pagecontroller,
+                  onPageChanged: (index) {
+                    controller.change_page(index);
+                    // setState(() {
+                    //   bottomNavBarIndex = index;
+                    // });
+                  },
+                  children: <Widget>[
+                    DashboardPage(),
+                    InvoicePage(),
+                    HelpPage(),
+                    ProfilePage(),
+                  ],
+                ),
               ),
-            ),
-            createCustomBottomNavBar(),
-          ],
+              createCustomBottomNavBar(),
+            ],
+          ),
         ),
       ),
     );

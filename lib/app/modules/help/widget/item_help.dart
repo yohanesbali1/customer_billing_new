@@ -42,21 +42,21 @@ class ItemHelp extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: controller.change_status(
-                      data.status.status,
+                      data.currentStatusType,
                     )['color'],
                   ),
                   child: Icon(
-                    controller.change_status(data.status.status)['icon'],
+                    controller.change_status(data.currentStatusType)['icon'],
                     color: Colors.white,
                     size: 14,
                   ),
                 ),
                 SizedBox(width: 5),
                 Text(
-                  data.status.description,
+                  data.currentStatusLabel,
                   style: GoogleFonts.montserrat(
                     color: controller.change_status(
-                      data.status.status,
+                      data.currentStatusType,
                     )['color'],
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -84,7 +84,7 @@ class ItemHelp extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    data.typeTopic.type,
+                    data.disorderCategory.name,
                     style: GoogleFonts.montserrat(
                       color: textSecondaryColor,
                       fontSize: 13,

@@ -131,7 +131,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                   ),
                 )
               : buildReportItem(
-                  controller.reportData.value as HelpModelDetail,
+                  controller.reportData.value as HelpModel,
                   context,
                 ),
         );
@@ -139,7 +139,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
     );
   }
 
-  Widget buildReportItem(HelpModelDetail data, context) {
+  Widget buildReportItem(HelpModel data, context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: defaultMargin, vertical: 20),
       child: ListView(
@@ -184,7 +184,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                               textAlign: TextAlign.left,
                             ),
                             Text(
-                              data.num_topic,
+                              data.noTicket,
                               style: GoogleFonts.montserrat(
                                 color: textPrimaryColor,
                                 fontSize: 13,
@@ -212,7 +212,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                               textAlign: TextAlign.start,
                             ),
                             Text(
-                              data.typeTopic.type,
+                              data.disorderCategory.name,
                               style: GoogleFonts.montserrat(
                                 color: textPrimaryColor,
                                 fontSize: 13,
