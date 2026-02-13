@@ -366,7 +366,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
-                        child: data.img != null
+                        child: data.attachmentUrl != null
                             ? GestureDetector(
                                 onTap: () {
                                   Get.dialog(
@@ -380,7 +380,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                                               child:
                                                   // Image.network(data.img),
                                                   Image.network(
-                                                    data.img,
+                                                    data.attachmentUrl ?? '',
                                                     width: double.infinity,
                                                     height: double.infinity,
                                                     fit: BoxFit.cover,
@@ -432,7 +432,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                                   );
                                 },
                                 child: Image.network(
-                                  data.img,
+                                  data.attachmentUrl ?? '',
                                   width: double.infinity,
                                   height: double.infinity,
                                   fit: BoxFit.cover,
@@ -493,7 +493,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        data.status[index].description,
+                        data.status[index].label,
                         style: GoogleFonts.montserrat(
                           color: textPrimaryColor,
                           fontSize: 15,
@@ -505,7 +505,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                       Text(
                         DateFormat(
                           "d MMMM yyyy",
-                        ).format(data.status[index].time),
+                        ).format(data.status[index].createdAt),
                         style: GoogleFonts.montserrat(
                           color: textSecondaryColor,
                           fontSize: 15,

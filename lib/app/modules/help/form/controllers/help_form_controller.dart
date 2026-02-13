@@ -27,7 +27,7 @@ class HelpFormController extends GetxController {
   var isoptionLoading = false.obs;
   var id = ''.obs;
 
-  Rxn<TypeTopic?> type_topic_value = Rxn<TypeTopic?>();
+  Rxn<DisorderCategory?> type_topic_value = Rxn<DisorderCategory?>();
   int type_topic_select = 0;
 
   var addressController = TextEditingController();
@@ -36,7 +36,7 @@ class HelpFormController extends GetxController {
   var descriptionController = TextEditingController();
   var mapsController = TextEditingController();
 
-  var type_topic_data = <TypeTopic>[].obs;
+  var type_topic_data = <DisorderCategory>[].obs;
 
   var currentPosition = Rxn<Position>();
   Rxn<LatLng> selectedLocation = Rxn<LatLng>();
@@ -98,12 +98,12 @@ class HelpFormController extends GetxController {
       Helper().AlertGetX(type: 'loading');
       await getTypeData();
       if (id.value != '') {
-        final HelpModelDetail data = detailController.reportData.value!;
+        final HelpModel data = detailController.reportData.value!;
         addressController.text = data.address!;
-        phoneController.text = data.phone!;
+        phoneController.text = data.noTelp!;
         descriptionController.text = data.description!;
-        typeTopicController.text = data.typeTopic!.type!;
-        type_topic_value.value = data.typeTopic!;
+        typeTopicController.text = data.disorderCategory!.type!;
+        type_topic_value.value = data.disorderCategory!;
         var parts = data.maps!.split(',');
         if (parts.length >= 2) {
           mapsController.text = data.maps!;

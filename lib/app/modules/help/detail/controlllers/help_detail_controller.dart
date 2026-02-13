@@ -11,7 +11,7 @@ class HelpDetailController extends GetxController {
   final HelpController helpController = Get.find<HelpController>();
   var isLoading = false.obs;
   var id = ''.obs;
-  Rxn<HelpModelDetail?> reportData = Rxn<HelpModelDetail?>();
+  Rxn<HelpModel?> reportData = Rxn<HelpModel?>();
 
   @override
   void onInit() {

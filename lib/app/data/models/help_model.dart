@@ -7,7 +7,7 @@ class HelpModel {
   final String description;
   final String unit;
   final String complaint;
-  final String requestDate;
+  final DateTime requestDate;
   final List<HelpStatus> status;
   final HelpStatus currentStatus;
   final String currentStatusType;
@@ -17,11 +17,13 @@ class HelpModel {
   final String noTelp;
   final String? attachmentUrl;
   final DateTime createdAt;
-  final String updatedAt;
+  final DateTime updatedAt;
   final User user;
   final CreatedBy createdBy;
   final DisorderCategory disorderCategory;
   final Officer? officer;
+  final String address;
+  final String maps;
 
   HelpModel({
     required this.id,
@@ -45,6 +47,8 @@ class HelpModel {
     required this.createdBy,
     required this.disorderCategory,
     this.officer,
+    required this.address,
+    required this.maps,
   });
 
   factory HelpModel.fromJson(Map<String, dynamic> json) {
@@ -72,6 +76,8 @@ class HelpModel {
       createdBy: CreatedBy.fromJson(json['created_by']),
       disorderCategory: DisorderCategory.fromJson(json['disorder_category']),
       officer: Officer.fromJson(json['officer']),
+      address: json['address'],
+      maps: json['maps'],
     );
   }
 
@@ -98,13 +104,15 @@ class HelpModel {
       'created_by': createdBy.toJson(),
       'disorder_category': disorderCategory.toJson(),
       'officer': officer?.toJson(),
+      'address': address,
+      'maps': maps,
     };
   }
 }
 
 class HelpStatus {
   final String label;
-  final String createdAt;
+  final DateTime createdAt;
   final UserApprove userApprove;
   final String status;
 
@@ -261,6 +269,31 @@ class Officer {
       'name': name,
       'department': department,
       'position': position,
+    };
+  }
+}
+
+class HelpResponseModel {
+  final List<HelpModel> data;
+  final MetaData? meta;
+
+  HelpResponseModel({required this.data, this.meta});
+
+  factory HelpResponseModel.fromJson(Map<String, dynamic> json) {
+    return HelpResponseModel(
+      data:
+          (json['data'] as List<dynamic>?)
+              ?.map((e) => HelpModel.fromJson(e))
+              .toList() ??
+          [],
+      meta: json['meta'] != null ? MetaData.fromJson(json['meta']) : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data.map((e) => e.toJson()).toList(),
+      'meta': meta?.toJson(),
     };
   }
 }

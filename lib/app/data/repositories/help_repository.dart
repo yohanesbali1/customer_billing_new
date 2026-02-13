@@ -22,10 +22,10 @@ class HelpRepository {
     }
   }
 
-  Future<HelpModelDetail?> showHelpData(dynamic id) async {
+  Future<HelpModel?> showHelpData(dynamic id) async {
     try {
       final response = await api.get('/customer/complaint/$id');
-      return HelpModelDetail.fromJson(response['data']);
+      return HelpModel.fromJson(response['data']);
     } catch (e) {
       rethrow;
     }
@@ -65,11 +65,11 @@ class HelpRepository {
     }
   }
 
-  Future<List<TypeTopic>> getTypeHelp() async {
+  Future<List<DisorderCategory>> getTypeHelp() async {
     try {
       final response = await api.get('/customer/type-complaint');
       return (response['data'] as List)
-          .map((e) => TypeTopic.fromJson(e))
+          .map((e) => DisorderCategory.fromJson(e))
           .toList();
     } catch (e) {
       rethrow;
