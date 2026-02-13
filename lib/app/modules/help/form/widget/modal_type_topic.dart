@@ -41,7 +41,7 @@ class ModalTypeTopic extends GetView<HelpFormController> {
                   children: controller.type_topic_data.map((item) {
                     return Center(
                       child: Text(
-                        item.type,
+                        item.name,
                         style: GoogleFonts.montserrat(
                           color: textPrimaryColor,
                           fontSize: 14,

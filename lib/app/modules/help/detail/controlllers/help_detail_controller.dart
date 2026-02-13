@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/data/repositories/help_repository.dart';
@@ -93,6 +94,22 @@ class HelpDetailController extends GetxController {
     } catch (e) {
       String errorMessage = 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(message: errorMessage);
+    }
+  }
+
+  Map<String, dynamic> statusIcon(String status) {
+    switch (status) {
+      case 'progress':
+        return {
+          "icon": Icons.pending_actions_outlined,
+          "color": Colors.yellow[700],
+        };
+      case 'approved':
+        return {"icon": Icons.check_outlined, "color": Colors.green[700]};
+      case 'rejected':
+        return {"icon": Icons.error_outline, "color": Colors.red[700]};
+      default:
+        return {"icon": Icons.help_outline, "color": Colors.grey[700]};
     }
   }
 }

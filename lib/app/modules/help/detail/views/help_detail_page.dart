@@ -3,6 +3,8 @@ import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/core/widgets/not_found.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'package:vigo_customer_billing/app/modules/help/detail/controlllers/help_detail_controller.dart';
+import 'package:vigo_customer_billing/app/modules/help/detail/views/widget/image_widget.dart';
+import 'package:vigo_customer_billing/app/modules/help/detail/views/widget/status_widget.dart';
 import 'package:vigo_customer_billing/app/modules/help/widget/skeleton_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -119,8 +121,6 @@ class DetailHelpPage extends GetView<HelpDetailController> {
           onRefresh: () async {
             final String id = Get.parameters['id'] ?? '';
             if (id.isNotEmpty) return await controller.getData(id);
-            // Future.microtask(() => controller.getData());
-            // return Future.value(true);
           },
           child: data == null
               ? SingleChildScrollView(
@@ -232,7 +232,6 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                   children: [
                     Expanded(
                       child: Container(
-                        // width: MediaQuery.of(context).size.width * 0.7,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -260,7 +259,6 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                     ),
                     Expanded(
                       child: Container(
-                        // width: MediaQuery.of(context).size.width * 0.3,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -300,7 +298,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Permasalahaan',
+                      'Deskripsi',
                       style: GoogleFonts.montserrat(
                         color: textSecondaryColor,
                         fontSize: 13,
@@ -324,6 +322,30 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
+                      'Komplain',
+                      style: GoogleFonts.montserrat(
+                        color: textSecondaryColor,
+                        fontSize: 13,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                    Text(
+                      data.complaint,
+                      style: GoogleFonts.montserrat(
+                        color: textPrimaryColor,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
                       'Detail Alamat ',
                       style: GoogleFonts.montserrat(
                         color: textSecondaryColor,
@@ -332,7 +354,55 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                       textAlign: TextAlign.left,
                     ),
                     Text(
-                      data.address,
+                      data?.address ?? '',
+                      style: GoogleFonts.montserrat(
+                        color: textPrimaryColor,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Petugas',
+                      style: GoogleFonts.montserrat(
+                        color: textSecondaryColor,
+                        fontSize: 13,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                    Text(
+                      data?.officer?.name ?? 'Tidak ada petugas',
+                      style: GoogleFonts.montserrat(
+                        color: textPrimaryColor,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Unit',
+                      style: GoogleFonts.montserrat(
+                        color: textSecondaryColor,
+                        fontSize: 13,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                    Text(
+                      data?.unit ?? '-',
                       style: GoogleFonts.montserrat(
                         color: textPrimaryColor,
                         fontSize: 13,
@@ -355,105 +425,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
                       ),
                       textAlign: TextAlign.left,
                     ),
-                    Container(
-                      height: 250,
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: borderboxColor, width: 0.5),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: data.attachmentUrl != null
-                            ? GestureDetector(
-                                onTap: () {
-                                  Get.dialog(
-                                    Stack(
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.all(20),
-                                          color: Colors.black.withOpacity(0.2),
-                                          child: SizedBox.expand(
-                                            child: InteractiveViewer(
-                                              child:
-                                                  // Image.network(data.img),
-                                                  Image.network(
-                                                    data.attachmentUrl ?? '',
-                                                    width: double.infinity,
-                                                    height: double.infinity,
-                                                    fit: BoxFit.cover,
-                                                    errorBuilder:
-                                                        (
-                                                          context,
-                                                          error,
-                                                          stackTrace,
-                                                        ) {
-                                                          return Center(
-                                                            child: Text(
-                                                              'Failed to load image',
-                                                            ),
-                                                          );
-                                                        },
-                                                    loadingBuilder:
-                                                        (
-                                                          context,
-                                                          child,
-                                                          loadingProgress,
-                                                        ) {
-                                                          if (loadingProgress ==
-                                                              null)
-                                                            return child;
-                                                          return Center(
-                                                            child:
-                                                                CircularProgressIndicator(),
-                                                          );
-                                                        },
-                                                  ),
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          top: 0,
-                                          right: 0,
-                                          child: IconButton(
-                                            icon: Icon(
-                                              Icons.close,
-                                              color: Colors.white,
-                                              size: 25,
-                                            ),
-                                            onPressed: () => Get.back(),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    barrierDismissible: true,
-                                  );
-                                },
-                                child: Image.network(
-                                  data.attachmentUrl ?? '',
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Center(
-                                      child: Text('Failed to load image'),
-                                    );
-                                  },
-                                  loadingBuilder:
-                                      (context, child, loadingProgress) {
-                                        if (loadingProgress == null)
-                                          return child;
-                                        return Center(
-                                          child: CircularProgressIndicator(),
-                                        );
-                                      },
-                                ),
-                              )
-                            : Text('-'),
-                      ),
-                    ),
+                    ImageWidget(data: data),
                   ],
                 ),
               ],
@@ -469,59 +441,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
             textAlign: TextAlign.start,
           ),
           SizedBox(height: 16),
-          ListView.separated(
-            shrinkWrap: true,
-            physics:
-                NeverScrollableScrollPhysics(), // prevent inner scroll conflict
-            padding: EdgeInsets.zero,
-            itemCount: data != null ? data.status.length : 0,
-            itemBuilder: (BuildContext context, int index) => Container(
-              child: Row(
-                children: [
-                  Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(Icons.check, color: Colors.white, size: 15),
-                  ),
-                  SizedBox(width: 10),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        data.status[index].label,
-                        style: GoogleFonts.montserrat(
-                          color: textPrimaryColor,
-                          fontSize: 15,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                      Text(
-                        DateFormat(
-                          "d MMMM yyyy",
-                        ).format(data.status[index].createdAt),
-                        style: GoogleFonts.montserrat(
-                          color: textSecondaryColor,
-                          fontSize: 15,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            separatorBuilder: (BuildContext context, int index) =>
-                SizedBox(height: 10),
-          ),
+          StatusWidget(data: data),
           SizedBox(height: 28),
           ElevatedButton(
             style: ElevatedButton.styleFrom(

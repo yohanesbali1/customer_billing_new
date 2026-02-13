@@ -21,6 +21,20 @@ class FormHelpWidget extends GetView<HelpFormController> {
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 10),
+            child: Obx(
+              () => CustomFormField(
+                label: 'Judul',
+                placeholder: 'Masukkan Judul',
+                controller: controller.descriptionController,
+                type: FormFieldType.text,
+                disabled: false,
+                isLoading: controller.isLoading.value,
+                validator: (value) => controller.validator_input(value),
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -56,6 +70,20 @@ class FormHelpWidget extends GetView<HelpFormController> {
                 placeholder: 'Masukkan permasalahan',
                 controller: controller.descriptionController,
                 type: FormFieldType.textarea,
+                disabled: false,
+                isLoading: controller.isLoading.value,
+                validator: (value) => controller.validator_input(value),
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(bottom: 10),
+            child: Obx(
+              () => CustomFormField(
+                label: 'Unit',
+                placeholder: 'Masukkan Unit',
+                controller: controller.descriptionController,
+                type: FormFieldType.text,
                 disabled: false,
                 isLoading: controller.isLoading.value,
                 validator: (value) => controller.validator_input(value),

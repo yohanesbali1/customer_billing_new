@@ -30,9 +30,13 @@ class HelpFormController extends GetxController {
   Rxn<DisorderCategory?> type_topic_value = Rxn<DisorderCategory?>();
   int type_topic_select = 0;
 
+  var titleController = TextEditingController();
+  var unitController = TextEditingController();
   var addressController = TextEditingController();
   var phoneController = TextEditingController();
   var typeTopicController = TextEditingController();
+  var complaintController = TextEditingController();
+  var requestDateController = TextEditingController();
   var descriptionController = TextEditingController();
   var mapsController = TextEditingController();
 
@@ -114,14 +118,16 @@ class HelpFormController extends GetxController {
       } else {
         await getCurrentLocation();
       }
-      Get.back();
       isLoading.value = false;
     } catch (e) {
+      print(e);
       isLoading.value = false;
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(message: errorMessage);
+    } finally {
+      if (Get.isDialogOpen ?? false) Get.back();
     }
   }
 
@@ -169,7 +175,7 @@ class HelpFormController extends GetxController {
   Future<dynamic> select_type_data() async {
     try {
       type_topic_value.value = type_topic_data.value[type_topic_select];
-      typeTopicController.text = type_topic_value.value!.type.toString();
+      typeTopicController.text = type_topic_value.value!.name.toString();
     } catch (e) {
       String errorMessage = e is String
           ? e

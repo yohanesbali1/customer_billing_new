@@ -22,8 +22,8 @@ class HelpModel {
   final CreatedBy createdBy;
   final DisorderCategory disorderCategory;
   final Officer? officer;
-  final String address;
-  final String maps;
+  final String? address;
+  final String? maps;
 
   HelpModel({
     required this.id,
@@ -47,8 +47,8 @@ class HelpModel {
     required this.createdBy,
     required this.disorderCategory,
     this.officer,
-    required this.address,
-    required this.maps,
+    this.address,
+    this.maps,
   });
 
   factory HelpModel.fromJson(Map<String, dynamic> json) {
@@ -59,7 +59,7 @@ class HelpModel {
       description: json['description'],
       unit: json['unit'],
       complaint: json['complaint'],
-      requestDate: json['request_date'],
+      requestDate: DateTime.parse(json['request_date']),
       status: (json['status'] as List)
           .map((e) => HelpStatus.fromJson(e))
           .toList(),
@@ -70,12 +70,14 @@ class HelpModel {
       priorityLabel: json['priority_label'],
       noTelp: json['no_telp'],
       attachmentUrl: json['attachment_url'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
+      createdAt: DateTime.parse(json['created_at']),
+      updatedAt: DateTime.parse(json['updated_at']),
       user: User.fromJson(json['user']),
       createdBy: CreatedBy.fromJson(json['created_by']),
       disorderCategory: DisorderCategory.fromJson(json['disorder_category']),
-      officer: Officer.fromJson(json['officer']),
+      officer: json['officer'] == null
+          ? null
+          : Officer.fromJson(json['officer']),
       address: json['address'],
       maps: json['maps'],
     );
@@ -126,7 +128,7 @@ class HelpStatus {
   factory HelpStatus.fromJson(Map<String, dynamic> json) {
     return HelpStatus(
       label: json['label'],
-      createdAt: json['created_at'],
+      createdAt: DateTime.parse(json['created_at']),
       userApprove: UserApprove.fromJson(json['user_approve']),
       status: json['status'],
     );
