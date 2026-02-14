@@ -1,5 +1,7 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/core/widgets/form.dart';
+import 'package:vigo_customer_billing/app/core/widgets/form_old.dart';
+import 'package:vigo_customer_billing/app/core/widgets/from.dart';
 import 'package:vigo_customer_billing/app/modules/login/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -59,24 +61,58 @@ class LoginPage extends GetView<LoginController> {
                             textAlign: TextAlign.left,
                           ),
                         ),
-                        Obx(
-                          () => CustomFormField(
-                            label: 'Username',
-                            placeholder: 'Masukkan username anda',
-                            controller: controller.usernameController,
-                            validator: controller.validator_input,
-                            type: FormFieldType.text,
-                            isLoading: controller.isLoading.value,
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            spacing: 5,
+                            children: [
+                              Text(
+                                "Username",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Obx(
+                                () => CustomInputField(
+                                  controller: controller.usernameController,
+                                  hintText: 'Masukkan Judul',
+                                  errorText: controller.usernameError.value,
+                                  onChanged: (_) =>
+                                      controller.validateUsername(),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        Obx(
-                          () => CustomFormField(
-                            label: 'Password',
-                            placeholder: 'Masukkan password anda',
-                            controller: controller.passwordController,
-                            validator: controller.validator_input,
-                            type: FormFieldType.password,
-                            isLoading: controller.isLoading.value,
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            spacing: 5,
+                            children: [
+                              Text(
+                                "Pasword",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Obx(
+                                () => CustomInputField(
+                                  controller: controller.passwordController,
+                                  hintText: 'Masukkan password',
+                                  isPassword: true,
+                                  errorText: controller.passwordError.value,
+                                  isTextArea: true,
+                                  onChanged: (_) =>
+                                      controller.validatePassword(),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
 

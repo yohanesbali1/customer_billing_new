@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/core/widgets/form.dart';
+import 'package:vigo_customer_billing/app/core/widgets/form_old.dart';
+import 'package:vigo_customer_billing/app/core/widgets/from.dart';
 import 'package:vigo_customer_billing/app/modules/help/form/controllers/help_form_controller.dart';
-import 'package:vigo_customer_billing/app/modules/help/form/widget/modal_camera.dart';
-import 'package:vigo_customer_billing/app/modules/help/form/widget/modal_location.dart';
+import 'package:vigo_customer_billing/app/modules/help/form/widget/image_widget.dart';
+import 'package:vigo_customer_billing/app/modules/help/form/widget/location_widget.dart';
 import 'package:vigo_customer_billing/app/modules/help/form/widget/modal_type_topic.dart';
 
 class FormHelpWidget extends GetView<HelpFormController> {
@@ -21,16 +19,28 @@ class FormHelpWidget extends GetView<HelpFormController> {
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 10),
-            child: Obx(
-              () => CustomFormField(
-                label: 'Judul',
-                placeholder: 'Masukkan Judul',
-                controller: controller.descriptionController,
-                type: FormFieldType.text,
-                disabled: false,
-                isLoading: controller.isLoading.value,
-                validator: (value) => controller.validator_input(value),
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 5,
+              children: [
+                Text(
+                  "Judul",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+                Obx(
+                  () => CustomInputField(
+                    controller: controller.titleController,
+                    hintText: 'Masukkan Judul',
+                    errorText: controller.titleError.value,
+                    isTextArea: true,
+                    onChanged: (_) => controller.validateRequestDate(),
+                  ),
+                ),
+              ],
             ),
           ),
           Container(
@@ -48,14 +58,12 @@ class FormHelpWidget extends GetView<HelpFormController> {
                     FocusScope.of(context).unfocus();
                   },
                   child: AbsorbPointer(
-                    child: CustomFormField(
-                      label: 'Tipe Gangguan',
-                      placeholder: 'Pilih tipe gangguan',
+                    child: CustomInputField(
                       controller: controller.typeTopicController,
-                      type: FormFieldType.text,
-                      disabled: true,
-                      isLoading: controller.isLoading.value,
-                      validator: (value) => controller.validator_input(value),
+                      hintText: 'Pilih tipe gangguan',
+                      errorText: controller.typeTopicError.value,
+                      isTextArea: true,
+                      onChanged: (_) => controller.validateTypeTopic(),
                     ),
                   ),
                 ),
@@ -64,149 +72,25 @@ class FormHelpWidget extends GetView<HelpFormController> {
           ),
           Container(
             margin: const EdgeInsets.only(bottom: 10),
-            child: Obx(
-              () => CustomFormField(
-                label: 'Permasalahan',
-                placeholder: 'Masukkan permasalahan',
-                controller: controller.descriptionController,
-                type: FormFieldType.textarea,
-                disabled: false,
-                isLoading: controller.isLoading.value,
-                validator: (value) => controller.validator_input(value),
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            child: Obx(
-              () => CustomFormField(
-                label: 'Unit',
-                placeholder: 'Masukkan Unit',
-                controller: controller.descriptionController,
-                type: FormFieldType.text,
-                disabled: false,
-                isLoading: controller.isLoading.value,
-                validator: (value) => controller.validator_input(value),
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            child: Obx(
-              () => CustomFormField(
-                label: 'No HP',
-                placeholder: 'Masukkan no hp',
-                controller: controller.phoneController,
-                type: FormFieldType.text,
-                isLoading: controller.isLoading.value,
-                validator: (value) => controller.validator_input(value),
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            child: Obx(
-              () => CustomFormField(
-                label: 'Alamat',
-                placeholder: 'Masukkan alamat',
-                controller: controller.addressController,
-                type: FormFieldType.textarea,
-                isLoading: controller.isLoading.value,
-                validator: (value) => controller.validator_input(value),
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
+              spacing: 5,
               children: [
                 Text(
-                  "Gambar",
+                  "Permasalahaan",
                   style: GoogleFonts.montserrat(
-                    color: textPrimaryColor,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
+                    color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 10),
                 Obx(
-                  () => Container(
-                    height: 250,
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: borderboxColor, width: 0.5),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: controller.image.value != null
-                          ? Image.file(
-                              controller.image.value!,
-                              width: double.infinity,
-                              height: double.infinity,
-                              fit: BoxFit.cover,
-                            )
-                          : Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.camera_alt_outlined,
-                                  size: 50,
-                                  color: borderboxColor,
-                                ),
-                                Text(
-                                  'Pilih Gambar',
-                                  style: GoogleFonts.montserrat(
-                                    color: borderboxColor,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
-                            ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      return showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: false,
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(16),
-                          ),
-                        ),
-                        builder: (context) {
-                          return CameraPickerSheet();
-                        },
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: mainColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 12,
-                        horizontal: 20,
-                      ),
-                    ),
-                    child: Text(
-                      'Ambil Gambar',
-                      style: GoogleFonts.montserrat(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
+                  () => CustomInputField(
+                    controller: controller.complaintController,
+                    hintText: 'Masukkan permasalahan',
+                    errorText: controller.complaintError.value,
+                    isTextArea: true,
+                    onChanged: (_) => controller.validateComplaint(),
                   ),
                 ),
               ],
@@ -216,122 +100,134 @@ class FormHelpWidget extends GetView<HelpFormController> {
             margin: const EdgeInsets.only(bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 5,
               children: [
                 Text(
-                  "Lokasi",
+                  "Deskripsi Gangguan",
                   style: GoogleFonts.montserrat(
-                    color: textPrimaryColor,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
+                    color: Colors.white,
                   ),
                 ),
-                Obx(() {
-                  return SizedBox(
-                    height: 300,
-                    child: Stack(
-                      children: <Widget>[
-                        FlutterMap(
-                          mapController: controller.flutterMapController,
-                          options: MapOptions(
-                            initialCenter: LatLng(-8.6524973, 115.2191175),
-                            interactionOptions: InteractionOptions(
-                              enableMultiFingerGestureRace: false,
-                              flags:
-                                  InteractiveFlag.all & ~InteractiveFlag.rotate,
-                            ),
-                            onTap: (tapPosition, latlng) {
-                              controller.isLoading.value
-                                  ? null
-                                  : controller.updateLocation(latlng);
-                            },
-                          ),
-                          children: [
-                            TileLayer(
-                              urlTemplate:
-                                  'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                              userAgentPackageName: 'VIGO',
-                            ),
-                            if (controller.selectedLocation.value != null)
-                              MarkerLayer(
-                                markers: [
-                                  Marker(
-                                    point: controller.selectedLocation.value!,
-                                    width: 40,
-                                    height: 40,
-                                    child: Icon(
-                                      Icons.location_on,
-                                      color: Colors.red,
-                                      size: 30,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                          ],
-                        ),
-                        Positioned(
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                //
-                                showModalBottomSheet(
-                                  context: context,
-                                  isScrollControlled: true, // ini penting!
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(20),
-                                    ),
-                                  ),
-                                  builder: (context) => const ModalLocation(),
-                                );
-                                // _showSheet(context);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 12,
-                                ),
-                                decoration: BoxDecoration(color: Colors.white),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        controller.search.value != ""
-                                            ? controller.search.value
-                                            : 'Pilih Lokasi',
-                                        style: GoogleFonts.montserrat(
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ),
-                                    Icon(Icons.arrow_drop_down),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 10,
-                          right: 10,
-                          child: FloatingActionButton(
-                            backgroundColor: mainColor,
-                            onPressed: () {
-                              controller.getCurrentLocation();
-                            },
-                            child: Icon(Icons.my_location),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }),
+                Obx(
+                  () => CustomInputField(
+                    controller: controller.descriptionController,
+                    hintText: 'Masukkan deskripsi gangguan',
+                    errorText: controller.descriptionError.value,
+                    isTextArea: true,
+                    onChanged: (_) => controller.validateRequestDate(),
+                  ),
+                ),
               ],
             ),
           ),
+          Container(
+            margin: const EdgeInsets.only(bottom: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 5,
+              children: [
+                Text(
+                  "Tanggal Gangguan",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+                Obx(
+                  () => CustomInputField(
+                    controller: controller.requestDateController,
+                    hintText: 'Masukkan tanggal gangguan',
+                    errorText: controller.requestDateError.value,
+                    isDate: true,
+                    onChanged: (_) => controller.validateRequestDate(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(bottom: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 5,
+              children: [
+                Text(
+                  "Unit",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+                Obx(
+                  () => CustomInputField(
+                    controller: controller.unitController,
+                    hintText: 'Masukkan unit',
+                    errorText: controller.unitError.value,
+                    isEditable: false,
+                    onChanged: (_) => controller.validatePhone(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(bottom: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 5,
+              children: [
+                Text(
+                  "No HP",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+                Obx(
+                  () => CustomInputField(
+                    controller: controller.phoneController,
+                    hintText: 'Masukkan no hp',
+                    errorText: controller.phoneError.value,
+                    isTextArea: true,
+                    onChanged: (_) => controller.validatePhone(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(bottom: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 5,
+              children: [
+                Text(
+                  "Alamat Gangguan",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+                Obx(
+                  () => CustomInputField(
+                    controller: controller.addressController,
+                    hintText: 'Masukkan alamat gangguan',
+                    errorText: controller.addressError.value,
+                    isTextArea: true,
+                    onChanged: (_) => controller.validateAddress(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ImageWidget(),
+          LocationWidget(),
         ],
       ),
     );

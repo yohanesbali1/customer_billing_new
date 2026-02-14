@@ -31,13 +31,21 @@ class HelpFormController extends GetxController {
   int type_topic_select = 0;
 
   var titleController = TextEditingController();
+  final Rxn<String> titleError = Rxn<String>();
   var unitController = TextEditingController();
+  final Rxn<String> unitError = Rxn<String>();
   var addressController = TextEditingController();
+  final Rxn<String> addressError = Rxn<String>();
   var phoneController = TextEditingController();
+  final Rxn<String> phoneError = Rxn<String>();
   var typeTopicController = TextEditingController();
+  final Rxn<String> typeTopicError = Rxn<String>();
   var complaintController = TextEditingController();
+  final Rxn<String> complaintError = Rxn<String>();
   var requestDateController = TextEditingController();
+  final Rxn<String> requestDateError = Rxn<String>();
   var descriptionController = TextEditingController();
+  final Rxn<String> descriptionError = Rxn<String>();
   var mapsController = TextEditingController();
 
   var type_topic_data = <DisorderCategory>[].obs;
@@ -81,8 +89,84 @@ class HelpFormController extends GetxController {
     image.value = null;
   }
 
-  String? validator_input(value) {
-    return value!.isEmpty ? 'Field ini harus diisi' : null;
+  bool validatePhone() {
+    final val = phoneController.text.trim();
+    if (val.isEmpty) {
+      phoneError.value = 'Telepon harus diisi';
+      return false;
+    }
+    if (!RegExp(r'^\d+$').hasMatch(val)) {
+      phoneError.value = 'Telepon harus angka';
+      return false;
+    }
+    phoneError.value = null;
+    return true;
+  }
+
+  bool validateUnit() {
+    final val = unitController.text.trim();
+    if (val.isEmpty) {
+      unitError.value = 'Unit harus diisi';
+      return false;
+    }
+    unitError.value = null;
+    return true;
+  }
+
+  bool validateTypeTopic() {
+    final val = typeTopicController.text.trim();
+    if (val.isEmpty) {
+      typeTopicError.value = 'Unit harus diisi';
+      return false;
+    }
+    typeTopicError.value = null;
+    return true;
+  }
+
+  bool validateAddress() {
+    final val = addressController.text.trim();
+    if (val.isEmpty) {
+      addressError.value = 'Alamat harus diisi';
+      return false;
+    }
+    addressError.value = null;
+    return true;
+  }
+
+  bool validateComplaint() {
+    final val = complaintController.text.trim();
+    if (val.isEmpty) {
+      complaintError.value = 'Komplain harus diisi';
+      return false;
+    }
+    complaintError.value = null;
+    return true;
+  }
+
+  bool validateDescription() {
+    final val = descriptionController.text.trim();
+    if (val.isEmpty) {
+      descriptionError.value = 'Deskripsi harus diisi';
+      return false;
+    }
+    descriptionError.value = null;
+    return true;
+  }
+
+  bool validateRequestDate() {
+    final val = requestDateController.text.trim();
+    if (val.isEmpty) {
+      requestDateError.value = 'Tanggal request harus diisi';
+      return false;
+    }
+    try {
+      DateTime.parse(val);
+      requestDateError.value = null;
+      return true;
+    } catch (_) {
+      requestDateError.value = 'Tanggal request harus yyyy-mm-dd';
+      return false;
+    }
   }
 
   Future<dynamic> getTypeData() async {

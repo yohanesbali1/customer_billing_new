@@ -9,7 +9,9 @@ class LoginController extends GetxController {
   LoginController({required this.repository});
   final formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
+  final Rxn<String> usernameError = Rxn<String>();
   final passwordController = TextEditingController();
+  final Rxn<String> passwordError = Rxn<String>();
 
   var isLoading = false.obs;
 
@@ -28,8 +30,24 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
-  String? validator_input(value) {
-    return value!.isEmpty ? 'Field ini harus diisi' : null;
+  bool validateUsername() {
+    final val = usernameController.text.trim();
+    if (val.isEmpty) {
+      usernameError.value = 'Password harus diisi';
+      return false;
+    }
+    usernameError.value = null;
+    return true;
+  }
+
+  bool validatePassword() {
+    final val = passwordController.text.trim();
+    if (val.isEmpty) {
+      passwordError.value = 'Password harus diisi';
+      return false;
+    }
+    passwordError.value = null;
+    return true;
   }
 
   Future<void> submit_login() async {
