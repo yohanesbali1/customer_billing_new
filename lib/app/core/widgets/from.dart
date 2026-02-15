@@ -24,6 +24,8 @@ class CustomInputField extends StatefulWidget {
 
   final Widget? prefix;
 
+  final bool? isReadOnly;
+
   // Text Area
   final bool isTextArea;
   const CustomInputField({
@@ -41,6 +43,7 @@ class CustomInputField extends StatefulWidget {
     this.errorText,
     this.prefix,
     this.isTextArea = false,
+    this.isReadOnly,
   }) : super(key: key);
 
   @override
@@ -90,7 +93,10 @@ class _CustomInputFieldState extends State<CustomInputField> {
                 value: item,
                 child: Text(
                   item,
-                  style: GoogleFonts.barlow(fontSize: 14, color: Colors.white),
+                  style: GoogleFonts.montserrat(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             )
@@ -100,7 +106,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
         },
         hint: Text(
           widget.hintText,
-          style: GoogleFonts.barlow(
+          style: GoogleFonts.montserrat(
             fontSize: 14,
             fontWeight: FontWeight.w400,
             color: textinputColor,
@@ -114,7 +120,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
     return TextField(
       controller: widget.controller,
       enabled: widget.isEditable,
-      readOnly: widget.isDate,
+      readOnly: (widget.isDate ?? false) || (widget.isReadOnly ?? false),
       keyboardType: widget.isTextArea
           ? TextInputType.multiline
           : widget.keyboardType,
@@ -123,7 +129,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
       onChanged: widget.onChanged,
       maxLines: widget.isTextArea ? 5 : 1,
       minLines: widget.isTextArea ? 3 : 1,
-      style: GoogleFonts.barlow(fontSize: 14, fontWeight: FontWeight.w400),
+      style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w400),
       decoration: _buildDecoration(
         suffixIcon: widget.isPassword
             ? IconButton(
@@ -146,11 +152,10 @@ class _CustomInputFieldState extends State<CustomInputField> {
   InputDecoration _buildDecoration({Widget? suffixIcon}) {
     return InputDecoration(
       hintText: widget.hintText,
-      errorText: widget.errorText, // 🔥 KUNCI EXTERNAL VALIDATION
-      hintStyle: GoogleFonts.barlow(
+      errorText: widget.errorText,
+      hintStyle: GoogleFonts.montserrat(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: textinputColor,
       ),
       isDense: true,
       contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
@@ -169,6 +174,10 @@ class _CustomInputFieldState extends State<CustomInputField> {
         borderSide: BorderSide(color: borderinputColor, width: 2),
       ),
       enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: borderinputColor, width: 1),
+      ),
+      disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(color: borderinputColor, width: 1),
       ),

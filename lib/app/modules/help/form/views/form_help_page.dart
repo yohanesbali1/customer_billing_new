@@ -264,15 +264,7 @@ class FormHelpPage extends GetView<HelpFormController> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () async {
-                    if (controller.formkey.currentState!.validate() &&
-                        controller.image.value != null) {
-                      FocusScope.of(context).unfocus();
-                      await controller.submit_data();
-                    } else {
-                      Helper().AlertGetX(
-                        message: 'Cek kembali data yang anda masukkan',
-                      );
-                    }
+                    await controller.submit_data();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: mainColor,

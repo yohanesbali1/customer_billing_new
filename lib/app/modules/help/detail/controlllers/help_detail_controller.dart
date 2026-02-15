@@ -55,15 +55,21 @@ class HelpDetailController extends GetxController {
       await repository.deleteHelp(id.value);
       reportData.value = null;
       await helpController.getData();
-      Get.back();
+      while (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
       await Helper().AlertGetX(
         type: 'success',
         message: "Data berhasil dihapus",
       );
-      Get.back();
+      while (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
       isLoading.value = false;
     } catch (e) {
-      Get.back();
+      while (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
       isLoading.value = false;
       String errorMessage = e is String
           ? e

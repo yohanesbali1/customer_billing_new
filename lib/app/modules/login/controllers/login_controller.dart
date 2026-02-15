@@ -33,7 +33,7 @@ class LoginController extends GetxController {
   bool validateUsername() {
     final val = usernameController.text.trim();
     if (val.isEmpty) {
-      usernameError.value = 'Password harus diisi';
+      usernameError.value = 'Username harus diisi';
       return false;
     }
     usernameError.value = null;
@@ -53,6 +53,11 @@ class LoginController extends GetxController {
   Future<void> submit_login() async {
     try {
       isLoading(true);
+      bool isValid = [validateUsername(), validatePassword()].every((v) => v);
+      if (!isValid) {
+        return;
+      }
+
       Helper().AlertGetX(type: 'loading');
       var data = {
         'username': usernameController.text,
@@ -62,10 +67,14 @@ class LoginController extends GetxController {
       await repository.loginData(data);
       await FirebaseMessaging.instance.deleteToken();
       isLoading(false);
-      Get.back();
+      while (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
       Get.offAllNamed('/home');
     } catch (e) {
-      Get.back();
+      while (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
       isLoading(false);
       String errorMessage = e is String
           ? e

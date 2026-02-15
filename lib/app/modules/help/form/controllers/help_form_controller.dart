@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:intl/intl.dart';
 import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_customer_billing/app/data/models/models.dart';
 import 'package:vigo_customer_billing/app/data/repositories/help_repository.dart';
@@ -89,27 +90,13 @@ class HelpFormController extends GetxController {
     image.value = null;
   }
 
-  bool validatePhone() {
-    final val = phoneController.text.trim();
+  bool validateTitle() {
+    final val = titleController.text.trim();
     if (val.isEmpty) {
-      phoneError.value = 'Telepon harus diisi';
+      titleError.value = 'Judul harus diisi';
       return false;
     }
-    if (!RegExp(r'^\d+$').hasMatch(val)) {
-      phoneError.value = 'Telepon harus angka';
-      return false;
-    }
-    phoneError.value = null;
-    return true;
-  }
-
-  bool validateUnit() {
-    final val = unitController.text.trim();
-    if (val.isEmpty) {
-      unitError.value = 'Unit harus diisi';
-      return false;
-    }
-    unitError.value = null;
+    titleError.value = null;
     return true;
   }
 
@@ -120,16 +107,6 @@ class HelpFormController extends GetxController {
       return false;
     }
     typeTopicError.value = null;
-    return true;
-  }
-
-  bool validateAddress() {
-    final val = addressController.text.trim();
-    if (val.isEmpty) {
-      addressError.value = 'Alamat harus diisi';
-      return false;
-    }
-    addressError.value = null;
     return true;
   }
 
@@ -169,6 +146,44 @@ class HelpFormController extends GetxController {
     }
   }
 
+  bool validateUnit() {
+    final val = unitController.text.trim();
+    if (val.isEmpty) {
+      unitError.value = 'Unit harus diisi';
+      return false;
+    }
+    unitError.value = null;
+    return true;
+  }
+
+  bool validatePhone() {
+    final val = phoneController.text.trim();
+    if (val.isEmpty) {
+      phoneError.value = 'Telepon harus diisi';
+      return false;
+    }
+    if (!RegExp(r'^\d+$').hasMatch(val)) {
+      phoneError.value = 'Telepon harus angka';
+      return false;
+    }
+    if (!RegExp(r'^\d{9,15}$').hasMatch(val)) {
+      phoneError.value = 'Telepon harus 9-15 digit angka';
+      return false;
+    }
+    phoneError.value = null;
+    return true;
+  }
+
+  bool validateAddress() {
+    final val = addressController.text.trim();
+    if (val.isEmpty) {
+      addressError.value = 'Alamat harus diisi';
+      return false;
+    }
+    addressError.value = null;
+    return true;
+  }
+
   Future<dynamic> getTypeData() async {
     try {
       isLoading.value = true;
@@ -187,11 +202,17 @@ class HelpFormController extends GetxController {
       await getTypeData();
       if (id.value != '') {
         final HelpModel data = detailController.reportData.value!;
-        addressController.text = data.address!;
-        phoneController.text = data.noTelp!;
-        descriptionController.text = data.description!;
-        typeTopicController.text = data.disorderCategory!.type!;
+        titleController.text = data.title!;
         type_topic_value.value = data.disorderCategory!;
+        typeTopicController.text = data.disorderCategory!.type!;
+        complaintController.text = data.complaint!;
+        descriptionController.text = data.description!;
+        requestDateController.text = DateFormat(
+          'yyyy-MM-dd',
+        ).format(data.requestDate!);
+        unitController.text = data.unit!;
+        phoneController.text = data.noTelp!;
+        addressController.text = data.address!;
         var parts = data.maps!.split(',');
         if (parts.length >= 2) {
           mapsController.text = data.maps!;
@@ -204,28 +225,47 @@ class HelpFormController extends GetxController {
       }
       isLoading.value = false;
     } catch (e) {
-      print(e);
       isLoading.value = false;
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
       Helper().AlertGetX(message: errorMessage);
     } finally {
-      if (Get.isDialogOpen ?? false) Get.back();
+      while (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
     }
   }
 
   Future<dynamic> submit_data() async {
     try {
       isLoading(true);
+      bool isValid = [
+        validateTitle(),
+        validateTypeTopic(),
+        validateComplaint(),
+        validateDescription(),
+        validateRequestDate(),
+        validateUnit(),
+        validatePhone(),
+        validateAddress(),
+      ].every((v) => v);
+      if (!isValid) {
+        return;
+      }
       Helper().AlertGetX(type: 'loading');
       var form = {
-        'phone': phoneController.text,
-        'address': addressController.text,
+        "disorder_category_id": type_topic_value.value!.id.toString(),
+        "no_telp": phoneController.text,
+        "priority": "high",
+        "request_date": requestDateController.text,
+        "complaint": complaintController.text,
+        "unit": unitController.text,
+        "description": descriptionController.text,
+        "title": titleController.text,
+        "address": addressController.text,
         'maps':
             "${selectedLocation.value!.latitude},${selectedLocation.value!.longitude}",
-        'type_topic_id': type_topic_value.value!.id.toString(),
-        'description': descriptionController.text,
       };
 
       await repository.submitHelp(
@@ -238,16 +278,22 @@ class HelpFormController extends GetxController {
       } else {
         await detailController.getData(id.value);
       }
-      ;
-      Get.back();
+      while (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
       await Helper().AlertGetX(
         type: 'success',
         message: "Data berhasil disimpan",
       );
+      while (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
       Get.back();
       isLoading(false);
     } catch (e) {
-      Get.back();
+      while (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
       isLoading(false);
       String errorMessage = e is String
           ? e
