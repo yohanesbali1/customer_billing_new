@@ -253,6 +253,12 @@ class HelpFormController extends GetxController {
       if (!isValid) {
         return;
       }
+      if (id.value.isEmpty && image.value == null) {
+        isLoading(false);
+        String errorMessage = 'Gambar wajib diisi';
+        Helper().AlertGetX(message: errorMessage);
+        return;
+      }
       Helper().AlertGetX(type: 'loading');
       var form = {
         "disorder_category_id": type_topic_value.value!.id.toString(),

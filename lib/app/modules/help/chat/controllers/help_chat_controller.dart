@@ -116,6 +116,7 @@ class HelpChatController extends GetxController {
       Helper().AlertGetX(message: errorMessage);
     } finally {
       image.value = null;
+      await getData();
     }
   }
 
@@ -123,14 +124,21 @@ class HelpChatController extends GetxController {
     try {
       isLoading(true);
       Helper().AlertGetX(type: 'loading');
-      var items = {"chat_id": payload};
-      // await HelperProvider().deleteChat(items);
+      await repository.deleteChat(payload);
       await getData();
-      Get.back();
-      // await Helper().AlertGetX('success', null);
+      while (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
+      await Helper().AlertGetX(
+        type: 'success',
+        message: "Pesan berhasil dihapus",
+      );
       isLoading(false);
     } catch (e) {
       isLoading(false);
+      while (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
       String errorMessage = e is String
           ? e
           : 'Maaf ada kesalahan, silahkan coba lagi';
