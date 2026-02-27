@@ -240,7 +240,7 @@ class FormHelpPage extends GetView<HelpFormController> {
                   children: [
                     Text(
                       "Form Bantuan",
-                      style: monseratTextFont.copyWith(
+                      style: GoogleFonts.montserrat(
                         color: textPrimaryColor,
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
@@ -249,7 +249,7 @@ class FormHelpPage extends GetView<HelpFormController> {
                     ),
                     Text(
                       "Lengkapi form berikut",
-                      style: monseratTextFont.copyWith(
+                      style: GoogleFonts.montserrat(
                         color: textPrimaryColor,
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
@@ -275,7 +275,7 @@ class FormHelpPage extends GetView<HelpFormController> {
                   ),
                   child: Text(
                     "Simpan",
-                    style: monseratTextFont.copyWith(
+                    style: GoogleFonts.montserrat(
                       color: Colors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,

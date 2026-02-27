@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
@@ -89,7 +90,7 @@ class _MemberCard extends StatelessWidget {
       children: [
         Text(
           data.customer.code,
-          style: monseratTextFont.copyWith(
+          style: GoogleFonts.montserrat(
             color: Colors.white,
             fontSize: 16,
             fontWeight: FontWeight.w500,
@@ -97,7 +98,7 @@ class _MemberCard extends StatelessWidget {
         ),
         Text(
           data.customer.subCompany?.code ?? '-',
-          style: monseratTextFont.copyWith(
+          style: GoogleFonts.montserrat(
             color: Colors.white,
             fontSize: 18,
             fontWeight: FontWeight.w700,
@@ -119,7 +120,7 @@ class _MemberCard extends StatelessWidget {
                 children: [
                   Text(
                     'Paket ',
-                    style: monseratTextFont.copyWith(
+                    style: GoogleFonts.montserrat(
                       color: Colors.white,
                       fontSize: 12,
                     ),
@@ -135,7 +136,7 @@ class _MemberCard extends StatelessWidget {
                     ),
                     child: Text(
                       data.status == 'active' ? 'Aktif' : 'Non Aktif',
-                      style: monseratTextFont.copyWith(
+                      style: GoogleFonts.montserrat(
                         color: Colors.white,
                         fontSize: 12,
                         fontWeight: FontWeight.w800,
@@ -146,7 +147,7 @@ class _MemberCard extends StatelessWidget {
               ),
               Text(
                 order.productName,
-                style: monseratTextFont.copyWith(
+                style: GoogleFonts.montserrat(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
@@ -166,11 +167,11 @@ class _MemberCard extends StatelessWidget {
         children: [
           Text(
             'Berlaku sampai ',
-            style: monseratTextFont.copyWith(color: Colors.white, fontSize: 13),
+            style: GoogleFonts.montserrat(color: Colors.white, fontSize: 13),
           ),
           Text(
             DateFormat('dd MMMM yyyy').format(data.endDate),
-            style: monseratTextFont.copyWith(
+            style: GoogleFonts.montserrat(
               color: Colors.white,
               fontSize: 14,
               fontWeight: FontWeight.w600,

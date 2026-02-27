@@ -453,7 +453,7 @@ class DetailHelpPage extends GetView<HelpDetailController> {
             ),
             child: Text(
               'Chat Customer Service',
-              style: monseratTextFont.copyWith(
+              style: GoogleFonts.montserrat(
                 color: Colors.white,
                 fontSize: 13,
                 fontWeight: FontWeight.w500,

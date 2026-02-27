@@ -18,7 +18,8 @@ class NotificationService {
   NotificationService._();
   static final NotificationService instance = NotificationService._();
 
-  final FirebaseMessaging _messaging = FirebaseMessaging.instance;
+  // Avoid accessing FirebaseMessaging.instance at class init to prevent crash
+  // final FirebaseMessaging _messaging = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin _localNotification =
       FlutterLocalNotificationsPlugin();
 
@@ -28,20 +29,29 @@ class NotificationService {
   static const String _channelId = 'channel_my_vigo';
 
   Future<void> initialize() async {
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    try {
+      FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-    await setupFlutterNotification();
-    await _requestPermission();
-    await _setupMessagingHandler();
+      await setupFlutterNotification();
+      await _requestPermission();
+      await _setupMessagingHandler();
+    } catch (e) {
+      // Firebase not initialized — skip messaging setup
+      return;
+    }
   }
 
   Future<void> _requestPermission() async {
-    await _messaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-      provisional: false,
-    );
+    try {
+      await FirebaseMessaging.instance.requestPermission(
+        alert: true,
+        badge: true,
+        sound: true,
+        provisional: false,
+      );
+    } catch (e) {
+      // ignore
+    }
   }
 
   Future<void> setupFlutterNotification() async {
@@ -118,16 +128,20 @@ class NotificationService {
   }
 
   Future<void> _setupMessagingHandler() async {
-    FirebaseMessaging.onMessage.listen(showNotification);
+    try {
+      FirebaseMessaging.onMessage.listen(showNotification);
 
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      pendingPayload = jsonEncode(message.data);
-      handleClickNotification();
-    });
+      FirebaseMessaging.onMessageOpenedApp.listen((message) {
+        pendingPayload = jsonEncode(message.data);
+        handleClickNotification();
+      });
 
-    final initialMessage = await _messaging.getInitialMessage();
-    if (initialMessage != null) {
-      pendingPayload = jsonEncode(initialMessage.data);
+      final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+      if (initialMessage != null) {
+        pendingPayload = jsonEncode(initialMessage.data);
+      }
+    } catch (e) {
+      // Firebase not initialized — skip
     }
   }
 

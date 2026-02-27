@@ -164,7 +164,7 @@ class ItemDataInvoice extends StatelessWidget {
                               ),
                               child: Text(
                                 "Salin",
-                                style: monseratTextFont.copyWith(
+                                style: GoogleFonts.montserrat(
                                   color: Colors.white,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w700,

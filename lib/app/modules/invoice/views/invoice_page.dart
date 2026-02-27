@@ -3,7 +3,7 @@ import 'package:vigo_customer_billing/app/modules/invoice/controllers/invoice_co
 import 'package:vigo_customer_billing/app/modules/invoice/views/list_invoice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:vigo_customer_billing/app/core/helpers/google_fonts_shim.dart';
 
 class InvoicePage extends GetView<InvoiceController> {
   @override

@@ -29,7 +29,7 @@ class DashboardPage extends GetView<DashboardController> {
                   children: [
                     Text(
                       'Selamat Datang, ',
-                      style: monseratTextFont.copyWith(
+                      style: GoogleFonts.montserrat(
                         color: Colors.white,
                         fontSize: 13,
                       ),
@@ -39,7 +39,7 @@ class DashboardPage extends GetView<DashboardController> {
                         enabled: controller.application_c.isLoading.value,
                         child: Text(
                           '${controller.application_c.accountbillData.value?.customer.name ?? 'Tidak Diketahui'}',
-                          style: monseratTextFont.copyWith(
+                          style: GoogleFonts.montserrat(
                             color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -154,7 +154,7 @@ class DashboardPage extends GetView<DashboardController> {
                         const SizedBox(height: 12),
                         Text(
                           'Layanan Kami',
-                          style: monseratTextFont.copyWith(
+                          style: GoogleFonts.montserrat(
                             color: Colors.black,
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -187,7 +187,7 @@ class DashboardPage extends GetView<DashboardController> {
                                     children: [
                                       Text(
                                         'Koneksi internet ngebut dirumah.',
-                                        style: monseratTextFont.copyWith(
+                                        style: GoogleFonts.montserrat(
                                           color: Colors.white,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w700,
@@ -202,7 +202,7 @@ class DashboardPage extends GetView<DashboardController> {
                                         children: [
                                           Text(
                                             'Pasang Internet Home',
-                                            style: monseratTextFont.copyWith(
+                                            style: GoogleFonts.montserrat(
                                               color: Colors.white,
                                               fontSize: 11,
                                               fontWeight: FontWeight.w400,

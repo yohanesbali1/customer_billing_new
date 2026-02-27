@@ -39,7 +39,7 @@ class LoginPage extends GetView<LoginController> {
                         margin: const EdgeInsets.only(top: 36, bottom: 4),
                         child: Text(
                           "Login dengan akun kamu",
-                          style: monseratTextFont.copyWith(
+                          style: GoogleFonts.montserrat(
                             color: textPrimaryColor,
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
@@ -51,7 +51,7 @@ class LoginPage extends GetView<LoginController> {
                         margin: const EdgeInsets.only(bottom: 16),
                         child: Text(
                           "Hello, Selamat datang kembali",
-                          style: monseratTextFont.copyWith(
+                          style: GoogleFonts.montserrat(
                             color: textSecondaryColor,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
@@ -127,7 +127,7 @@ class LoginPage extends GetView<LoginController> {
                           ),
                           child: Text(
                             "Masuk",
-                            style: monseratTextFont.copyWith(
+                            style: GoogleFonts.montserrat(
                               color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.w500,

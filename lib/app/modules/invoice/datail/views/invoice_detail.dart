@@ -6,7 +6,7 @@ import 'package:vigo_customer_billing/app/modules/invoice/datail/widget/item_dat
 import 'package:vigo_customer_billing/app/modules/invoice/datail/widget/skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:vigo_customer_billing/app/core/helpers/google_fonts_shim.dart';
 
 class InvoiceDetailPage extends GetView<InvoiceDetailController> {
   const InvoiceDetailPage({super.key});

@@ -4,7 +4,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 class ProfileRepository {
   final ApiProvider api;
-  final FirebaseMessaging firebaseMessage = FirebaseMessaging.instance;
+  // Avoid accessing FirebaseMessaging.instance at class init to prevent crash
+  // final FirebaseMessaging firebaseMessage = FirebaseMessaging.instance;
 
   ProfileRepository({required this.api});
   Future<AccountBillModel?> getProfile() async {
@@ -18,10 +19,14 @@ class ProfileRepository {
 
   Future<dynamic> updateDataTokenFCM() async {
     try {
-      final token_fcm = await firebaseMessage.getToken();
-      final form = {'id': token_fcm};
-      await api.post('/auth/save-token', form);
-      return true;
+      try {
+        final token_fcm = await FirebaseMessaging.instance.getToken();
+        final form = {'id': token_fcm};
+        await api.post('/auth/save-token', form);
+        return true;
+      } catch (e) {
+        return false;
+      }
     } catch (e) {
       rethrow;
     }

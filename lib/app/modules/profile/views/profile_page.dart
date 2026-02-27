@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/modules/profile/controllers/profile_controller.dart';
 import 'package:vigo_customer_billing/app/modules/profile/widget/list_menu_profile.dart';
@@ -16,7 +17,7 @@ class ProfilePage extends GetView<ProfileController> {
         centerTitle: true,
         title: Text(
           'Profile',
-          style: monseratTextFont.copyWith(
+          style: GoogleFonts.montserrat(
             color: textPrimaryColor,
             fontSize: 16,
             fontWeight: FontWeight.w600,
@@ -51,7 +52,7 @@ class ProfilePage extends GetView<ProfileController> {
                 () => Text(
                   '${controller.application_c.accountbillData.value?.customer.name ?? '-'}',
                   textAlign: TextAlign.center,
-                  style: monseratTextFont.copyWith(
+                  style: GoogleFonts.montserrat(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -63,7 +64,7 @@ class ProfilePage extends GetView<ProfileController> {
               child: Text(
                 '${controller.application_c.accountbillData.value?.customer.code ?? '-'}',
                 textAlign: TextAlign.center,
-                style: monseratTextFont.copyWith(
+                style: GoogleFonts.montserrat(
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
                 ),

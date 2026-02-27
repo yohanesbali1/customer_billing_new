@@ -18,7 +18,7 @@ class SettingProfilePage extends StatelessWidget {
         scrolledUnderElevation: 0,
         title: Text(
           'Pengaturan',
-          style: monseratTextFont.copyWith(
+          style: GoogleFonts.montserrat(
             color: textPrimaryColor,
             fontSize: 14,
             fontWeight: FontWeight.w600,

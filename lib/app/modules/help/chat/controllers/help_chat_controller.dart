@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart'; // Commented out to avoid app hang
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,7 +20,7 @@ class HelpChatController extends GetxController {
   var message = TextEditingController().obs;
   final formkey = GlobalKey<FormState>();
   OverlayEntry? overlayEntry = null;
-  final firebaseMessage = FirebaseMessaging.instance;
+  // final firebaseMessage = FirebaseMessaging.instance; // Commented out to avoid app hang
   ScrollController scrollController = ScrollController();
   final ImagePicker _picker = ImagePicker();
   final picker = ImagePicker();
@@ -44,12 +44,14 @@ class HelpChatController extends GetxController {
     super.onReady();
 
     scrollController.addListener(() => onScroll());
+    /*
     FirebaseMessaging.onMessage.listen((message) {
       if (message.data != null &&
           message.data['type'] == "ticket_${id.value}") {
         getData();
       }
     });
+    */
   }
 
   clear_form() {

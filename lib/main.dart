@@ -1,10 +1,10 @@
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart'; // Commented out to avoid app hang
+// import 'firebase_options.dart'; // Commented out to avoid app hang
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
+// import 'package:google_fonts/google_fonts.dart'; // Temporarily disabled to avoid AssetManifest loading issues
 import 'app/core/bindings/application_bindings.dart';
 import 'app/routes/app_pages.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -25,12 +25,17 @@ class NoStretchScrollBehavior extends ScrollBehavior {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  /*
+  // Firebase initialization commented out to prevent startup hang
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // NotificationService depends on Firebase; disabled for now
   await NotificationService.instance.initialize();
+  */
   final storage = new FlutterSecureStorage();
   await dotenv.load();
   final String? token = await storage.read(key: 'token');
-  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -41,20 +46,15 @@ void main() async {
         title: 'App Vigo Customer Billing',
         // navigatorKey: navigatorKey,
         initialBinding: ApplicationBindings(),
-        initialRoute: token != null ? '/home' : 'login',
+        initialRoute: token != null ? '/home' : '/login',
         getPages: AppPages.routes,
         theme: ThemeData(
           primaryColor: Colors.white,
           primarySwatch: Colors.amber,
-          fontFamily: GoogleFonts.montserrat().fontFamily,
           textSelectionTheme: TextSelectionThemeData(
             cursorColor: Color(0xFFEF8200),
             selectionColor: Colors.amber,
             selectionHandleColor: Colors.transparent,
-          ),
-          textTheme: GoogleFonts.montserratTextTheme(
-            // Use this within the builder context
-            ThemeData.light().textTheme,
           ),
         ),
         // scrollBehavior: NoStretchScrollBehavior(),

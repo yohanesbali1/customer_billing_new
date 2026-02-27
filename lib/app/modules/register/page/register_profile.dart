@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/core/widgets/form_old.dart';
 import 'package:vigo_customer_billing/app/modules/register/register_controller.dart';
@@ -17,7 +18,7 @@ class RegisterPage extends GetView<RegisterController> {
         scrolledUnderElevation: 0,
         title: Text(
           'Registrasi Akun',
-          style: monseratTextFont.copyWith(
+          style: GoogleFonts.montserrat(
             color: Color(0xFF0F1B26),
             fontSize: 16,
             fontWeight: FontWeight.w700,
@@ -90,7 +91,7 @@ class RegisterPage extends GetView<RegisterController> {
                   SizedBox(height: 8),
                   Text(
                     'Minimal 8 karakter yang berisikan gabungan dari huruf, Kapital, angka dan simbol',
-                    style: monseratTextFont.copyWith(
+                    style: GoogleFonts.montserrat(
                       fontSize: 13,
                       color: textSecondaryColor,
                     ),
@@ -124,7 +125,7 @@ class RegisterPage extends GetView<RegisterController> {
                 ),
                 child: Text(
                   "Masuk",
-                  style: monseratTextFont.copyWith(
+                  style: GoogleFonts.montserrat(
                     color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,

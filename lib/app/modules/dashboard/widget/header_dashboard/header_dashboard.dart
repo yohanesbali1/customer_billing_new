@@ -37,7 +37,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 //         //             children: [
 //         //               Text(
 //         //                 'Selamat Datang, ',
-//         //                 style: monseratTextFont.copyWith(
+//         //                 style: GoogleFonts.montserrat(
 //         //                   color: Colors.white,
 //         //                   fontSize: 13,
 //         //                 ),
@@ -47,7 +47,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 //         //                   enabled: applicationControllers.isLoading.value,
 //         //                   child: Text(
 //         //                     '${applicationControllers.accountbillData.value?.customer.name ?? 'Tidak Diketahui'}',
-//         //                     style: monseratTextFont.copyWith(
+//         //                     style: GoogleFonts.montserrat(
 //         //                       color: Colors.white,
 //         //                       fontSize: 16,
 //         //                       fontWeight: FontWeight.w600,

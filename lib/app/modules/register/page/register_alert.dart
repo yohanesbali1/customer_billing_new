@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/modules/register/register_controller.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class RegisteAlertPage extends GetView<RegisterController> {
               margin: EdgeInsets.only(bottom: 5),
               child: Text(
                 'Registrasi Berhasil',
-                style: monseratTextFont.copyWith(
+                style: GoogleFonts.montserrat(
                   color: textPrimaryColor,
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
@@ -41,7 +42,7 @@ class RegisteAlertPage extends GetView<RegisterController> {
               margin: EdgeInsets.only(bottom: 5),
               child: Text(
                 'Akun anda berhasil dibuat. Silahkan check email kamu untuk mendapatkan username. silahkan login kembali dengan username dan password yang sudah terdaftar',
-                style: monseratTextFont.copyWith(
+                style: GoogleFonts.montserrat(
                   color: textSecondaryColor,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -64,7 +65,7 @@ class RegisteAlertPage extends GetView<RegisterController> {
                 ),
                 child: Text(
                   "Menuju Dashboard ",
-                  style: monseratTextFont.copyWith(
+                  style: GoogleFonts.montserrat(
                     color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,

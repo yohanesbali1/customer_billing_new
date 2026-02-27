@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';
 import 'package:vigo_customer_billing/app/modules/dashboard/views/dashboard_page.dart';
 import 'package:vigo_customer_billing/app/modules/help/views/help_page.dart';
@@ -97,7 +98,7 @@ class HomePage extends GetView<HomeController> {
                     Obx(
                       () => Text(
                         'Home',
-                        style: monseratTextFont.copyWith(
+                        style: GoogleFonts.montserrat(
                           color: controller.page_index.value == 0
                               ? mainColor
                               : textSecondaryColor,
@@ -138,7 +139,7 @@ class HomePage extends GetView<HomeController> {
                     Obx(
                       () => Text(
                         'Riwayat',
-                        style: monseratTextFont.copyWith(
+                        style: GoogleFonts.montserrat(
                           color: controller.page_index.value == 1
                               ? mainColor
                               : textSecondaryColor,
@@ -179,7 +180,7 @@ class HomePage extends GetView<HomeController> {
                     Obx(
                       () => Text(
                         'Bantuan',
-                        style: monseratTextFont.copyWith(
+                        style: GoogleFonts.montserrat(
                           color: controller.page_index.value == 2
                               ? mainColor
                               : textSecondaryColor,
@@ -220,7 +221,7 @@ class HomePage extends GetView<HomeController> {
                     Obx(
                       () => Text(
                         'Profile',
-                        style: monseratTextFont.copyWith(
+                        style: GoogleFonts.montserrat(
                           color: controller.page_index.value == 3
                               ? mainColor
                               : textSecondaryColor,
