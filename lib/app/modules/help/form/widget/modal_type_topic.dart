@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:vigo_customer_billing/app/core/helpers/google_fonts_shim.dart';
 
 // Ganti sesuai project kamu
 import 'package:vigo_customer_billing/app/core/theme/theme.dart';

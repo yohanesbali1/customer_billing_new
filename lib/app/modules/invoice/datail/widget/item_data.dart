@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:vigo_customer_billing/app/core/helpers/google_fonts_shim.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

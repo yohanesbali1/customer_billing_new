@@ -4,7 +4,7 @@ import 'package:vigo_customer_billing/app/core/widgets/not_found.dart';
 import 'package:vigo_customer_billing/app/modules/help/chat/controllers/help_chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:vigo_customer_billing/app/core/helpers/google_fonts_shim.dart';
 import 'package:vigo_customer_billing/app/modules/help/chat/widgets/input_chat_widget.dart';
 import 'package:vigo_customer_billing/app/modules/help/chat/widgets/list_data.dart';
 
