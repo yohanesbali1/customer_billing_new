@@ -14,7 +14,7 @@ class InvoiceDetailController extends GetxController {
   var id = ''.obs;
   Rxn<InvoiceModel?> invoiceData = Rxn<InvoiceModel?>();
   Rxn<BankModel?> bank_data = Rxn<BankModel?>();
-  List<BankModel> list_bank = RxList<BankModel>();
+  RxList<BankModel> list_bank = <BankModel>[].obs;
   var isLoading = false.obs;
   var isLoadingBank = false.obs;
   var bank_value = false.obs;
@@ -47,7 +47,7 @@ class InvoiceDetailController extends GetxController {
   @override
   Future<void> showBank(id) async {
     try {
-      bank_data.value = await bankRepository.showDataBank(id);
+      bank_data.value = await bankRepository.showDataBank(id) ?? null;
     } catch (e) {
       isLoading.value = false;
       Helper().AlertSnackBar();
@@ -58,7 +58,7 @@ class InvoiceDetailController extends GetxController {
   Future<void> getBank() async {
     try {
       isLoadingBank.value = true;
-      list_bank = await bankRepository.getBankData();
+      list_bank.value = await bankRepository.getBankData() ?? [];
       isLoadingBank.value = false;
     } catch (e) {
       isLoadingBank.value = false;

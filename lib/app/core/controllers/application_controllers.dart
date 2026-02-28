@@ -15,11 +15,7 @@ class ApplicationControllers extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    final current = Get.currentRoute;
-    if (current != '/login') {
-      if (Platform.isAndroid) changeToken();
-      getData();
-    }
+
     // everAll([Get.routing.obs], (_) {
     //   final current = Get.currentRoute;
     //   final previous = Get.previousRoute;
@@ -29,6 +25,16 @@ class ApplicationControllers extends GetxController {
     //     getData();
     //   }
     // });
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    final currentRoute = Get.routing.current;
+    if (currentRoute != '/login') {
+      if (Platform.isAndroid) changeToken();
+      getData();
+    }
   }
 
   Future<void> getData() async {

@@ -76,7 +76,6 @@ class LoginController extends GetxController {
       }
       Get.offAllNamed('/home');
     } catch (e) {
-      print(e);
       while (Get.isDialogOpen ?? false) {
         Get.back();
       }

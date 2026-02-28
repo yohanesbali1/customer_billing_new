@@ -187,7 +187,7 @@ class HelpFormController extends GetxController {
   Future<dynamic> getTypeData() async {
     try {
       isLoading.value = true;
-      type_topic_data.value = await repository.getTypeHelp();
+      type_topic_data.value = await repository.getTypeHelp() ?? [];
     } catch (e) {
       rethrow;
     } finally {
@@ -199,7 +199,7 @@ class HelpFormController extends GetxController {
     try {
       isLoading.value = true;
       Helper().AlertGetX(type: 'loading');
-      await getTypeData();
+      // await getTypeData();
       if (id.value != '') {
         final HelpModel data = detailController.reportData.value!;
         titleController.text = data.title!;
