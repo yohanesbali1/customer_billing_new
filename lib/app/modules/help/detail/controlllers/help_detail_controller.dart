@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:vigo_customer_billing/app/data/models/models.dart';
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
-import 'package:vigo_customer_billing/app/data/repositories/help_repository.dart';
+import 'package:vigo_billing/app/data/models/models.dart';
+import 'package:vigo_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_billing/app/data/repositories/help_repository.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:vigo_customer_billing/app/modules/help/controllers/help_controller.dart';
+import 'package:vigo_billing/app/modules/help/controllers/help_controller.dart';
 
 class HelpDetailController extends GetxController {
   final HelpRepository repository;

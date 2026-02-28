@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/data/models/models.dart';
+import 'package:vigo_billing/app/data/models/models.dart';
 
 class SessionService extends GetxService {
   Rxn<AccountBillModel> currentUser = Rxn<AccountBillModel>();

@@ -1,8 +1,9 @@
 import 'dart:math';
 
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vigo_billing/app/core/global_keys.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -312,59 +313,143 @@ class Helper {
     }
   }
 
-  void AlertSnackBar({String message = '', String status = 'error'}) {
+  void AlertSnackBar({
+    BuildContext? context,
+    String message = '',
+    String status = 'error',
+  }) {
     Color color;
-    String sub_message;
-    Icon icon;
+    String subMessage;
+    Widget iconWidget;
     switch (status) {
       case 'success':
-        icon = Icon(Icons.check, color: Colors.white);
+        iconWidget = Icon(Icons.check, color: Colors.white);
         color = Colors.green;
-        sub_message = 'Berhasil';
+        subMessage = 'Berhasil';
         break;
       case 'warning':
-        icon = Icon(Icons.warning, color: Colors.white);
+        iconWidget = Icon(Icons.warning, color: Colors.white);
         color = Colors.yellow;
-        sub_message = 'Peringatan';
+        subMessage = 'Peringatan';
         break;
       default:
-        icon = Icon(Icons.error, color: Colors.white);
-        message = 'Maaf, terjadi kesalahan';
-        sub_message = 'Silahkan hubungi cs';
+        iconWidget = Icon(Icons.error, color: Colors.white);
+        if (message.isEmpty) message = 'Maaf, terjadi kesalahan';
+        subMessage = 'Silahkan hubungi cs';
         color = Colors.red;
     }
 
-    Get.snackbar(
-      "",
-      "",
-      backgroundColor: color,
-      colorText: Colors.white,
-      icon: icon,
-      titleText: Text(
-        message,
-        style: GoogleFonts.montserrat(
-          color: Colors.white,
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
+    // Prefer using ScaffoldMessenger when a valid BuildContext is provided.
+    if (context != null) {
+      final messenger = ScaffoldMessenger.maybeOf(context);
+      if (messenger != null) {
+        messenger.showSnackBar(
+          SnackBar(
+            backgroundColor: color,
+            duration: Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+            margin: EdgeInsets.only(
+              top: 10,
+              left: defaultMargin,
+              right: defaultMargin,
+            ),
+            content: Row(
+              children: [
+                iconWidget,
+                SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        message,
+                        style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        subMessage,
+                        style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+        return;
+      }
+    }
+
+    // Try using global ScaffoldMessengerKey when no context-provided messenger.
+    final globalMessenger = scaffoldMessengerKey.currentState;
+    void showViaMessenger(ScaffoldMessengerState messenger) {
+      messenger.showSnackBar(
+        SnackBar(
+          backgroundColor: color,
+          duration: Duration(seconds: 2),
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.only(
+            top: 10,
+            left: defaultMargin,
+            right: defaultMargin,
+          ),
+          content: Row(
+            children: [
+              iconWidget,
+              SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      message,
+                      style: GoogleFonts.montserrat(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      subMessage,
+                      style: GoogleFonts.montserrat(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-      messageText: Text(
-        sub_message,
-        style: GoogleFonts.montserrat(
-          color: Colors.white,
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
-        ),
-      ),
-      margin: EdgeInsets.only(
-        top: 10,
-        left: defaultMargin,
-        right: defaultMargin,
-      ),
-      duration: 2.seconds,
-      snackPosition: SnackPosition.TOP,
-      isDismissible: true,
-    );
+      );
+    }
+
+    if (globalMessenger != null) {
+      showViaMessenger(globalMessenger);
+      return;
+    }
+
+    // Schedule a post-frame attempt to show the snackbar when the app is ready.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final messenger = scaffoldMessengerKey.currentState;
+      if (messenger != null) {
+        showViaMessenger(messenger);
+      } else {
+        debugPrint('No ScaffoldMessenger available to show snackbar');
+      }
+    });
   }
 
   int calculatePerPage(BuildContext context, {double itemHeight = 80}) {

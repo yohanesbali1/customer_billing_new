@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/core/widgets/form_old.dart';
-import 'package:vigo_customer_billing/app/core/widgets/from.dart';
-import 'package:vigo_customer_billing/app/modules/help/form/controllers/help_form_controller.dart';
-import 'package:vigo_customer_billing/app/modules/help/form/widget/image_widget.dart';
-import 'package:vigo_customer_billing/app/modules/help/form/widget/location_widget.dart';
-import 'package:vigo_customer_billing/app/modules/help/form/widget/modal_type_topic.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/core/widgets/form_old.dart';
+import 'package:vigo_billing/app/core/widgets/from.dart';
+import 'package:vigo_billing/app/modules/help/form/controllers/help_form_controller.dart';
+import 'package:vigo_billing/app/modules/help/form/widget/image_widget.dart';
+import 'package:vigo_billing/app/modules/help/form/widget/location_widget.dart';
+import 'package:vigo_billing/app/modules/help/form/widget/modal_type_topic.dart';
 
 class FormHelpWidget extends GetView<HelpFormController> {
   const FormHelpWidget();

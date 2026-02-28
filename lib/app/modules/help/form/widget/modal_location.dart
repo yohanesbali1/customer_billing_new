@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/help/form/controllers/help_form_controller.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/modules/help/form/controllers/help_form_controller.dart';
 
 class ModalLocation extends GetView<HelpFormController> {
   const ModalLocation({super.key});

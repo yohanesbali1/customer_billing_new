@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
-import 'package:vigo_customer_billing/app/modules/help/chat/controllers/help_chat_video_controller.dart';
+import 'package:vigo_billing/app/modules/help/chat/controllers/help_chat_video_controller.dart';
 
 enum MediaType { image, video }
 

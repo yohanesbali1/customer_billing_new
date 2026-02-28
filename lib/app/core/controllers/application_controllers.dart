@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
-import 'package:vigo_customer_billing/app/core/services/session_serivce.dart';
-import 'package:vigo_customer_billing/app/data/models/models.dart';
-import 'package:vigo_customer_billing/app/data/repositories/profile_repository.dart';
+import 'package:vigo_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_billing/app/core/services/session_serivce.dart';
+import 'package:vigo_billing/app/data/models/models.dart';
+import 'package:vigo_billing/app/data/repositories/profile_repository.dart';
 
 class ApplicationControllers extends GetxController {
   final ProfileRepository repository;

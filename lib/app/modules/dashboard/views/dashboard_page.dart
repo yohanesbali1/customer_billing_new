@@ -1,8 +1,8 @@
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/dashboard/controllers/dashboard_controller.dart';
-import 'package:vigo_customer_billing/app/modules/dashboard/widget/card_member/card_member.dart';
-import 'package:vigo_customer_billing/app/modules/dashboard/widget/header_dashboard/header_dashboard.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:vigo_billing/app/modules/dashboard/widget/card_member/card_member.dart';
+import 'package:vigo_billing/app/modules/dashboard/widget/header_dashboard/header_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

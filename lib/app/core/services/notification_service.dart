@@ -30,7 +30,9 @@ class NotificationService {
 
   Future<void> initialize() async {
     try {
-      FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+      FirebaseMessaging.onBackgroundMessage(
+        _firebaseMessagingBackgroundHandler,
+      );
 
       await setupFlutterNotification();
       await _requestPermission();
@@ -49,6 +51,15 @@ class NotificationService {
         sound: true,
         provisional: false,
       );
+
+      // iOS: Ensure APNs token is fetched to prevent token-not-set warning
+      await FirebaseMessaging.instance.getAPNSToken();
+
+      // Get FCM token
+      final token = await FirebaseMessaging.instance.getToken();
+      if (token != null) {
+        // Token is ready to be sent to your server
+      }
     } catch (e) {
       // ignore
     }
@@ -136,7 +147,8 @@ class NotificationService {
         handleClickNotification();
       });
 
-      final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+      final initialMessage = await FirebaseMessaging.instance
+          .getInitialMessage();
       if (initialMessage != null) {
         pendingPayload = jsonEncode(initialMessage.data);
       }

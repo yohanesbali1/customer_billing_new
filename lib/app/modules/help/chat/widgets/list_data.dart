@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/data/models/models.dart';
-import 'package:vigo_customer_billing/app/modules/help/chat/controllers/help_chat_controller.dart';
-import 'package:vigo_customer_billing/app/modules/help/chat/widgets/chat_video_widget.dart';
-import 'package:vigo_customer_billing/app/modules/help/chat/widgets/full_screen.dart';
+import 'package:vigo_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/data/models/models.dart';
+import 'package:vigo_billing/app/modules/help/chat/controllers/help_chat_controller.dart';
+import 'package:vigo_billing/app/modules/help/chat/widgets/chat_video_widget.dart';
+import 'package:vigo_billing/app/modules/help/chat/widgets/full_screen.dart';
 
 class ListDataChatWidget extends GetView<HelpChatController> {
   final ChatModel data;

@@ -1,8 +1,8 @@
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
-import 'package:vigo_customer_billing/app/data/models/models.dart';
+import 'package:vigo_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_billing/app/data/models/models.dart';
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/data/repositories/bank_repository.dart';
-import 'package:vigo_customer_billing/app/data/repositories/invoice_repository.dart';
+import 'package:vigo_billing/app/data/repositories/bank_repository.dart';
+import 'package:vigo_billing/app/data/repositories/invoice_repository.dart';
 
 class InvoiceDetailController extends GetxController {
   final InvoiceRepository repository;

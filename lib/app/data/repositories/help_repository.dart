@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:vigo_customer_billing/app/data/models/models.dart';
-import 'package:vigo_customer_billing/app/data/providers/api_provider.dart';
+import 'package:vigo_billing/app/data/models/models.dart';
+import 'package:vigo_billing/app/data/providers/api_provider.dart';
 
 class HelpRepository {
   final ApiProvider api;

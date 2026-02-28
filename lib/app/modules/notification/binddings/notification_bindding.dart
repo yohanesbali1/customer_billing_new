@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/data/repositories/notification_repositoriy.dart';
-import 'package:vigo_customer_billing/app/modules/dashboard/controllers/dashboard_controller.dart';
-import 'package:vigo_customer_billing/app/modules/notification/controllers/notification_controller.dart';
+import 'package:vigo_billing/app/data/repositories/notification_repositoriy.dart';
+import 'package:vigo_billing/app/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:vigo_billing/app/modules/notification/controllers/notification_controller.dart';
 
 class NotificationBindding extends Bindings {
   @override

@@ -1,6 +1,6 @@
-import 'package:vigo_customer_billing/app/core/middleware/auth_middleware.dart';
-import 'package:vigo_customer_billing/app/modules/faq/faq_bindding.dart';
-import 'package:vigo_customer_billing/app/modules/faq/faq_page.dart';
+import 'package:vigo_billing/app/core/middleware/auth_middleware.dart';
+import 'package:vigo_billing/app/modules/faq/faq_bindding.dart';
+import 'package:vigo_billing/app/modules/faq/faq_page.dart';
 import 'package:get/get.dart';
 
 class FAQRoutes {

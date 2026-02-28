@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
 import 'card_member_clipper.dart';
 
 class SkeletonCardMember extends StatelessWidget {

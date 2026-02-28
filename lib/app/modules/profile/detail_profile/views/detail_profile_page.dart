@@ -1,4 +1,4 @@
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';

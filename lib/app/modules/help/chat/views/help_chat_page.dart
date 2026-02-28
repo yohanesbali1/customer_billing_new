@@ -1,12 +1,12 @@
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/core/widgets/not_found.dart';
-import 'package:vigo_customer_billing/app/modules/help/chat/controllers/help_chat_controller.dart';
+import 'package:vigo_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/core/widgets/not_found.dart';
+import 'package:vigo_billing/app/modules/help/chat/controllers/help_chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/core/helpers/google_fonts_shim.dart';
-import 'package:vigo_customer_billing/app/modules/help/chat/widgets/input_chat_widget.dart';
-import 'package:vigo_customer_billing/app/modules/help/chat/widgets/list_data.dart';
+import 'package:vigo_billing/app/core/helpers/google_fonts_shim.dart';
+import 'package:vigo_billing/app/modules/help/chat/widgets/input_chat_widget.dart';
+import 'package:vigo_billing/app/modules/help/chat/widgets/list_data.dart';
 
 class ChatHelpPage extends GetView<HelpChatController> {
   @override

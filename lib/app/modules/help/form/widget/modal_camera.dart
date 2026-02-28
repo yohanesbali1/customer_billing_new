@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:vigo_customer_billing/app/core/helpers/google_fonts_shim.dart';
-import 'package:vigo_customer_billing/app/modules/help/form/controllers/help_form_controller.dart';
+import 'package:vigo_billing/app/core/helpers/google_fonts_shim.dart';
+import 'package:vigo_billing/app/modules/help/form/controllers/help_form_controller.dart';
 
 class CameraPickerSheet extends StatelessWidget {
   // bisa diganti dengan tipe spesifik kalau kamu punya

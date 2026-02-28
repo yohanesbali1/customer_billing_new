@@ -1,7 +1,7 @@
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_billing/app/core/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/data/repositories/auth_repositories.dart';
+import 'package:vigo_billing/app/data/repositories/auth_repositories.dart';
 
 class UpdatePasswordController extends GetxController {
   final AuthRepository repository;

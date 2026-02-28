@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/notification/controllers/notification_controller.dart';
-import 'package:vigo_customer_billing/app/modules/notification/widgets/list_data_widget.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/modules/notification/controllers/notification_controller.dart';
+import 'package:vigo_billing/app/modules/notification/widgets/list_data_widget.dart';
 
 class NotificationPage extends GetView<NotificationController> {
   const NotificationPage({super.key});

@@ -1,4 +1,4 @@
-import 'package:vigo_customer_billing/app/modules/profile/update_password/controllers/update_password_controller.dart';
+import 'package:vigo_billing/app/modules/profile/update_password/controllers/update_password_controller.dart';
 import 'package:get/get.dart';
 
 class UpdatePasswordBinding extends Bindings {

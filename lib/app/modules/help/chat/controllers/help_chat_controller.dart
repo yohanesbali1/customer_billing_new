@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_billing/app/core/helpers/helpers.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart'; // Commented out to avoid app hang
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:vigo_customer_billing/app/data/models/models.dart';
-import 'package:vigo_customer_billing/app/data/repositories/chat_repository.dart';
+import 'package:vigo_billing/app/data/models/models.dart';
+import 'package:vigo_billing/app/data/repositories/chat_repository.dart';
 
 class HelpChatController extends GetxController {
   final ChatRepository repository;

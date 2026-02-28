@@ -1,5 +1,5 @@
-import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/core/controllers/application_controllers.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';

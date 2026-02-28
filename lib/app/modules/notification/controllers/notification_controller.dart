@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
-import 'package:vigo_customer_billing/app/data/models/models.dart';
-import 'package:vigo_customer_billing/app/data/repositories/notification_repositoriy.dart';
-import 'package:vigo_customer_billing/app/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:vigo_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_billing/app/data/models/models.dart';
+import 'package:vigo_billing/app/data/repositories/notification_repositoriy.dart';
+import 'package:vigo_billing/app/modules/dashboard/controllers/dashboard_controller.dart';
 
 class NotificationController extends GetxController {
   final NotificationRepositoriy repository;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/core/helpers/google_fonts_shim.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/help/form/controllers/help_form_controller.dart';
-import 'package:vigo_customer_billing/app/modules/help/form/widget/modal_camera.dart';
+import 'package:vigo_billing/app/core/helpers/google_fonts_shim.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/modules/help/form/controllers/help_form_controller.dart';
+import 'package:vigo_billing/app/modules/help/form/widget/modal_camera.dart';
 
 class ImageWidget extends GetView<HelpFormController> {
   const ImageWidget({super.key});

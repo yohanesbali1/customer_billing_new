@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/core/middleware/auth_middleware.dart';
-import 'package:vigo_customer_billing/app/modules/notification/binddings/notification_bindding.dart';
-import 'package:vigo_customer_billing/app/modules/notification/views/nofication_view.dart';
+import 'package:vigo_billing/app/core/middleware/auth_middleware.dart';
+import 'package:vigo_billing/app/modules/notification/binddings/notification_bindding.dart';
+import 'package:vigo_billing/app/modules/notification/views/nofication_view.dart';
 
 class NotificationRoutes {
   NotificationRoutes._();

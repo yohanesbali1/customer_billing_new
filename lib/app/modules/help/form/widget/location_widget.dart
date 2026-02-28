@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/core/helpers/google_fonts_shim.dart';
+import 'package:vigo_billing/app/core/helpers/google_fonts_shim.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/help/form/controllers/help_form_controller.dart';
-import 'package:vigo_customer_billing/app/modules/help/form/widget/modal_location.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/modules/help/form/controllers/help_form_controller.dart';
+import 'package:vigo_billing/app/modules/help/form/widget/modal_location.dart';
 
 class LocationWidget extends GetView<HelpFormController> {
   const LocationWidget({super.key});

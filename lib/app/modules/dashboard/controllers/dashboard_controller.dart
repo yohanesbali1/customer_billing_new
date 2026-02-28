@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
-import 'package:vigo_customer_billing/app/data/repositories/dashborad_repository.dart';
-import 'package:vigo_customer_billing/app/modules/home/controllers/home_controller.dart';
+import 'package:vigo_billing/app/core/controllers/application_controllers.dart';
+import 'package:vigo_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_billing/app/data/repositories/dashborad_repository.dart';
+import 'package:vigo_billing/app/modules/home/controllers/home_controller.dart';
 
 class DashboardController extends GetxController {
   final DashboardRepository? repository;

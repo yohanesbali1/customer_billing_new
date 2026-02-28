@@ -1,11 +1,11 @@
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/core/widgets/not_found.dart';
-import 'package:vigo_customer_billing/app/modules/help/widget/skeleton.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/core/widgets/not_found.dart';
+import 'package:vigo_billing/app/modules/help/widget/skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/modules/notification/controllers/notification_controller.dart';
-import 'package:vigo_customer_billing/app/modules/notification/widgets/item_data_widget.dart';
-import 'package:vigo_customer_billing/app/modules/notification/widgets/skeleton_widget.dart';
+import 'package:vigo_billing/app/modules/notification/controllers/notification_controller.dart';
+import 'package:vigo_billing/app/modules/notification/widgets/item_data_widget.dart';
+import 'package:vigo_billing/app/modules/notification/widgets/skeleton_widget.dart';
 
 class ListDataNotificationPage extends GetView<NotificationController> {
   const ListDataNotificationPage({super.key});

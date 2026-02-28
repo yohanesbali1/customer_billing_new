@@ -1,9 +1,9 @@
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/dashboard/views/dashboard_page.dart';
-import 'package:vigo_customer_billing/app/modules/help/views/help_page.dart';
-import 'package:vigo_customer_billing/app/modules/invoice/views/invoice_page.dart';
-import 'package:vigo_customer_billing/app/modules/profile/views/profile_page.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/modules/dashboard/views/dashboard_page.dart';
+import 'package:vigo_billing/app/modules/help/views/help_page.dart';
+import 'package:vigo_billing/app/modules/invoice/views/invoice_page.dart';
+import 'package:vigo_billing/app/modules/profile/views/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

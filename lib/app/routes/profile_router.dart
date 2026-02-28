@@ -1,13 +1,13 @@
-import 'package:vigo_customer_billing/app/core/middleware/auth_middleware.dart';
-import 'package:vigo_customer_billing/app/modules/profile/about/about_bindding.dart';
-import 'package:vigo_customer_billing/app/modules/profile/about/about_page.dart';
-import 'package:vigo_customer_billing/app/modules/profile/detail_profile/binddings/detail_profile_bindding.dart';
-import 'package:vigo_customer_billing/app/modules/profile/detail_profile/views/detail_profile_page.dart';
-import 'package:vigo_customer_billing/app/modules/profile/information/information_bindding.dart';
-import 'package:vigo_customer_billing/app/modules/profile/information/information_page.dart';
-import 'package:vigo_customer_billing/app/modules/profile/setting/setting_page.dart';
-import 'package:vigo_customer_billing/app/modules/profile/update_password/binddings/update_password_bindding.dart';
-import 'package:vigo_customer_billing/app/modules/profile/update_password/views/update_password_page.dart';
+import 'package:vigo_billing/app/core/middleware/auth_middleware.dart';
+import 'package:vigo_billing/app/modules/profile/about/about_bindding.dart';
+import 'package:vigo_billing/app/modules/profile/about/about_page.dart';
+import 'package:vigo_billing/app/modules/profile/detail_profile/binddings/detail_profile_bindding.dart';
+import 'package:vigo_billing/app/modules/profile/detail_profile/views/detail_profile_page.dart';
+import 'package:vigo_billing/app/modules/profile/information/information_bindding.dart';
+import 'package:vigo_billing/app/modules/profile/information/information_page.dart';
+import 'package:vigo_billing/app/modules/profile/setting/setting_page.dart';
+import 'package:vigo_billing/app/modules/profile/update_password/binddings/update_password_bindding.dart';
+import 'package:vigo_billing/app/modules/profile/update_password/views/update_password_page.dart';
 import 'package:get/get.dart';
 
 class ProfileRoutes {

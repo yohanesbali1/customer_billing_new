@@ -1,10 +1,10 @@
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/help/controllers/help_controller.dart';
-import 'package:vigo_customer_billing/app/modules/help/widget/list_data.dart';
-import 'package:vigo_customer_billing/app/modules/home/controllers/home_controller.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/modules/help/controllers/help_controller.dart';
+import 'package:vigo_billing/app/modules/help/widget/list_data.dart';
+import 'package:vigo_billing/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/core/helpers/google_fonts_shim.dart';
+import 'package:vigo_billing/app/core/helpers/google_fonts_shim.dart';
 
 class HelpPage extends GetView<HelpController> {
   @override

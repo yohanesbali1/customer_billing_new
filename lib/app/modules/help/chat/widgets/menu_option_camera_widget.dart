@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/help/chat/controllers/help_chat_controller.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/modules/help/chat/controllers/help_chat_controller.dart';
 
 class MenuOptionCameraWidget extends StatelessWidget {
   const MenuOptionCameraWidget({Key? key}) : super(key: key);

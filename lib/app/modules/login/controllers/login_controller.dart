@@ -1,8 +1,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
-import 'package:vigo_customer_billing/app/data/repositories/auth_repositories.dart';
+import 'package:vigo_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_billing/app/data/repositories/auth_repositories.dart';
 
 class LoginController extends GetxController {
   final AuthRepository repository;
@@ -72,6 +72,7 @@ class LoginController extends GetxController {
       }
       Get.offAllNamed('/home');
     } catch (e) {
+      print(e);
       while (Get.isDialogOpen ?? false) {
         Get.back();
       }

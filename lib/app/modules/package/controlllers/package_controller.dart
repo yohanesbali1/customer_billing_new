@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
+import 'package:vigo_billing/app/core/controllers/application_controllers.dart';
 
 class PackageController extends GetxController {
   final ApplicationControllers applicationControllers = Get.find();

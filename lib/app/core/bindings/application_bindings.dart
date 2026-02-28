@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
-import 'package:vigo_customer_billing/app/core/services/local_storage_service.dart';
-import 'package:vigo_customer_billing/app/core/services/session_serivce.dart';
-import 'package:vigo_customer_billing/app/data/providers/api_provider.dart';
-import 'package:vigo_customer_billing/app/data/repositories/profile_repository.dart';
+import 'package:vigo_billing/app/core/controllers/application_controllers.dart';
+import 'package:vigo_billing/app/core/services/local_storage_service.dart';
+import 'package:vigo_billing/app/core/services/session_serivce.dart';
+import 'package:vigo_billing/app/data/providers/api_provider.dart';
+import 'package:vigo_billing/app/data/repositories/profile_repository.dart';
 
 class ApplicationBindings extends Bindings {
   @override

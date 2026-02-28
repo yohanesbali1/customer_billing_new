@@ -1,12 +1,12 @@
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/core/widgets/not_found.dart';
-import 'package:vigo_customer_billing/app/data/models/models.dart';
-import 'package:vigo_customer_billing/app/modules/invoice/datail/controllers/invoice_detail_controller.dart';
-import 'package:vigo_customer_billing/app/modules/invoice/datail/widget/item_data.dart';
-import 'package:vigo_customer_billing/app/modules/invoice/datail/widget/skeleton.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/core/widgets/not_found.dart';
+import 'package:vigo_billing/app/data/models/models.dart';
+import 'package:vigo_billing/app/modules/invoice/datail/controllers/invoice_detail_controller.dart';
+import 'package:vigo_billing/app/modules/invoice/datail/widget/item_data.dart';
+import 'package:vigo_billing/app/modules/invoice/datail/widget/skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/core/helpers/google_fonts_shim.dart';
+import 'package:vigo_billing/app/core/helpers/google_fonts_shim.dart';
 
 class InvoiceDetailPage extends GetView<InvoiceDetailController> {
   const InvoiceDetailPage({super.key});

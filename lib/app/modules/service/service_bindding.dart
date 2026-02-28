@@ -1,4 +1,4 @@
-import 'package:vigo_customer_billing/app/modules/service/service_controller.dart';
+import 'package:vigo_billing/app/modules/service/service_controller.dart';
 import 'package:get/get.dart';
 
 class ServiceBinding extends Bindings {

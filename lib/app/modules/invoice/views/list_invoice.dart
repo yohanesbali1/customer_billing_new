@@ -1,8 +1,8 @@
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/core/widgets/not_found.dart';
-import 'package:vigo_customer_billing/app/modules/invoice/controllers/invoice_controller.dart';
-import 'package:vigo_customer_billing/app/modules/invoice/views/list_data.dart';
-import 'package:vigo_customer_billing/app/modules/invoice/views/invoice_skeleton.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/core/widgets/not_found.dart';
+import 'package:vigo_billing/app/modules/invoice/controllers/invoice_controller.dart';
+import 'package:vigo_billing/app/modules/invoice/views/list_data.dart';
+import 'package:vigo_billing/app/modules/invoice/views/invoice_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

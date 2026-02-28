@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/core/helpers/google_fonts_shim.dart';
+import 'package:vigo_billing/app/core/helpers/google_fonts_shim.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
-import 'package:vigo_customer_billing/app/core/helpers/helpers.dart';
-import 'package:vigo_customer_billing/app/core/theme/theme.dart';
-import 'package:vigo_customer_billing/app/modules/invoice/datail/widget/guide.dart';
-import 'package:vigo_customer_billing/app/modules/invoice/datail/widget/bank_modal.dart';
+import 'package:vigo_billing/app/core/controllers/application_controllers.dart';
+import 'package:vigo_billing/app/core/helpers/helpers.dart';
+import 'package:vigo_billing/app/core/theme/theme.dart';
+import 'package:vigo_billing/app/modules/invoice/datail/widget/guide.dart';
+import 'package:vigo_billing/app/modules/invoice/datail/widget/bank_modal.dart';
 
 class ItemDataInvoice extends StatelessWidget {
   final data;

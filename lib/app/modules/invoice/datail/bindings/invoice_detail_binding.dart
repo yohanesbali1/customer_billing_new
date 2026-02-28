@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:vigo_customer_billing/app/data/repositories/bank_repository.dart';
-import 'package:vigo_customer_billing/app/data/repositories/invoice_repository.dart';
-import 'package:vigo_customer_billing/app/modules/invoice/datail/controllers/invoice_detail_controller.dart';
+import 'package:vigo_billing/app/data/repositories/bank_repository.dart';
+import 'package:vigo_billing/app/data/repositories/invoice_repository.dart';
+import 'package:vigo_billing/app/modules/invoice/datail/controllers/invoice_detail_controller.dart';
 
 class InvoiceDetailBinding extends Bindings {
   void dependencies() {

@@ -1,7 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:vigo_customer_billing/app/core/controllers/application_controllers.dart';
-import 'package:vigo_customer_billing/app/core/services/local_storage_service.dart';
-import 'package:vigo_customer_billing/app/data/providers/api_provider.dart';
+import 'package:vigo_billing/app/core/controllers/application_controllers.dart';
+import 'package:vigo_billing/app/core/services/local_storage_service.dart';
+import 'package:vigo_billing/app/data/providers/api_provider.dart';
 import 'package:get/get.dart';
 
 class AuthRepository {
