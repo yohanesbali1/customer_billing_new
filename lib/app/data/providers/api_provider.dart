@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -131,7 +133,9 @@ class ApiProvider {
   Future<void> _handleUnauthorized() async {
     try {
       await storage.delete(key: 'token');
-      await FirebaseMessaging.instance.deleteToken();
+      if (Platform.isAndroid) {
+        await FirebaseMessaging.instance.deleteToken();
+      }
     } catch (e) {
       rethrow;
     } finally {

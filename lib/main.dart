@@ -28,13 +28,14 @@ class NoStretchScrollBehavior extends ScrollBehavior {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  if (Firebase.apps.isEmpty && Platform.isAndroid) {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+  if (Platform.isAndroid) {
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }
+    await NotificationService.instance.initialize();
   }
-  await NotificationService.instance.initialize();
   final storage = new FlutterSecureStorage();
   await dotenv.load();
   final String? token = await storage.read(key: 'token');

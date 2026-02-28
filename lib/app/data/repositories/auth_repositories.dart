@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:vigo_billing/app/core/controllers/application_controllers.dart';
 import 'package:vigo_billing/app/core/services/local_storage_service.dart';
@@ -34,7 +36,9 @@ class AuthRepository {
     try {
       await api.get('/auth/logout');
       await storage.clear();
-      await FirebaseMessaging.instance.deleteToken();
+      if (Platform.isAndroid) {
+        await FirebaseMessaging.instance.deleteToken();
+      }
       applicationControllers.clearProfile();
       return null;
     } catch (e) {

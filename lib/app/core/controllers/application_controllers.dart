@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:vigo_billing/app/core/helpers/helpers.dart';
 import 'package:vigo_billing/app/core/services/session_serivce.dart';
@@ -15,7 +17,7 @@ class ApplicationControllers extends GetxController {
     super.onInit();
     final current = Get.currentRoute;
     if (current != '/login') {
-      changeToken();
+      if (Platform.isAndroid) changeToken();
       getData();
     }
     // everAll([Get.routing.obs], (_) {

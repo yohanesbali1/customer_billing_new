@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -65,7 +67,9 @@ class LoginController extends GetxController {
         'group_app': 'VIGO',
       };
       await repository.loginData(data);
-      await FirebaseMessaging.instance.deleteToken();
+      if (Platform.isAndroid) {
+        await FirebaseMessaging.instance.deleteToken();
+      }
       isLoading(false);
       while (Get.isDialogOpen ?? false) {
         Get.back();

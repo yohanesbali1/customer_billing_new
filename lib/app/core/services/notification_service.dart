@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
@@ -30,6 +31,11 @@ class NotificationService {
 
   Future<void> initialize() async {
     try {
+      if (!Platform.isAndroid) {
+        // Skip Firebase messaging setup on non-Android platforms
+        return;
+      }
+
       FirebaseMessaging.onBackgroundMessage(
         _firebaseMessagingBackgroundHandler,
       );

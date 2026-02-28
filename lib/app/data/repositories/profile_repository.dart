@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:vigo_billing/app/data/models/models.dart';
 import 'package:vigo_billing/app/data/providers/api_provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -19,6 +21,7 @@ class ProfileRepository {
 
   Future<dynamic> updateDataTokenFCM() async {
     try {
+      if (!Platform.isAndroid) return false;
       try {
         final token_fcm = await FirebaseMessaging.instance.getToken();
         final form = {'id': token_fcm};
