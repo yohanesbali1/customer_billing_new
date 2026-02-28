@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -50,20 +41,47 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBrxFAlEv_BNy08kwB4FBkxjqvTVT3Jtj0',
-    appId: '1:26093709880:android:89b9d412648969615314cd',
-    messagingSenderId: '26093709880',
-    projectId: 'billing-92cbf',
-    storageBucket: 'billing-92cbf.firebasestorage.app',
+    apiKey: 'AIzaSyCQdiSF_zPiFHRQ0JfRPeQqPzrxoRUJfVY',
+    appId: '1:85373941587:android:be2c9d4c7ab70466c293a6',
+    messagingSenderId: '85373941587',
+    projectId: 'vigo-billing',
+    storageBucket: 'vigo-billing.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA4s5pKw7HjKLY8TZhkvmctT7HppM82Tk0',
-    appId: '1:26093709880:ios:82ff5cd0fb6a213d5314cd',
-    messagingSenderId: '26093709880',
-    projectId: 'billing-92cbf',
-    storageBucket: 'billing-92cbf.firebasestorage.app',
-    iosBundleId: 'com.example.customerBilling',
+    apiKey: 'AIzaSyDeBowKNb12BGsmk0oSMbFg_6-RVXai_0Y',
+    appId: '1:85373941587:ios:eaf1c5847b40441bc293a6',
+    messagingSenderId: '85373941587',
+    projectId: 'vigo-billing',
+    storageBucket: 'vigo-billing.firebasestorage.app',
+    iosBundleId: 'com.billing.vigo',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBKPO9IlcxMHb1hGU4YupmGEoYD_IGVPfM',
+    appId: '1:85373941587:web:ce4ca23046facdd7c293a6',
+    messagingSenderId: '85373941587',
+    projectId: 'vigo-billing',
+    authDomain: 'vigo-billing.firebaseapp.com',
+    storageBucket: 'vigo-billing.firebasestorage.app',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDeBowKNb12BGsmk0oSMbFg_6-RVXai_0Y',
+    appId: '1:85373941587:ios:eaf1c5847b40441bc293a6',
+    messagingSenderId: '85373941587',
+    projectId: 'vigo-billing',
+    storageBucket: 'vigo-billing.firebasestorage.app',
+    iosBundleId: 'com.billing.vigo',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAdhlJhhiMPg5FPm_FZJjphYNdDH5LFgS0',
+    appId: '1:85373941587:web:aa6e9f0b4d23b445c293a6',
+    messagingSenderId: '85373941587',
+    projectId: 'vigo-billing',
+    authDomain: 'vigo-billing.firebaseapp.com',
+    storageBucket: 'vigo-billing.firebasestorage.app',
   );
 
 }

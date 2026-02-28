@@ -7,9 +7,28 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:85373941587:android:f0bb6df23ffb4ff5c293a6",
+        "mobilesdk_app_id": "1:85373941587:android:be2c9d4c7ab70466c293a6",
         "android_client_info": {
           "package_name": "com.billing.vigo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQdiSF_zPiFHRQ0JfRPeQqPzrxoRUJfVY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85373941587:android:f0bb6df23ffb4ff5c293a6",
+        "android_client_info": {
+          "package_name": "com.billing.vigo_customer"
         }
       },
       "oauth_client": [],
